@@ -1691,83 +1691,144 @@
         color: var(--ink2);
         line-height: 1.75;
       }
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: var(--line);
-        margin-top: 4rem;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        overflow: hidden;
+      .skills-panel {
+        margin-top: 3.5rem;
+        padding: 1rem 1.2rem;
+        border: 1px solid var(--line2);
+        border-radius: calc(var(--radius) + 2px);
+        background: var(--bg);
         box-shadow: var(--shadow);
       }
-      .sk {
-        background: var(--bg2);
-        padding: 2rem;
-        opacity: 0;
-        transform: translateY(18px);
-        transition:
-          opacity 0.6s var(--ease),
-          transform 0.6s var(--ease),
-          background 0.3s;
-        position: relative;
+      .skills-tiers {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
       }
-      .sk::after {
+      .skills-tier-label {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.35rem;
+        padding-top: 0.15rem;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .skills-tier-label::after {
         content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          circle at 0% 0%,
-          var(--amber-glow),
-          transparent 55%
-        );
+        flex: 1;
+        height: 1px;
+        background: var(--line2);
+      }
+      .skills-tier--domain .skills-tier-label {
+        color: var(--teal);
+      }
+      .skills-grid {
+        display: grid;
+        gap: 0.65rem;
+      }
+      .skills-grid--core {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .skills-grid--core .sk--wide {
+        grid-column: 1 / -1;
+      }
+      .skills-grid--compact {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .sk {
+        position: relative;
+        padding: 1.5rem 1.55rem;
+        border: 1px solid var(--line2);
+        border-radius: var(--radius);
+        background: var(--bg-elev);
         opacity: 0;
-        transition: opacity 0.35s;
-        pointer-events: none;
+        transform: translateY(16px);
+        transition:
+          opacity 0.55s var(--ease),
+          transform 0.55s var(--ease),
+          border-color 0.3s,
+          box-shadow 0.3s;
       }
       .sk.on {
         opacity: 1;
         transform: translateY(0);
       }
       .sk:hover {
-        background: var(--bg3);
+        border-color: rgba(212, 146, 92, 0.35);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
       }
-      .sk:hover::after {
-        opacity: 1;
+      .sk--accent {
+        border-color: rgba(212, 146, 92, 0.25);
+        background: linear-gradient(
+          160deg,
+          rgba(212, 146, 92, 0.1) 0%,
+          var(--bg-elev) 48%
+        );
       }
-      .sk.wide {
-        grid-column: span 2;
+      .sk--accent::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        border-radius: var(--radius) var(--radius) 0 0;
+        background: linear-gradient(90deg, var(--amber), var(--amber2));
+      }
+      .sk--fintech {
+        border-color: rgba(110, 184, 174, 0.28);
+        background: linear-gradient(
+          160deg,
+          rgba(110, 184, 174, 0.09) 0%,
+          var(--bg-elev) 50%
+        );
       }
       .sk-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 1.1rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--line2);
+      }
+      .sk-head-text {
         font-family: var(--serif);
-        font-size: 0.95rem;
+        font-size: 1.05rem;
         font-weight: 500;
         color: var(--ink);
-        letter-spacing: -0.01em;
-        margin-bottom: 1rem;
-        padding-bottom: 0.7rem;
-        border-bottom: 1px solid var(--line);
+        letter-spacing: -0.02em;
+        line-height: 1.25;
       }
       .sk-num {
+        flex-shrink: 0;
         font-family: var(--mono);
-        font-size: 0.6rem;
-        color: var(--amber);
-        letter-spacing: 0.08em;
-        margin-bottom: 0.4rem;
+        font-size: 0.62rem;
+        font-weight: 500;
+        color: var(--amber2);
+        letter-spacing: 0.06em;
+        padding: 0.3rem 0.55rem;
+        border-radius: 999px;
+        border: 1px solid rgba(212, 146, 92, 0.35);
+        background: rgba(212, 146, 92, 0.1);
       }
       .sk-groups {
         display: flex;
         flex-direction: column;
-        gap: 1.15rem;
+        gap: 1.25rem;
       }
       .sk-subhead {
         font-family: var(--mono);
-        font-size: 0.58rem;
-        color: var(--amber);
+        font-size: 0.65rem;
+        color: var(--amber2);
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.55rem;
       }
       .sk-group .sk-tags {
         margin-top: 0;
@@ -1775,34 +1836,37 @@
       .sk-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
+        gap: 0.45rem;
       }
       .sk-tag {
         font-family: var(--mono);
-        font-size: 0.62rem;
-        padding: 0.22rem 0.6rem;
-        border-radius: 3px;
+        font-size: 0.72rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 6px;
         border: 1px solid var(--line2);
-        color: var(--ink3);
-        letter-spacing: 0.03em;
+        color: var(--ink2);
+        letter-spacing: 0.02em;
+        background: rgba(0, 0, 0, 0.2);
         transition:
           border-color 0.2s,
-          color 0.2s;
+          color 0.2s,
+          background 0.2s;
         cursor: default;
       }
       .sk-tag:hover {
         border-color: var(--amber);
-        color: var(--amber2);
+        color: var(--ink);
+        background: rgba(212, 146, 92, 0.12);
       }
       .sk-tag.hi {
-        border-color: rgba(212, 146, 92, 0.35);
+        border-color: rgba(212, 146, 92, 0.45);
         color: var(--amber2);
-        background: rgba(212, 146, 92, 0.06);
+        background: rgba(212, 146, 92, 0.14);
       }
       .sk-tag.tl {
-        border-color: rgba(110, 184, 174, 0.35);
-        color: var(--teal);
-        background: rgba(110, 184, 174, 0.06);
+        border-color: rgba(110, 184, 174, 0.45);
+        color: #8fd4ca;
+        background: rgba(110, 184, 174, 0.12);
       }
 
       /* ── PROJECTS ── */
@@ -2154,12 +2218,12 @@
         border-top: 1px solid var(--line);
       }
       .lang-block-head {
-        margin-bottom: 2rem;
-        max-width: 32rem;
+        margin-bottom: 1.25rem;
+        max-width: 36rem;
       }
       .lang-eyebrow {
         font-family: var(--mono);
-        font-size: 0.62rem;
+        font-size: 0.68rem;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--amber);
@@ -2174,24 +2238,65 @@
         margin-bottom: 0.65rem;
       }
       .lang-intro {
-        font-size: 0.92rem;
+        font-size: 0.95rem;
         color: var(--ink2);
-        line-height: 1.7;
+        line-height: 1.75;
+      }
+      .lang-panel {
+        padding: 1rem 1.2rem;
+        border: 1px solid var(--line2);
+        border-radius: calc(var(--radius) + 2px);
+        background: var(--bg);
+        box-shadow: var(--shadow);
+      }
+      .lang-tiers {
+        display: flex;
+        flex-direction: column;
+        gap: 0.0rem;
+      }
+      .lang-tier-label {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.35rem;
+        padding-top: 0.15rem;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+      .lang-tier-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line2);
+      }
+      .lang-tier--learn .lang-tier-label {
+        color: var(--ink2);
       }
       .lang-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-        gap: 1rem;
+        gap: 0.65rem;
+      }
+      .lang-grid--fluent {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .lang-grid--learn {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .lang-card {
         position: relative;
         overflow: hidden;
         isolation: isolate;
-        min-height: 8.5rem;
-        padding: 1.35rem 1.4rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.15rem;
+        min-height: 10rem;
+        padding: 1.35rem 1.4rem 1.3rem;
         border: 1px solid var(--line2);
         border-radius: var(--radius);
-        background: linear-gradient(145deg, var(--bg3) 0%, var(--bg2) 100%);
         opacity: 0;
         transform: translateY(16px);
         transition:
@@ -2200,15 +2305,7 @@
           border-color 0.3s,
           box-shadow 0.3s;
       }
-      .lang-card.on {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .lang-card:hover {
-        border-color: rgba(212, 146, 92, 0.4);
-        box-shadow: var(--shadow);
-        transform: translateY(-3px);
-      }
+      /* ธงเป็นพื้นหลัง — overlay เข้มเพื่อให้ข้อความอ่านง่าย */
       .lang-card[data-flag]::before {
         content: "";
         position: absolute;
@@ -2217,8 +2314,10 @@
         background-image: var(--flag-bg);
         background-size: cover;
         background-position: center;
-        opacity: 0.78;
-        transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+        opacity: 0.55;
+        transition:
+          opacity 0.35s var(--ease),
+          transform 0.35s var(--ease);
       }
       .lang-card[data-flag]::after {
         content: "";
@@ -2226,140 +2325,177 @@
         inset: 0;
         z-index: 0;
         background: linear-gradient(
-          145deg,
-          rgba(14, 12, 10, 0.58) 0%,
-          rgba(14, 12, 10, 0.32) 55%,
-          rgba(14, 12, 10, 0.62) 100%
+          165deg,
+          rgba(14, 12, 10, 0.82) 0%,
+          rgba(14, 12, 10, 0.62) 48%,
+          rgba(14, 12, 10, 0.85) 100%
         );
       }
       .lang-card:hover[data-flag]::before {
-        opacity: 0.92;
+        opacity: 0.68;
         transform: scale(1.03);
       }
-      .lang-card[data-flag="la"] {
-        --flag-bg: url("https://flagcdn.com/w320/la.png");
-      }
-      .lang-card[data-flag="th"] {
-        --flag-bg: url("https://flagcdn.com/w320/th.png");
-      }
-      .lang-card[data-flag="gb"] {
-        --flag-bg: url("https://flagcdn.com/w320/gb.png");
-      }
-      .lang-card[data-flag="fr"] {
-        --flag-bg: url("https://flagcdn.com/w320/fr.png");
-      }
-      .lang-card[data-flag="de"] {
-        --flag-bg: url("https://flagcdn.com/w320/de.png");
-      }
-      .lang-card > * {
+      .lang-card[data-flag] > * {
         position: relative;
         z-index: 1;
+      }
+      .lang-card[data-flag="la"] {
+        --flag-bg: url("https://flagcdn.com/w640/la.png");
+      }
+      .lang-card[data-flag="th"] {
+        --flag-bg: url("https://flagcdn.com/w640/th.png");
+      }
+      .lang-card[data-flag="gb"] {
+        --flag-bg: url("https://flagcdn.com/w640/gb.png");
+      }
+      .lang-card[data-flag="fr"] {
+        --flag-bg: url("https://flagcdn.com/w640/fr.png");
+      }
+      .lang-card[data-flag="de"] {
+        --flag-bg: url("https://flagcdn.com/w640/de.png");
+      }
+      .lang-card.on {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .lang-card:hover {
+        border-color: rgba(212, 146, 92, 0.4);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
       }
       .lang-card--native {
         border-color: rgba(212, 146, 92, 0.35);
       }
-      .lang-card--native::after {
+      .lang-card--native[data-flag]::after {
         background: linear-gradient(
-          145deg,
-          rgba(212, 146, 92, 0.15) 0%,
-          rgba(14, 12, 10, 0.35) 50%,
-          rgba(14, 12, 10, 0.58) 100%
+          165deg,
+          rgba(212, 146, 92, 0.28) 0%,
+          rgba(14, 12, 10, 0.58) 45%,
+          rgba(14, 12, 10, 0.82) 100%
         );
       }
-      .lang-card-top {
+      .lang-card--pro[data-flag]::after {
+        background: linear-gradient(
+          165deg,
+          rgba(110, 184, 174, 0.2) 0%,
+          rgba(14, 12, 10, 0.58) 48%,
+          rgba(14, 12, 10, 0.84) 100%
+        );
+      }
+      .lang-card--learn {
+        border-style: dashed;
+        border-color: rgba(255, 248, 238, 0.18);
+      }
+      .lang-card-head {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
         gap: 0.75rem;
-        margin-bottom: 1.1rem;
       }
-      .lang-id {
-        min-width: 0;
+      .lang-card-meta {
         flex: 1;
+        min-width: 0;
       }
       .lang-name {
         font-family: var(--serif);
-        font-size: 1.05rem;
+        font-size: 1.2rem;
         font-weight: 500;
         letter-spacing: -0.02em;
         color: var(--ink);
-        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.65);
+        line-height: 1.2;
+        text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
       }
       .lang-script {
         display: block;
-        font-family: var(--mono);
-        font-size: 0.58rem;
-        color: var(--ink3);
-        letter-spacing: 0.06em;
-        margin-top: 0.15rem;
-        text-transform: uppercase;
+        margin-top: 0.2rem;
+        font-size: 0.82rem;
+        color: rgba(245, 240, 232, 0.88);
+        line-height: 1.35;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
       }
       .lang-badge {
         flex-shrink: 0;
+        align-self: flex-start;
         font-family: var(--mono);
-        font-size: 0.55rem;
-        letter-spacing: 0.06em;
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
-        padding: 0.28rem 0.55rem;
+        padding: 0.35rem 0.65rem;
         border-radius: 999px;
-        border: 1px solid var(--line2);
-        background: rgba(14, 12, 10, 0.38);
-        color: var(--ink2);
+        border: 1px solid rgba(255, 248, 238, 0.2);
+        background: rgba(14, 12, 10, 0.55);
+        color: var(--ink);
         backdrop-filter: blur(8px);
       }
       .lang-badge--native {
-        color: var(--amber);
-        border-color: rgba(212, 146, 92, 0.45);
-        background: rgba(212, 146, 92, 0.15);
+        color: var(--amber2);
+        border-color: rgba(212, 146, 92, 0.5);
+        background: rgba(14, 12, 10, 0.6);
       }
       .lang-badge--pro {
-        color: var(--teal);
-        border-color: rgba(110, 184, 174, 0.4);
-        background: rgba(110, 184, 174, 0.1);
+        color: #8fd4ca;
+        border-color: rgba(110, 184, 174, 0.5);
+        background: rgba(14, 12, 10, 0.6);
       }
       .lang-badge--learn {
-        color: var(--ink3);
+        color: var(--ink2);
         border-style: dashed;
+        background: rgba(14, 12, 10, 0.55);
+      }
+      .lang-meter {
+        margin-top: auto;
+        padding: 0.75rem 0.85rem;
+        border-radius: var(--radius-sm);
+        background: rgba(14, 12, 10, 0.52);
+        border: 1px solid rgba(255, 248, 238, 0.1);
+        backdrop-filter: blur(6px);
       }
       .lang-meter-head {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         justify-content: space-between;
         gap: 0.5rem;
-        margin-bottom: 0.45rem;
+        margin-bottom: 0.55rem;
       }
       .lang-meter-label {
         font-family: var(--mono);
-        font-size: 0.58rem;
+        font-size: 0.65rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--ink3);
+        color: rgba(245, 240, 232, 0.75);
       }
       .lang-meter-pct {
         font-family: var(--mono);
-        font-size: 0.62rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: 0.02em;
+      }
+      .lang-card--native .lang-meter-pct {
         color: var(--amber2);
-        letter-spacing: 0.04em;
+      }
+      .lang-card--pro .lang-meter-pct {
+        color: #8fd4ca;
       }
       .lang-track {
-        height: 6px;
-        background: rgba(255, 248, 238, 0.14);
+        height: 10px;
+        background: rgba(0, 0, 0, 0.35);
         border-radius: 999px;
         overflow: hidden;
-        border: 1px solid rgba(255, 248, 238, 0.12);
-        backdrop-filter: blur(4px);
+        border: 1px solid var(--line2);
       }
       .lang-fill {
         height: 100%;
         width: 0;
         border-radius: 999px;
         background: linear-gradient(90deg, var(--amber) 0%, var(--amber2) 100%);
-        box-shadow: 0 0 12px rgba(212, 146, 92, 0.45);
+        box-shadow: 0 0 14px rgba(212, 146, 92, 0.4);
         transition: width 1.15s var(--ease);
       }
       .lang-card--pro .lang-fill {
         background: linear-gradient(90deg, #4a9e94 0%, var(--teal) 100%);
-        box-shadow: 0 0 12px rgba(110, 184, 174, 0.35);
+        box-shadow: 0 0 14px rgba(110, 184, 174, 0.35);
       }
       .lang-card--learn .lang-fill {
         background: linear-gradient(90deg, var(--ink3) 0%, var(--ink2) 100%);
@@ -2369,12 +2505,14 @@
         width: var(--w);
       }
       .lang-level-note {
-        margin-top: 0.55rem;
-        font-family: var(--mono);
-        font-size: 0.6rem;
-        color: var(--ink2);
-        letter-spacing: 0.04em;
-        line-height: 1.4;
+        margin-top: 0.65rem;
+        padding: 0.45rem 0.65rem;
+        font-size: 0.75rem;
+        color: rgba(245, 240, 232, 0.82);
+        line-height: 1.45;
+        background: rgba(14, 12, 10, 0.45);
+        border: 1px solid rgba(255, 248, 238, 0.1);
+        border-radius: var(--radius-sm);
       }
 
       /* ── CONTACT ── */
@@ -2635,11 +2773,15 @@
           grid-template-columns: 1fr;
           gap: 0.5rem;
         }
-        .skills-grid {
-          grid-template-columns: 1fr 1fr;
+        .skills-panel {
+          padding: 0.85rem 1rem;
         }
-        .sk.wide {
-          grid-column: span 1;
+        .skills-grid--core,
+        .skills-grid--compact {
+          grid-template-columns: 1fr;
+        }
+        .skills-grid--core .sk--wide {
+          grid-column: auto;
         }
         .proj-grid {
           grid-template-columns: 1fr 1fr;
@@ -2647,6 +2789,15 @@
         }
         .edu-cards {
           grid-template-columns: 1fr;
+        }
+        .lang-grid--fluent {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .lang-grid--fluent .lang-card--native {
+          grid-column: 1 / -1;
+        }
+        .skills-grid--compact {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
         .contact-grid {
           grid-template-columns: 1fr;
@@ -2691,13 +2842,17 @@
         .proj-grid {
           grid-template-columns: 1fr;
         }
-        .skills-grid {
+        .skills-grid--compact {
           grid-template-columns: 1fr;
         }
         .eu-row {
           flex-direction: column;
         }
-        .lang-grid {
+        .lang-panel {
+          padding: 0.85rem 1rem;
+        }
+        .lang-grid--fluent,
+        .lang-grid--learn {
           grid-template-columns: 1fr;
         }
         nav,
@@ -3145,142 +3300,137 @@
           Full-stack fintech engineer — mobile, web, backend, cloud, and
           security.
         </p>
-        <div class="skills-grid">
-          <div class="sk wide">
-            <div class="sk-num">01</div>
-            <div class="sk-head">Programming &amp; Frameworks</div>
-            <div class="sk-groups">
-              <div class="sk-group">
-                <p class="sk-subhead">Languages</p>
-                <div class="sk-tags">
-                  <span class="sk-tag hi">Dart</span
-                  ><span class="sk-tag hi">TypeScript</span
-                  ><span class="sk-tag hi">JavaScript</span>
-                  <span class="sk-tag">Python</span
-                  ><span class="sk-tag">Java</span><span class="sk-tag">C#</span
-                  ><span class="sk-tag">C</span> <span class="sk-tag">SQL</span
-                  ><span class="sk-tag">HTML/CSS</span
-                  ><span class="sk-tag">EJS</span>
+        <div class="skills-panel">
+          <div class="skills-tiers">
+            <section class="skills-tier" aria-labelledby="skills-tier-core">
+              <h3 class="skills-tier-label" id="skills-tier-core">Core stack</h3>
+              <div class="skills-grid skills-grid--core">
+                <div class="sk sk--wide sk--accent">
+                  <div class="sk-head">
+                    <span class="sk-head-text">Programming &amp; Frameworks</span>
+                    <span class="sk-num">01</span>
+                  </div>
+                  <div class="sk-groups">
+                    <div class="sk-group">
+                      <p class="sk-subhead">Languages</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag hi">Dart</span><span class="sk-tag hi">TypeScript</span><span class="sk-tag hi">JavaScript</span>
+                        <span class="sk-tag">Python</span><span class="sk-tag">Java</span><span class="sk-tag">C#</span><span class="sk-tag">C</span>
+                        <span class="sk-tag">SQL</span><span class="sk-tag">HTML/CSS</span><span class="sk-tag">EJS</span>
+                      </div>
+                    </div>
+                    <div class="sk-group">
+                      <p class="sk-subhead">Frontend &amp; Mobile</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag hi">Flutter 3+ yrs</span><span class="sk-tag hi">React.js</span><span class="sk-tag">Next.js</span>
+                        <span class="sk-tag">Vue.js</span><span class="sk-tag">Nuxt.js</span><span class="sk-tag">Tailwind CSS</span><span class="sk-tag">Bootstrap 5</span>
+                      </div>
+                    </div>
+                    <div class="sk-group">
+                      <p class="sk-subhead">Backend</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag hi">Node.js</span><span class="sk-tag hi">Express.js 2+ yrs</span><span class="sk-tag">Java Spring Boot</span>
+                        <span class="sk-tag">RESTful API</span>
+                      </div>
+                    </div>
+                    <div class="sk-group">
+                      <p class="sk-subhead">DevOps &amp; Tools</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag hi">Docker</span><span class="sk-tag hi">GitHub</span><span class="sk-tag hi">GitLab - GitFlow</span>
+                        <span class="sk-tag">GitLab</span><span class="sk-tag">CI/CD</span><span class="sk-tag">GitFlow</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="sk sk--accent">
+                  <div class="sk-head">
+                    <span class="sk-head-text">Mobile &amp; App Stores</span>
+                    <span class="sk-num">02</span>
+                  </div>
+                  <div class="sk-tags">
+                    <span class="sk-tag hi">Flutter</span><span class="sk-tag hi">Dart</span>
+                    <span class="sk-tag">Android SDK</span><span class="sk-tag">iOS</span>
+                    <span class="sk-tag">Google Play</span><span class="sk-tag">App Store</span><span class="sk-tag">Huawei AppGallery</span>
+                  </div>
+                </div>
+                <div class="sk sk--wide">
+                  <div class="sk-head">
+                    <span class="sk-head-text">Databases &amp; Cloud Services</span>
+                    <span class="sk-num">03</span>
+                  </div>
+                  <div class="sk-groups">
+                    <div class="sk-group">
+                      <p class="sk-subhead">Cloud</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag">Alibaba Cloud</span><span class="sk-tag">Firebase</span><span class="sk-tag">Cloudinary</span>
+                      </div>
+                    </div>
+                    <div class="sk-group">
+                      <p class="sk-subhead">APIs</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag">Google Maps API</span><span class="sk-tag">MapBox API</span><span class="sk-tag hi">RESTful API Design</span>
+                      </div>
+                    </div>
+                    <div class="sk-group">
+                      <p class="sk-subhead">Server</p>
+                      <div class="sk-tags">
+                        <span class="sk-tag">Ubuntu Linux 24</span><span class="sk-tag">Cloud Server Management</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="sk-group">
-                <p class="sk-subhead">Frontend &amp; Mobile</p>
-                <div class="sk-tags">
-                  <span class="sk-tag hi">Flutter 3+ yrs</span
-                  ><span class="sk-tag hi">React.js</span
-                  ><span class="sk-tag">Next.js</span>
-                  <span class="sk-tag">Vue.js</span
-                  ><span class="sk-tag">Nuxt.js</span
-                  ><span class="sk-tag">Tailwind CSS</span
-                  ><span class="sk-tag">Bootstrap 5</span>
+            </section>
+            <section class="skills-tier skills-tier--domain" aria-labelledby="skills-tier-domain">
+              <h3 class="skills-tier-label" id="skills-tier-domain">Domain expertise</h3>
+              <div class="skills-grid skills-grid--compact">
+                <div class="sk sk--fintech">
+                  <div class="sk-head">
+                    <span class="sk-head-text">Fintech &amp; Payments</span>
+                    <span class="sk-num">04</span>
+                  </div>
+                  <div class="sk-tags">
+                    <span class="sk-tag tl">LaoQR</span><span class="sk-tag tl">LAPNet</span>
+                    <span class="sk-tag">Visa</span><span class="sk-tag">Mastercard</span><span class="sk-tag tl">Telecom APIs</span>
+                  </div>
+                </div>
+                <div class="sk sk--fintech">
+                  <div class="sk-head">
+                    <span class="sk-head-text">AI &amp; eKYC</span>
+                    <span class="sk-num">05</span>
+                  </div>
+                  <div class="sk-tags">
+                    <span class="sk-tag tl">DeepSeek AI</span><span class="sk-tag tl">Google OCR</span>
+                    <span class="sk-tag tl">Face Detection</span><span class="sk-tag tl">Liveness API</span><span class="sk-tag tl">Huawei API</span>
+                  </div>
+                </div>
+                <div class="sk">
+                  <div class="sk-head">
+                    <span class="sk-head-text">Cybersecurity</span>
+                    <span class="sk-num">06</span>
+                  </div>
+                  <div class="sk-tags">
+                    <span class="sk-tag">Reverse Engineering</span><span class="sk-tag">Mobile / Flutter</span>
+                    <span class="sk-tag">Traffic Interception</span><span class="sk-tag">Network Analysis</span><span class="sk-tag">RSA Cryptography</span>
+                  </div>
                 </div>
               </div>
-              <div class="sk-group">
-                <p class="sk-subhead">Backend</p>
-                <div class="sk-tags">
-                  <span class="sk-tag hi">Node.js</span
-                  ><span class="sk-tag hi">Express.js 2+ yrs</span
-                  ><span class="sk-tag">Java Spring Boot</span>
-                  <span class="sk-tag">RESTful API</span>
+            </section>
+            <section class="skills-tier" aria-labelledby="skills-tier-more">
+              <h3 class="skills-tier-label" id="skills-tier-more">Tools &amp; design</h3>
+              <div class="skills-grid skills-grid--compact">
+                <div class="sk">
+                  <div class="sk-head">
+                    <span class="sk-head-text">Design</span>
+                    <span class="sk-num">07</span>
+                  </div>
+                  <div class="sk-tags">
+                    <span class="sk-tag hi">Figma</span><span class="sk-tag">Adobe Photoshop</span>
+                    <span class="sk-tag">UI/UX</span><span class="sk-tag">Prototyping</span>
+                  </div>
                 </div>
               </div>
-              <div class="sk-group">
-                <p class="sk-subhead">DevOps &amp; Tools</p>
-                <div class="sk-tags">
-                  <span class="sk-tag hi">Docker</span>
-                  <span class="sk-tag hi">GitHub</span
-                  ><span class="sk-tag hi">GitLab - GitFlow</span
-                    ><span class="sk-tag">GitLab</span
-                  ><span class="sk-tag">CI/CD</span
-                  ><span class="sk-tag">GitFlow</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sk">
-            <div class="sk-num">02</div>
-            <div class="sk-head">Mobile &amp; App Stores</div>
-            <div class="sk-tags">
-              <span class="sk-tag hi">Flutter</span
-              ><span class="sk-tag hi">Dart</span>
-              <span class="sk-tag">Android SDK</span
-              ><span class="sk-tag">iOS</span>
-              <span class="sk-tag">Google Play</span
-              ><span class="sk-tag">App Store</span
-              ><span class="sk-tag">Huawei AppGallery</span>
-            </div>
-          </div>
-          <div class="sk wide">
-            <div class="sk-num">03</div>
-            <div class="sk-head">Databases &amp; Cloud Services</div>
-            <div class="sk-groups">
-              <div class="sk-group">
-                <p class="sk-subhead">Cloud</p>
-                <div class="sk-tags">
-                  <span class="sk-tag">Alibaba Cloud</span
-                  ><span class="sk-tag">Firebase</span
-                  ><span class="sk-tag">Cloudinary</span>
-                </div>
-              </div>
-              <div class="sk-group">
-                <p class="sk-subhead">APIs</p>
-                <div class="sk-tags">
-                  <span class="sk-tag">Google Maps API</span
-                  ><span class="sk-tag">MapBox API</span
-                  ><span class="sk-tag hi">RESTful API Design</span>
-                </div>
-              </div>
-              <div class="sk-group">
-                <p class="sk-subhead">Server</p>
-                <div class="sk-tags">
-                  <span class="sk-tag">Ubuntu Linux 24</span
-                  ><span class="sk-tag">Cloud Server Management</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sk">
-            <div class="sk-num">04</div>
-            <div class="sk-head">Fintech &amp; Payments</div>
-            <div class="sk-tags">
-              <span class="sk-tag tl">LaoQR</span
-              ><span class="sk-tag tl">LAPNet</span>
-              <span class="sk-tag">Visa</span
-              ><span class="sk-tag">Mastercard</span
-              ><span class="sk-tag tl">Telecom APIs</span>
-            </div>
-          </div>
-          <div class="sk">
-            <div class="sk-num">05</div>
-            <div class="sk-head">AI &amp; eKYC</div>
-            <div class="sk-tags">
-              <span class="sk-tag tl">DeepSeek AI</span
-              ><span class="sk-tag tl">Google OCR</span>
-              <span class="sk-tag tl">Face Detection</span
-              ><span class="sk-tag tl">Liveness API</span
-              ><span class="sk-tag tl">Huawei API</span>
-            </div>
-          </div>
-          <div class="sk">
-            <div class="sk-num">06</div>
-            <div class="sk-head">Cybersecurity</div>
-            <div class="sk-tags">
-              <span class="sk-tag">Reverse Engineering</span
-              ><span class="sk-tag">Mobile / Flutter</span>
-              <span class="sk-tag">Traffic Interception</span
-              ><span class="sk-tag">Network Analysis</span
-              ><span class="sk-tag">RSA Cryptography</span>
-            </div>
-          </div>
-          <div class="sk">
-            <div class="sk-num">07</div>
-            <div class="sk-head">Design</div>
-            <div class="sk-tags">
-              <span class="sk-tag hi">Figma</span
-              ><span class="sk-tag">Adobe Photoshop</span>
-              <span class="sk-tag">UI/UX</span
-              ><span class="sk-tag">Prototyping</span>
-            </div>
+            </section>
           </div>
         </div>
       </div>
@@ -3699,100 +3849,112 @@
               Native Lao speaker with strong Thai and English for professional engineering work — currently building French and German for life in the Greater Region.
             </p>
           </div>
-          <div class="lang-grid">
-            <article class="lang-card lang-card--native" data-flag="la" style="--w: 100%">
-              <div class="lang-card-top">
-                <div class="lang-id">
-                  <div class="lang-name-wrap">
-                    <span class="lang-name">Lao</span>
-                    <span class="lang-script">ພາສາລາວ</span>
-                  </div>
+          <div class="lang-panel">
+            <div class="lang-tiers">
+              <section class="lang-tier lang-tier--fluent" aria-labelledby="lang-tier-fluent">
+                <h4 class="lang-tier-label" id="lang-tier-fluent">Fluent &amp; professional</h4>
+                <div class="lang-grid lang-grid--fluent">
+                  <article class="lang-card lang-card--native" data-flag="la" style="--w: 100%">
+                    <header class="lang-card-head">
+                      <div class="lang-card-meta">
+                        <h5 class="lang-name">Lao</h5>
+                        <span class="lang-script">ພາສາລາວ</span>
+                      </div>
+                      <span class="lang-badge lang-badge--native">Native</span>
+                    </header>
+                    <div class="lang-meter">
+                      <div class="lang-meter-head">
+                        <span class="lang-meter-label">Proficiency</span>
+                        <span class="lang-meter-pct">100%</span>
+                      </div>
+                      <div class="lang-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Lao proficiency">
+                        <div class="lang-fill"></div>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="lang-card lang-card--pro" data-flag="th" style="--w: 80%">
+                    <header class="lang-card-head">
+                      <div class="lang-card-meta">
+                        <h5 class="lang-name">Thai</h5>
+                        <span class="lang-script">ภาษาไทย</span>
+                      </div>
+                      <span class="lang-badge lang-badge--pro">Professional</span>
+                    </header>
+                    <div class="lang-meter">
+                      <div class="lang-meter-head">
+                        <span class="lang-meter-label">Proficiency</span>
+                        <span class="lang-meter-pct">80%</span>
+                      </div>
+                      <div class="lang-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Thai proficiency">
+                        <div class="lang-fill"></div>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="lang-card lang-card--pro" data-flag="gb" style="--w: 65%">
+                    <header class="lang-card-head">
+                      <div class="lang-card-meta">
+                        <h5 class="lang-name">English</h5>
+                        <span class="lang-script">Working language</span>
+                      </div>
+                      <span class="lang-badge lang-badge--pro">B2 · IELTS 5.5</span>
+                    </header>
+                    <div class="lang-meter">
+                      <div class="lang-meter-head">
+                        <span class="lang-meter-label">Proficiency</span>
+                        <span class="lang-meter-pct">65%</span>
+                      </div>
+                      <div class="lang-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="English proficiency">
+                        <div class="lang-fill"></div>
+                      </div>
+                      <p class="lang-level-note">Comfortable in tech docs, meetings &amp; workplace communication</p>
+                    </div>
+                  </article>
                 </div>
-                <span class="lang-badge lang-badge--native">Native</span>
-              </div>
-              <div class="lang-meter-head">
-                <span class="lang-meter-label">Proficiency</span>
-                <span class="lang-meter-pct">100%</span>
-              </div>
-              <div class="lang-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Lao proficiency">
-                <div class="lang-fill"></div>
-              </div>
-            </article>
-            <article class="lang-card lang-card--pro" data-flag="th" style="--w: 80%">
-              <div class="lang-card-top">
-                <div class="lang-id">
-                  <div class="lang-name-wrap">
-                    <span class="lang-name">Thai</span>
-                    <span class="lang-script">ภาษาไทย</span>
-                  </div>
+              </section>
+              <section class="lang-tier lang-tier--learn" aria-labelledby="lang-tier-learn">
+                <h4 class="lang-tier-label" id="lang-tier-learn">Currently learning</h4>
+                <div class="lang-grid lang-grid--learn">
+                  <article class="lang-card lang-card--learn" data-flag="fr" style="--w: 15%">
+                    <header class="lang-card-head">
+                      <div class="lang-card-meta">
+                        <h5 class="lang-name">French</h5>
+                        <span class="lang-script">Français</span>
+                      </div>
+                      <span class="lang-badge lang-badge--learn">A1</span>
+                    </header>
+                    <div class="lang-meter">
+                      <div class="lang-meter-head">
+                        <span class="lang-meter-label">Proficiency</span>
+                        <span class="lang-meter-pct">15%</span>
+                      </div>
+                      <div class="lang-track" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" aria-label="French proficiency">
+                        <div class="lang-fill"></div>
+                      </div>
+                      <p class="lang-level-note">Preparing for Luxembourg &amp; Greater Region</p>
+                    </div>
+                  </article>
+                  <article class="lang-card lang-card--learn" data-flag="de" style="--w: 5%">
+                    <header class="lang-card-head">
+                      <div class="lang-card-meta">
+                        <h5 class="lang-name">German</h5>
+                        <span class="lang-script">Deutsch</span>
+                      </div>
+                      <span class="lang-badge lang-badge--learn">A1</span>
+                    </header>
+                    <div class="lang-meter">
+                      <div class="lang-meter-head">
+                        <span class="lang-meter-label">Proficiency</span>
+                        <span class="lang-meter-pct">5%</span>
+                      </div>
+                      <div class="lang-track" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" aria-label="German proficiency">
+                        <div class="lang-fill"></div>
+                      </div>
+                      <p class="lang-level-note">Greater Region · ongoing study</p>
+                    </div>
+                  </article>
                 </div>
-                <span class="lang-badge lang-badge--pro">Professional</span>
-              </div>
-              <div class="lang-meter-head">
-                <span class="lang-meter-label">Proficiency</span>
-                <span class="lang-meter-pct">80%</span>
-              </div>
-              <div class="lang-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Thai proficiency">
-                <div class="lang-fill"></div>
-              </div>
-            </article>
-            <article class="lang-card lang-card--pro" data-flag="gb" style="--w: 65%">
-              <div class="lang-card-top">
-                <div class="lang-id">
-                  <div class="lang-name-wrap">
-                    <span class="lang-name">English</span>
-                    <span class="lang-script">Working language</span>
-                  </div>
-                </div>
-                <span class="lang-badge lang-badge--pro">B2</span>
-              </div>
-              <div class="lang-meter-head">
-                <span class="lang-meter-label">Proficiency</span>
-                <span class="lang-meter-pct">65%</span>
-              </div>
-              <div class="lang-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="English proficiency">
-                <div class="lang-fill"></div>
-              </div>
-              <p class="lang-level-note">IELTS 5.5 · comfortable in tech &amp; workplace</p>
-            </article>
-            <article class="lang-card lang-card--learn" data-flag="fr" style="--w: 15%">
-              <div class="lang-card-top">
-                <div class="lang-id">
-                  <div class="lang-name-wrap">
-                    <span class="lang-name">French</span>
-                    <span class="lang-script">Français</span>
-                  </div>
-                </div>
-                <span class="lang-badge lang-badge--learn">A1 · Learning</span>
-              </div>
-              <div class="lang-meter-head">
-                <span class="lang-meter-label">Proficiency</span>
-                <span class="lang-meter-pct">15%</span>
-              </div>
-              <div class="lang-track" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" aria-label="French proficiency">
-                <div class="lang-fill"></div>
-              </div>
-              <p class="lang-level-note">Preparing for Luxembourg &amp; Greater Region</p>
-            </article>
-            <article class="lang-card lang-card--learn" data-flag="de" style="--w: 15%">
-              <div class="lang-card-top">
-                <div class="lang-id">
-                  <div class="lang-name-wrap">
-                    <span class="lang-name">German</span>
-                    <span class="lang-script">Deutsch</span>
-                  </div>
-                </div>
-                <span class="lang-badge lang-badge--learn">A1 · Learning</span>
-              </div>
-              <div class="lang-meter-head">
-                <span class="lang-meter-label">Proficiency</span>
-                <span class="lang-meter-pct">5%</span>
-              </div>
-              <div class="lang-track" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" aria-label="German proficiency">
-                <div class="lang-fill"></div>
-              </div>
-              <p class="lang-level-note">Greater Region · ongoing study</p>
-            </article>
+              </section>
+            </div>
           </div>
         </div>
 

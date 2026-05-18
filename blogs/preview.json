@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 0,
   "preview": [
     {
       "id": "building-lao-llm-gemma4",
@@ -9,24 +9,6 @@
       "date": "2026-05-14",
       "readTime": "12 min read",
       "cover": "blogs/building-lao-llm-gemma4/cover.svg"
-    },
-    {
-      "id": "getting-started-flutter",
-      "tag": "Flutter",
-      "title": "Getting Started with Flutter in 2024",
-      "excerpt": "A practical guide to building your first cross-platform mobile app with Flutter and Dart. From setup to your first widget.",
-      "date": "2024-11-10",
-      "readTime": "6 min read",
-      "cover": "blogs/getting-started-flutter/cover.svg"
-    },
-    {
-      "id": "fintech-laos",
-      "tag": "Fintech",
-      "title": "Building Fintech Apps in Laos: Lessons Learned",
-      "excerpt": "Real-world experience integrating LaoQR, mobile banking APIs, and eKYC into production apps for the Lao market.",
-      "date": "2024-08-22",
-      "readTime": "8 min read",
-      "cover": "blogs/fintech-laos/cover.svg"
     }
   ]
 }

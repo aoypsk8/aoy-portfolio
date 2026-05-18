@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#24211e"/>
+  <rect x="280" y="80" width="240" height="240" rx="8" fill="#fff" opacity="0.95"/>
+  <rect x="300" y="100" width="80" height="80" fill="#1a1816"/>
+  <rect x="300" y="200" width="200" height="12" fill="#d4925c" opacity="0.6"/>
+  <rect x="300" y="225" width="160" height="12" fill="#d4925c" opacity="0.4"/>
+  <text x="400" y="360" font-family="system-ui,sans-serif" font-size="22" fill="#f5f0e8" text-anchor="middle">LaoQR payment flow</text>
+</svg>

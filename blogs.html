@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog &amp; Articles — Aoy Phongsakoun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/activities-page.css" />
+    <link rel="stylesheet" href="css/blogs-page.css" />
+  </head>
+  <body>
+    <nav id="nav">
+      <a class="logo" href="index.html">Aoy Phongsakoun</a>
+      <ul class="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="blogs.html" class="active">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a class="navCta" href="mailto:aoypsk8@gmail.com">Say hello</a>
+      <button
+        class="navToggle"
+        id="navToggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="activities.html">Activities</a>
+      <a href="blogs.html" class="active">Blog</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello &rarr;</a>
+    </div>
+
+    <header class="page-hero">
+      <a class="page-back" href="index.html#blog">&larr; Back to portfolio</a>
+      <div class="s-tag">Writing &amp; thoughts</div>
+      <h1 class="s-heading">Blog &amp; <em>Articles</em></h1>
+      <p class="s-sub">
+        Notes on software engineering, mobile development, fintech, and building things in Southeast Asia.
+      </p>
+    </header>
+
+    <main id="blog-page">
+      <div class="wrap">
+        <div class="blog-grid" id="blogGrid" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <div class="blog-modal-overlay" id="blogModal" role="dialog" aria-modal="true" aria-label="Blog article">
+      <div class="blog-modal">
+        <button class="blog-modal-close" id="blogModalClose" aria-label="Close">&times;</button>
+        <div class="blog-modal-header">
+          <span class="blog-tag" id="blogModalTag"></span>
+          <h2 class="blog-modal-title" id="blogModalTitle"></h2>
+          <p class="blog-modal-desc" id="blogModalDesc"></p>
+          <p class="blog-modal-meta" id="blogModalMeta"></p>
+        </div>
+        <div class="blog-modal-gallery-wrap" id="blogGalleryWrap">
+          <div class="act-gallery">
+            <button class="act-gallery-nav act-gallery-prev" id="blogGalleryPrev" aria-label="Previous image">&#8592;</button>
+            <div class="act-gallery-img-wrap">
+              <img id="blogGalleryImg" src="" alt="" />
+              <div class="act-gallery-counter" id="blogGalleryCounter"></div>
+            </div>
+            <button class="act-gallery-nav act-gallery-next" id="blogGalleryNext" aria-label="Next image">&#8594;</button>
+          </div>
+          <div class="act-thumbs" id="blogThumbs"></div>
+        </div>
+        <div class="blog-modal-body" id="blogModalBody">
+          <p class="blog-modal-loading">Loading&hellip;</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span class="f-l">&copy; 2026 Aoy Phongsakoun</span>
+      <span class="f-c">Made with care.</span>
+      <span class="f-l">Vientiane, Laos</span>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.getElementById("nav");
+        const toggle = document.getElementById("navToggle");
+        const menu = document.getElementById("mobileMenu");
+        window.addEventListener("scroll", () => {
+          nav.classList.toggle("s", window.scrollY > 40);
+        });
+        toggle.addEventListener("click", () => {
+          const open = toggle.classList.toggle("open");
+          menu.classList.toggle("open", open);
+          toggle.setAttribute("aria-expanded", open);
+          menu.setAttribute("aria-hidden", !open);
+          document.body.style.overflow = open ? "hidden" : "";
+        });
+        menu.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", () => {
+            toggle.classList.remove("open");
+            menu.classList.remove("open");
+            document.body.style.overflow = "";
+          });
+        });
+      })();
+    </script>
+    <script>
+      window.__BLOGS_CONFIG__ = {
+        dataUrl: "blogs/data.json",
+      };
+    </script>
+    <script src="js/blogs.js"></script>
+  </body>
+</html>

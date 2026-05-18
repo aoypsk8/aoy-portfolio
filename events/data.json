@@ -1,44 +1,285 @@
 [
   {
-    "id": "hackathon-2024",
-    "tag": "Hackathon",
-    "title": "National Hackathon 2024",
-    "description": "Competed in a 48-hour hackathon building a fintech solution for rural banking access. Our team placed in the top 3 out of 40 teams.",
-    "date": "March 2024",
-    "location": "Vientiane, Laos",
-    "cover": "events/hackathon-2024/cover.jpg",
+    "id": "ctc2024",
+    "tag": "Conference",
+    "title": "CTC 2024",
+    "description": "Joined CTC 2024 in Bangkok, Thailand — connecting with developers, exploring new tech, and sharing experience from fintech and AI work in Laos.",
+    "date": "2024",
+    "location": "Bangkok, Thailand",
+    "cover": "events/ctc2024/7415b414-f461-44ce-8bd4-6c526252a6f6.jpg",
     "images": [
-      "events/hackathon-2024/cover.jpg",
-      "events/hackathon-2024/img1.jpg",
-      "events/hackathon-2024/img2.jpg"
+      "events/ctc2024/IMG_4589.jpg",
+      "events/ctc2024/IMG_4591.jpg",
+      "events/ctc2024/IMG_4592.JPG",
+      "events/ctc2024/IMG_4658.jpg",
+      "events/ctc2024/7415b414-f461-44ce-8bd4-6c526252a6f6.jpg",
+      "events/ctc2024/26256bfa-df12-40ae-b2d0-8816b9e88192.JPG"
     ]
   },
   {
-    "id": "workshop-2024",
+    "id": "eumedia2024",
+    "tag": "Media",
+    "title": "EU Media 2024",
+    "description": "Participated in the EU Media 2024 programme — sessions on digital media, cross-border collaboration, and how technology shapes public communication in the ASEAN region.",
+    "date": "2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/eumedia2024/IMG_6904.jpg",
+    "images": [
+      "events/eumedia2024/92c62d5d-e848-4593-92c6-ba098bfeadc5.jpg",
+      "events/eumedia2024/83ba0f70-bf45-438b-a843-10e1ed3357a5.jpg",
+      "events/eumedia2024/IMG_6801.jpg",
+      "events/eumedia2024/IMG_6904.jpg",
+      "events/eumedia2024/IMG_6907.jpg",
+      "events/eumedia2024/IMG_6914.jpg",
+      "events/eumedia2024/IMG_6953.jpg",
+      "events/eumedia2024/IMG_6956.jpg"
+    ]
+  },
+  {
+    "id": "thriving-21st-century-graduate",
     "tag": "Workshop",
-    "title": "AI & Machine Learning Workshop",
-    "description": "Hands-on workshop covering practical applications of machine learning in Southeast Asia. Covered model training, deployment, and real-world use cases.",
-    "date": "June 2024",
+    "title": "Thriving as a 21st Century Graduate",
+    "description": "Joined the Thriving as a 21st Century Graduate programme — building career readiness, communication, and digital skills to grow as a graduate in a fast-changing tech landscape.",
+    "date": "2025",
     "location": "Vientiane, Laos",
-    "cover": "events/workshop-2024/cover.jpg",
+    "cover": "events/thriving/IMG_1990.jpg",
     "images": [
-      "events/workshop-2024/cover.jpg",
-      "events/workshop-2024/img1.jpg"
+      "events/thriving/3F766CB5-1AB2-4D60-BEEE-443A5AC17B4B.JPG",
+      "events/thriving/IMG_1940.jpg",
+      "events/thriving/IMG_1942.jpg",
+      "events/thriving/IMG_1951.jpg",
+      "events/thriving/IMG_1953.jpg",
+      "events/thriving/IMG_1958.jpg",
+      "events/thriving/IMG_1962.jpg",
+      "events/thriving/IMG_1990.jpg",
+      "events/thriving/IMG_2005.jpg",
+      "events/thriving/IMG_2010.jpg",
+      "events/thriving/IMG_2033.jpg",
+      "events/thriving/IMG_2037.jpg",
+      "events/thriving/IMG_2042.jpg"
     ]
   },
   {
-    "id": "meetup-2024",
-    "tag": "Meetup",
-    "title": "Dev Community Meetup",
-    "description": "Monthly developer gathering focused on sharing open-source projects and new tech. Gave a short talk on building REST APIs with Node.js.",
-    "date": "September 2024",
+    "id": "security-smes-lao-2024",
+    "tag": "Security",
+    "title": "Security for SMEs in Lao 2024",
+    "description": "Attended Security for SMEs in Lao 2024 — practical sessions on protecting small businesses from cyber threats, secure operations, and building security awareness in the Lao market.",
+    "date": "2024",
     "location": "Vientiane, Laos",
-    "cover": "events/meetup-2024/cover.jpg",
+    "cover": "events/security2024/97800baa-e37c-4f5e-bda3-5324d6d6d5d4.JPG",
     "images": [
-      "events/meetup-2024/cover.jpg",
-      "events/meetup-2024/img1.jpg",
-      "events/meetup-2024/img2.jpg",
-      "events/meetup-2024/img3.jpg"
+      "events/security2024/97800baa-e37c-4f5e-bda3-5324d6d6d5d4.JPG",
+      "events/security2024/b5547a09-febc-4b54-99c1-0e777a5154c8.JPG",
+      "events/security2024/e03b9163-e0c4-48c3-9905-54066860e855.JPG"
+    ]
+  },
+  {
+    "id": "american-center-intermediate-english",
+    "tag": "Education",
+    "title": "American Center Laos — Intermediate English",
+    "description": "Studied Intermediate English at the American Center in Laos — improving professional communication, discussion skills, and confidence using English in academic and work settings.",
+    "date": "2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/aceng/798E8BD4-2F27-450D-9DA7-FFEBF5F58BA1.JPG",
+    "images": [
+      "events/aceng/IMG_3279.JPG",
+      "events/aceng/798E8BD4-2F27-450D-9DA7-FFEBF5F58BA1.JPG",
+      "events/aceng/IMG_2975.jpg",
+      "events/aceng/IMG_3651.jpg",
+      "events/aceng/IMG_3672.jpg"
+    ]
+  },
+  {
+    "id": "exchange-lao-singapore",
+    "tag": "Exchange",
+    "title": "Lao–Singapore Culture Exchange",
+    "description": "Participated in the Lao–Singapore culture exchange programme at the National University of Laos — sharing culture, building friendships, and learning from students across both countries.",
+    "date": "2024",
+    "location": "National University of Laos · Vientiane, Laos",
+    "cover": "events/excahngeLaoSing/IMG_1323.jpg",
+    "images": [
+      "events/excahngeLaoSing/157c96c2-fad1-4517-b979-190e2f533467.JPG",
+      "events/excahngeLaoSing/IMG_2720.jpg",
+      "events/excahngeLaoSing/IMG_3865.jpg",
+      "events/excahngeLaoSing/IMG_3873.jpg",
+      "events/excahngeLaoSing/IMG_1236.jpg",
+      "events/excahngeLaoSing/IMG_1242.jpg",
+      "events/excahngeLaoSing/IMG_1323.jpg"
+    ]
+  },
+  {
+    "id": "sdgs-lao-singapore",
+    "tag": "SDGs",
+    "title": "SDGs Lao–Singapore Programme",
+    "description": "Joined the SDGs collaboration between the National University of Laos and a university in Singapore — working on sustainable development goals, cross-campus dialogue, and joint learning on social and environmental impact.",
+    "date": "2024",
+    "location": "National University of Laos · Vientiane, Laos",
+    "cover": "events/sdgsLaoSing/IMG_4100.jpg",
+    "images": [
+      "events/sdgsLaoSing/IMG_4100.jpg",
+      "events/sdgsLaoSing/IMG_4106.jpg",
+      "events/sdgsLaoSing/IMG_4126.jpg",
+      "events/sdgsLaoSing/IMG_2937.jpg",
+      "events/sdgsLaoSing/IMG_2961.jpg",
+      "events/sdgsLaoSing/IMG_3023.jpg",
+      "events/sdgsLaoSing/IMG_3049.jpg"
+    ]
+  },
+  {
+    "id": "startnovation-networking-talk-2024",
+    "tag": "Networking",
+    "title": "Startnovation Networking & Talk 2024",
+    "description": "Attended Startnovation Networking and Talk 2024 — connecting with founders, mentors, and builders, and joining sessions on innovation, startups, and growing the tech community in Laos.",
+    "date": "2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/snt2024/IMG_5528.JPG",
+    "images": [
+      "events/snt2024/1044EE43-A3BC-429C-BF5D-2014C6984906.JPG",
+      "events/snt2024/IMG_5523.JPG",
+      "events/snt2024/IMG_5528.JPG",
+      "events/snt2024/IMG_5532.JPG",
+      "events/snt2024/IMG_5536.JPG"
+    ]
+  },
+  {
+    "id": "regional-final-data-science-laos-2024",
+    "tag": "Data Science",
+    "title": "Regional Final Data Science in Laos 2024",
+    "description": "Competed in the Regional Final Data Science in Laos (22–24 October 2024) — applying data analysis, problem-solving, and teamwork in a national data science competition.",
+    "date": "22–24 Oct 2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/datascience2024/0E7F0C5D-BDC8-4D08-8850-D5B3744BA6DA.JPG",
+    "images": [
+      "events/datascience2024/IMG_8149.jpg",
+      "events/datascience2024/IMG_8150.jpg",
+      "events/datascience2024/0E7F0C5D-BDC8-4D08-8850-D5B3744BA6DA.JPG",
+      "events/datascience2024/AC41DE11-9A20-4523-B8B8-ED641A6AEA6C.JPG"
+    ]
+  },
+  {
+    "id": "guest-speaker-samsung-innovation",
+    "tag": "Speaker",
+    "title": "Guest Speaker — Samsung Innovation",
+    "description": "Invited as a guest speaker at Samsung Innovation — sharing insights on technology, mobile development, and innovation with students and the local tech community.",
+    "date": "Dec 2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/guestspeaker_samsung/IMG_9502.JPG",
+    "images": [
+      "events/guestspeaker_samsung/IMG_9502.JPG",
+      "events/guestspeaker_samsung/IMG_9398.jpg",
+      "events/guestspeaker_samsung/IMG_20241212_152113.jpg",
+      "events/guestspeaker_samsung/IMG_9374.jpg",
+      "events/guestspeaker_samsung/IMG_9379.jpg"
+    ]
+  },
+  {
+    "id": "ctc-leaders-laos-2025",
+    "tag": "Leadership",
+    "title": "CTC Leaders Laos 2025",
+    "description": "Participated in CTC Leaders Laos 2025 — leadership development, collaboration with young leaders, and strengthening the tech and innovation community across Laos.",
+    "date": "2025",
+    "location": "Vientiane, Laos",
+    "cover": "events/ctcLa2025/IMG_1304.JPG",
+    "images": [
+      "events/ctcLa2025/IMG_1280.JPG",
+      "events/ctcLa2025/IMG_1304.JPG",
+      "events/ctcLa2025/IMG_1305.JPG",
+      "events/ctcLa2025/IMG_1316.JPG",
+      "events/ctcLa2025/IMG_1275.jpg",
+      "events/ctcLa2025/IMG_9379.jpg"
+    ]
+  },
+  {
+    "id": "silpakorn-summer-camp-exchange",
+    "tag": "Exchange",
+    "title": "Exchange Student — Silpakorn University Summer Camp",
+    "description": "Joined as an exchange student at the summer camp programme at Silpakorn University, Thailand — cultural exchange, collaborative learning, and building connections with students from Laos and Thailand.",
+    "date": "Summer",
+    "location": "Silpakorn University · Thailand",
+    "cover": "events/silapagon/IMG_20250523_112619.jpg",
+    "images": [
+      "events/silapagon/IMG_6182.jpg",
+      "events/silapagon/IMG_6005.jpg",
+      "events/silapagon/IMG_6006.jpg",
+      "events/silapagon/IMG_20250521_183902.jpg",
+      "events/silapagon/IMG_20250521_184204.jpg",
+      "events/silapagon/IMG_20250522_164413.jpg",
+      "events/silapagon/IMG_20250522_191910.jpg",
+      "events/silapagon/IMG_20250523_094612.jpg",
+      "events/silapagon/IMG_20250523_102339.jpg",
+      "events/silapagon/IMG_20250523_103033.jpg",
+      "events/silapagon/IMG_20250523_112619.jpg",
+      "events/silapagon/4d794396-254d-46c1-961d-3d25da7b0107.JPG",
+      "events/silapagon/f5931104-ccc3-4fac-8946-c58f9677ddf9.JPG"
+    ]
+  },
+  {
+    "id": "her-in-tech-women-for-the-future",
+    "tag": "Speaker",
+    "title": "Her in Tech — Guest Speaker & Teaching Assistant",
+    "description": "Served as guest speaker and teaching assistant for the Her in Tech programme, organized by Women for the Future — supporting women in technology through workshops, mentorship, and hands-on learning.",
+    "date": "2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/herintech/HerInTech(2)-43.JPG",
+    "images": [
+      "events/herintech/DSC06356.jpg",
+      "events/herintech/HerInTech(1)-140.JPG",
+      "events/herintech/HerInTech(1)-153.JPG",
+      "events/herintech/HerInTech(1)-177.JPG",
+      "events/herintech/HerInTech(1)-30.JPG",
+      "events/herintech/HerInTech(1)-45.JPG",
+      "events/herintech/HerInTech(1)-79.JPG",
+      "events/herintech/HerInTech(2)-129.JPG",
+      "events/herintech/HerInTech(2)-38.JPG",
+      "events/herintech/HerInTech(2)-43.JPG",
+      "events/herintech/IMG_3991.jpg"
+    ]
+  },
+  {
+    "id": "jdb-executive-business-forum-2025",
+    "tag": "Business",
+    "title": "JDB Executive Business Forum 2025",
+    "description": "Invited by Joint Development Bank (JDB) to the Executive Business Forum 2025 — hosted by JDB, bringing together leaders to discuss business, finance, and economic development in Laos.",
+    "date": "2025",
+    "location": "Vientiane, Laos",
+    "cover": "events/jdb_bussiness/IMG_6174.JPG",
+    "images": [
+      "events/jdb_bussiness/IMG_6174.JPG",
+      "events/jdb_bussiness/IMG_6176.JPG"
+    ]
+  },
+  {
+    "id": "techsauce-global-summit-2025",
+    "tag": "Summit",
+    "title": "Techsauce Global Summit 2025",
+    "description": "Represented MMoneyX at Techsauce Global Summit 2025 in Bangkok, Thailand — connecting with the regional tech ecosystem, fintech innovators, and partners across Southeast Asia.",
+    "date": "2025",
+    "location": "Bangkok, Thailand",
+    "cover": "events/techsauce2025/72fb194b-1f51-44a1-ba2b-60d43c6fb6b1.JPG",
+    "images": [
+      "events/techsauce2025/72fb194b-1f51-44a1-ba2b-60d43c6fb6b1.JPG",
+      "events/techsauce2025/66aeea5e-a9da-46ac-9399-bf7e5e937874.jpg",
+      "events/techsauce2025/IMG_4693.jpg",
+      "events/techsauce2025/IMG_4741.jpg"
+    ]
+  },
+  {
+    "id": "bachelor-graduation-nuol",
+    "tag": "Graduation",
+    "title": "Bachelor's Graduation — Computer Programming Development",
+    "description": "Graduated with a Bachelor's degree in Computer Programming Development from the National University of Laos (NUOL) — celebrating years of study, projects, and growth as a software engineer.",
+    "date": "September 2025",
+    "location": "National University of Laos · Vientiane, Laos",
+    "cover": "events/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c.jpg",
+    "images": [
+      "events/graduated_bachelor/0A33DB83-C0C1-4B03-9728-0245E0E2603E.JPG",
+      "events/graduated_bachelor/76673557-f9b6-4ac5-a063-517a26388cf4.JPG",
+      "events/graduated_bachelor/16a66c94-2b48-4eb1-97b3-54886bfbc4ec.JPG",
+      "events/graduated_bachelor/IMG_5825.jpg",
+      "events/graduated_bachelor/IMG_5827.jpg",
+      "events/graduated_bachelor/IMG_5841.jpg",
+      "events/graduated_bachelor/447550d1-96a6-46f8-b902-523282c9f659.jpg",
+      "events/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c.jpg"
     ]
   }
 ]

@@ -2865,7 +2865,9 @@
       }
 
       /* ── ACTIVITIES ── */
-      #activities { padding: 6rem 0; }
+      #activities {
+        padding: 6rem 3rem;
+      }
       .act-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -2877,6 +2879,7 @@
         border: 1px solid var(--line);
         border-radius: var(--radius);
         overflow: hidden;
+        cursor: pointer;
         transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
       }
       .act-card:hover {
@@ -3077,8 +3080,213 @@
         display: block;
       }
       .act-card { cursor: pointer; }
+      .act-card-more {
+        display: flex;
+        text-decoration: none;
+        border-style: dashed;
+        border-color: var(--line2);
+        background: transparent;
+        min-height: 100%;
+      }
+      .act-card-more:hover {
+        border-color: var(--amber);
+        background: var(--amber-glow);
+      }
+      .act-more-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.25rem;
+        width: 100%;
+        min-height: 280px;
+        text-align: center;
+      }
+      .act-more-icon {
+        display: inline-flex;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-bottom: 0.75rem;
+        color: var(--amber);
+        transition: transform 0.3s var(--ease);
+      }
+      .act-more-icon::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
+      }
+      .act-card-more:hover .act-more-icon {
+        transform: translateX(4px);
+      }
+      .act-more-label {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        color: var(--ink);
+        margin-bottom: 0.35rem;
+      }
+      .act-more-sub,
+      .act-more-hint {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--ink3);
+      }
+      .act-more-hint {
+        margin-top: 0.5rem;
+        color: var(--amber);
+      }
+      .act-empty {
+        color: var(--ink3);
+        font-family: var(--mono);
+        font-size: 0.85rem;
+        grid-column: 1 / -1;
+      }
+
+      /* Activities — iPad & mobile */
+      @media (max-width: 1024px) {
+        #activities {
+          padding: 5rem 2rem;
+        }
+        .act-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1.25rem;
+          margin-top: 2.5rem;
+        }
+        .act-modal {
+          max-width: min(800px, calc(100vw - 2rem));
+          padding: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #activities {
+          padding: 4.5rem 1.5rem;
+        }
+        .act-grid {
+          gap: 1rem;
+        }
+        .act-modal-overlay {
+          padding: 0.75rem;
+        }
+        .act-modal {
+          max-height: min(92vh, 92dvh);
+          padding: 1.25rem 1rem 1.5rem;
+        }
+        .act-modal-header {
+          margin-bottom: 1rem;
+          padding-right: 2.75rem;
+        }
+        .act-modal-title {
+          font-size: 1.2rem;
+          line-height: 1.35;
+        }
+        .act-modal-desc {
+          font-size: 0.85rem;
+        }
+        .act-gallery {
+          gap: 0.5rem;
+          margin-bottom: 0.75rem;
+        }
+        .act-gallery-nav {
+          width: 2.25rem;
+          height: 2.25rem;
+          min-width: 2.25rem;
+          font-size: 0.9rem;
+        }
+        .act-gallery-img-wrap {
+          aspect-ratio: 4/3;
+          min-width: 0;
+        }
+        .act-thumbs {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+          gap: 0.4rem;
+          padding-bottom: 0.35rem;
+        }
+        .act-thumbs::-webkit-scrollbar {
+          height: 4px;
+        }
+        .act-thumb {
+          width: 56px;
+          height: 56px;
+        }
+        .act-more-inner {
+          min-height: 220px;
+          padding: 1.5rem 1rem;
+        }
+      }
+
       @media (max-width: 640px) {
-        .act-grid { grid-template-columns: 1fr; }
+        #activities {
+          padding: 4rem 1.25rem;
+        }
+        .act-grid {
+          grid-template-columns: 1fr;
+          margin-top: 2rem;
+        }
+        .act-body {
+          padding: 1rem;
+        }
+        .act-title {
+          font-size: 1rem;
+        }
+        .act-card-more .act-more-inner {
+          min-height: 200px;
+        }
+        .act-modal-overlay {
+          padding: 0;
+          align-items: stretch;
+        }
+        .act-modal {
+          width: 100%;
+          max-width: none;
+          max-height: 100vh;
+          max-height: 100dvh;
+          min-height: 100dvh;
+          border-radius: 0;
+          border-left: none;
+          border-right: none;
+          padding: 1rem 1rem max(1.25rem, env(safe-area-inset-bottom));
+          padding-top: max(3rem, env(safe-area-inset-top));
+        }
+        .act-modal-close {
+          top: max(0.75rem, env(safe-area-inset-top));
+          right: 0.75rem;
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      @media (max-width: 640px) and (hover: none) {
+        .act-card:hover {
+          transform: none;
+          box-shadow: none;
+        }
+        .act-card:active {
+          opacity: 0.92;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .act-gallery-nav {
+          width: 2rem;
+          height: 2rem;
+          min-width: 2rem;
+          font-size: 0.8rem;
+        }
+        .act-thumb {
+          width: 48px;
+          height: 48px;
+        }
+        .act-modal-title {
+          font-size: 1.05rem;
+        }
       }
 
       /* ── Blog ── */
@@ -3093,8 +3301,8 @@
         border: 1px solid var(--line);
         border-radius: var(--radius);
         overflow: hidden;
+        cursor: pointer;
         transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
-        text-decoration: none;
         display: block;
       }
       .blog-card:hover {
@@ -3116,6 +3324,24 @@
         transition: transform 0.4s var(--ease);
       }
       .blog-card:hover .blog-cover img { transform: scale(1.05); }
+      .blog-cover-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(26,24,22,0.85) 0%, transparent 50%);
+        display: flex;
+        align-items: flex-end;
+        padding: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s var(--ease);
+      }
+      .blog-card:hover .blog-cover-overlay { opacity: 1; }
+      .blog-cover-hint {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--amber2);
+      }
       .blog-cover-placeholder {
         width: 100%;
         height: 100%;
@@ -3164,8 +3390,190 @@
         gap: 1rem;
         flex-wrap: wrap;
       }
+      .blog-card-more {
+        border-style: dashed;
+        border-color: var(--line2);
+        background: transparent;
+        text-decoration: none;
+        color: inherit;
+      }
+      .blog-card-more:hover {
+        border-color: var(--amber);
+        background: var(--amber-glow);
+      }
+      .blog-more-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2.5rem 1.4rem;
+        min-height: 280px;
+        text-align: center;
+      }
+      .blog-more-icon {
+        font-size: 1.75rem;
+        color: var(--amber);
+        margin-bottom: 0.75rem;
+        transition: transform 0.3s var(--ease);
+      }
+      .blog-card-more:hover .blog-more-icon {
+        transform: translateX(4px);
+      }
+      .blog-more-label {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        color: var(--ink);
+        margin-bottom: 0.35rem;
+      }
+      .blog-more-sub,
+      .blog-more-hint {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--ink3);
+      }
+      .blog-more-hint {
+        margin-top: 0.5rem;
+        color: var(--amber);
+      }
+      .blog-empty {
+        color: var(--ink3);
+        font-family: var(--mono);
+        font-size: 0.85rem;
+        grid-column: 1 / -1;
+      }
       @media (max-width: 640px) {
         .blog-grid { grid-template-columns: 1fr; }
+      }
+      /* ── Blog Article Modal ── */
+      .blog-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s;
+      }
+      .blog-modal-overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .blog-modal {
+        background: var(--bg2);
+        border: 1px solid var(--line2);
+        border-radius: var(--radius);
+        width: 100%;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+        position: relative;
+        box-shadow: var(--shadow-lg);
+      }
+      .blog-modal-header { margin-bottom: 1rem; }
+      .blog-modal-desc {
+        color: var(--ink2);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 0.4rem;
+      }
+      .blog-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--bg3);
+        border: 1px solid var(--line2);
+        color: var(--ink);
+        border-radius: 50%;
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        z-index: 1;
+      }
+      .blog-modal-close:hover { background: var(--bg-elev); }
+      .blog-modal-gallery-wrap { margin-bottom: 1.25rem; }
+      .blog-modal-gallery-wrap.hidden { display: none; }
+      .blog-modal-title {
+        font-family: var(--serif);
+        font-size: 1.5rem;
+        color: var(--ink);
+        margin: 0.4rem 0 0.6rem;
+        line-height: 1.3;
+      }
+      .blog-modal-meta {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--ink3);
+        margin-bottom: 1.25rem;
+      }
+      .blog-modal-body {
+        color: var(--ink2);
+        font-size: 0.92rem;
+        line-height: 1.75;
+      }
+      .blog-modal-body h2 {
+        font-family: var(--serif);
+        font-size: 1.15rem;
+        color: var(--ink);
+        margin: 1.5rem 0 0.6rem;
+      }
+      .blog-modal-body h2:first-child { margin-top: 0; }
+      .blog-modal-body p { margin-bottom: 1rem; }
+      .blog-modal-body ul, .blog-modal-body ol {
+        margin: 0 0 1rem 1.25rem;
+      }
+      .blog-modal-body li { margin-bottom: 0.35rem; }
+      .blog-modal-body code {
+        font-family: var(--mono);
+        font-size: 0.85em;
+        background: var(--bg3);
+        padding: 0.15em 0.4em;
+        border-radius: 4px;
+        color: var(--amber2);
+      }
+      .blog-modal-body pre {
+        background: var(--bg3);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        padding: 1rem;
+        overflow-x: auto;
+        margin-bottom: 1rem;
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+      .blog-modal-body figure {
+        margin: 1.25rem 0;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--bg3);
+      }
+      .blog-modal-body figure img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+      }
+      .blog-modal-body figcaption {
+        padding: 0.6rem 1rem;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--ink3);
+      }
+      .blog-modal-loading {
+        color: var(--ink3);
+        font-family: var(--mono);
+        font-size: 0.85rem;
       }
     </style>
   </head>
@@ -3214,8 +3622,8 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#education">Education</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="blogs.html">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a class="navCta" href="mailto:aoypsk8@gmail.com">Say hello</a>
@@ -3236,8 +3644,8 @@
       <a href="#skills" class="mm-link">Skills</a>
       <a href="#projects" class="mm-link">Projects</a>
       <a href="#education" class="mm-link">Education</a>
-      <a href="#activities" class="mm-link">Activities</a>
-      <a href="#blog" class="mm-link">Blog</a>
+      <a href="activities.html" class="mm-link">Activities</a>
+      <a href="blogs.html" class="mm-link">Blog</a>
       <a href="#contact" class="mm-link">Contact</a>
       <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello →</a>
     </div>
@@ -4303,6 +4711,33 @@
       </div>
     </div>
 
+    <!-- Blog Article Modal -->
+    <div class="blog-modal-overlay" id="blogModal" role="dialog" aria-modal="true" aria-label="Blog article">
+      <div class="blog-modal">
+        <button class="blog-modal-close" id="blogModalClose" aria-label="Close">✕</button>
+        <div class="blog-modal-header">
+          <span class="blog-tag" id="blogModalTag"></span>
+          <h3 class="blog-modal-title" id="blogModalTitle"></h3>
+          <p class="blog-modal-desc" id="blogModalDesc"></p>
+          <p class="blog-modal-meta" id="blogModalMeta"></p>
+        </div>
+        <div class="blog-modal-gallery-wrap" id="blogGalleryWrap">
+          <div class="act-gallery">
+            <button class="act-gallery-nav act-gallery-prev" id="blogGalleryPrev" aria-label="Previous image">&#8592;</button>
+            <div class="act-gallery-img-wrap">
+              <img id="blogGalleryImg" src="" alt="" />
+              <div class="act-gallery-counter" id="blogGalleryCounter"></div>
+            </div>
+            <button class="act-gallery-nav act-gallery-next" id="blogGalleryNext" aria-label="Next image">&#8594;</button>
+          </div>
+          <div class="act-thumbs" id="blogThumbs"></div>
+        </div>
+        <div class="blog-modal-body" id="blogModalBody">
+          <p class="blog-modal-loading">Loading…</p>
+        </div>
+      </div>
+    </div>
+
     <!-- BLOG -->
     <section id="blog">
       <div class="wrap">
@@ -4460,7 +4895,7 @@
 
         // hover / click / text
         const hoverSel =
-          'a, button, .btn, .navCta, .pf, .ct-link, .eu-card, .lang-card, .pj, .sk-tag, .num-block, .logo-wrap, .navToggle, .mm-cta, #btt, label, [role="button"]';
+          'a, button, .btn, .navCta, .pf, .ct-link, .eu-card, .lang-card, .pj, .sk-tag, .num-block, .logo-wrap, .navToggle, .mm-cta, #btt, label, [role="button"], .act-card, .blog-card';
         const textSel =
           "p, .hero-desc, .about-body, .exp-points li, .pj-desc, .ct-sub, h1, h2, h3, .s-title, .about-intro";
 
@@ -4706,146 +5141,24 @@
       }
     </script>
     <script>
-      // ── Activities: load events/data.json and render cards ──
-      const actGrid   = document.getElementById('actGrid');
-      const actModal  = document.getElementById('actModal');
-      const modalClose = document.getElementById('actModalClose');
-      const modalTag  = document.getElementById('actModalTag');
-      const modalTitle = document.getElementById('actModalTitle');
-      const modalDesc  = document.getElementById('actModalDesc');
-      const modalMeta  = document.getElementById('actModalMeta');
-      const galleryImg = document.getElementById('actGalleryImg');
-      const galleryCounter = document.getElementById('actGalleryCounter');
-      const thumbsWrap = document.getElementById('actThumbs');
-      const prevBtn   = document.getElementById('actGalleryPrev');
-      const nextBtn   = document.getElementById('actGalleryNext');
-
-      let currentImages = [];
-      let currentIndex  = 0;
-
-      function showImage(index) {
-        currentIndex = index;
-        galleryImg.style.opacity = '0';
-        setTimeout(() => {
-          galleryImg.src = currentImages[index];
-          galleryImg.style.opacity = '1';
-        }, 150);
-        galleryCounter.textContent = `${index + 1} / ${currentImages.length}`;
-        prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === currentImages.length - 1;
-        thumbsWrap.querySelectorAll('.act-thumb').forEach((t, i) => {
-          t.classList.toggle('active', i === index);
-        });
-      }
-
-      function openModal(event) {
-        modalTag.textContent   = event.tag;
-        modalTitle.textContent = event.title;
-        modalDesc.textContent  = event.description;
-        modalMeta.textContent  = `${event.date} · ${event.location}`;
-        currentImages = event.images;
-
-        thumbsWrap.innerHTML = '';
-        event.images.forEach((src, i) => {
-          const thumb = document.createElement('div');
-          thumb.className = 'act-thumb';
-          thumb.innerHTML = `<img src="${src}" alt="Photo ${i+1}" loading="lazy">`;
-          thumb.addEventListener('click', () => showImage(i));
-          thumbsWrap.appendChild(thumb);
-        });
-
-        showImage(0);
-        actModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        actModal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-
-      prevBtn.addEventListener('click', () => { if (currentIndex > 0) showImage(currentIndex - 1); });
-      nextBtn.addEventListener('click', () => { if (currentIndex < currentImages.length - 1) showImage(currentIndex + 1); });
-      modalClose.addEventListener('click', closeModal);
-      actModal.addEventListener('click', e => { if (e.target === actModal) closeModal(); });
-      document.addEventListener('keydown', e => {
-        if (!actModal.classList.contains('open')) return;
-        if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft' && currentIndex > 0) showImage(currentIndex - 1);
-        if (e.key === 'ArrowRight' && currentIndex < currentImages.length - 1) showImage(currentIndex + 1);
-      });
-
-      function renderCards(events) {
-        actGrid.innerHTML = '';
-        events.forEach(ev => {
-          const card = document.createElement('div');
-          card.className = 'act-card reveal';
-          card.innerHTML = `
-            <div class="act-img-wrap">
-              <img src="${ev.cover}" alt="${ev.title}" loading="lazy"
-                onerror="this.parentElement.innerHTML='<div class=\'act-img-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><path d=\'M3 9h18M9 21V9\'/></svg><span>No image yet</span></div>'" />
-            </div>
-            <div class="act-body">
-              <span class="act-event-tag">${ev.tag}</span>
-              <p class="act-title">${ev.title}</p>
-              <p class="act-meta">${ev.date} · ${ev.location}</p>
-            </div>`;
-          card.addEventListener('click', () => openModal(ev));
-          actGrid.appendChild(card);
-        });
-      }
-
-      fetch('events/data.json')
-        .then(r => r.json())
-        .then(renderCards)
-        .catch(() => {
-          actGrid.innerHTML = '<p style="color:var(--ink3);font-family:var(--mono);font-size:.85rem">Could not load events/data.json — make sure you\'re serving the site from a web server.</p>';
-        });
+      // ── Activities preview: 3 cards + See more (full list on activities.html) ──
+      window.__EVENTS_CONFIG__ = {
+        dataUrl: "events/preview.json",
+        seeMoreHref: "activities.html",
+        seeMoreLabel: "See more",
+      };
     </script>
+    <script src="js/events.js"></script>
     <script>
-      // ── Blog: load blogs/data.json and render cards ──
-      function fmtDate(iso) {
-        const d = new Date(iso);
-        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-      }
-
-      function renderPosts(posts) {
-        const grid = document.getElementById('blogGrid');
-        grid.innerHTML = '';
-        if (!posts.length) {
-          grid.innerHTML = '<p style="color:var(--ink3);font-family:var(--mono);font-size:.85rem">No posts yet. Add entries to blogs/data.json to get started.</p>';
-          return;
-        }
-        posts.forEach(post => {
-          const card = document.createElement('a');
-          card.className = 'blog-card reveal';
-          card.href = '#';
-          card.setAttribute('aria-label', post.title);
-          card.innerHTML = `
-            <div class="blog-cover">
-              <img src="${post.cover}" alt="${post.title}" loading="lazy"
-                onerror="this.parentElement.innerHTML='<div class=\\'blog-cover-placeholder\\'><svg width=\\'40\\' height=\\'40\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\' viewBox=\\'0 0 24 24\\'><path d=\\'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z\\'/><polyline points=\\'14 2 14 8 20 8\\'/></svg><span>No cover yet</span></div>'" />
-            </div>
-            <div class="blog-body">
-              <span class="blog-tag">${post.tag}</span>
-              <p class="blog-title">${post.title}</p>
-              <p class="blog-excerpt">${post.excerpt}</p>
-              <div class="blog-meta">
-                <span>${fmtDate(post.date)}</span>
-                <span>${post.readTime}</span>
-              </div>
-            </div>`;
-          grid.appendChild(card);
-          io.observe(card);
-        });
-      }
-
-      fetch('blogs/data.json')
-        .then(r => r.json())
-        .then(renderPosts)
-        .catch(() => {
-          document.getElementById('blogGrid').innerHTML = '<p style="color:var(--ink3);font-family:var(--mono);font-size:.85rem">Could not load blogs/data.json — make sure you\'re serving the site from a web server.</p>';
-        });
+      // ── Blog preview: 3 cards + See more (full list on blogs.html) ──
+      window.__BLOGS_CONFIG__ = {
+        dataUrl: "blogs/preview.json",
+        seeMoreHref: "blogs.html",
+        seeMoreLabel: "See more",
+        lazyFullPost: true,
+        fullDataUrl: "blogs/data.json",
+      };
     </script>
+    <script src="js/blogs.js"></script>
   </body>
 </html>

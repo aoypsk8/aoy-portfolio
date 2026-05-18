@@ -1,0 +1,1 @@
+for f in IMG_*.JPEG; do [ -f "$f" ] || continue; base="${f%.*}"; sips -s format jpeg -s formatOptions 90 "$f" --out "${base}.jpg" 2>/dev/null; done; ls -la *.jpg *.JPG *.JPEG 2>/dev/null | head -20

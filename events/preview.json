@@ -1,0 +1,55 @@
+{
+  "total": 16,
+  "preview": [
+    {
+      "id": "bachelor-graduation-nuol",
+      "tag": "Graduation",
+      "title": "Bachelor's Graduation — Computer Programming Development",
+      "description": "Graduated with a Bachelor's degree in Computer Programming Development from the National University of Laos (NUOL) — celebrating years of study, projects, and growth as a software engineer.",
+      "date": "September 2025",
+      "location": "National University of Laos · Vientiane, Laos",
+      "cover": "events/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c.jpg",
+      "images": [
+        "events/graduated_bachelor/0A33DB83-C0C1-4B03-9728-0245E0E2603E.JPG",
+        "events/graduated_bachelor/76673557-f9b6-4ac5-a063-517a26388cf4.JPG",
+        "events/graduated_bachelor/16a66c94-2b48-4eb1-97b3-54886bfbc4ec.JPG",
+        "events/graduated_bachelor/IMG_5825.jpg",
+        "events/graduated_bachelor/IMG_5827.jpg",
+        "events/graduated_bachelor/IMG_5841.jpg",
+        "events/graduated_bachelor/447550d1-96a6-46f8-b902-523282c9f659.jpg",
+        "events/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c.jpg"
+      ]
+    },
+    {
+      "id": "techsauce-global-summit-2025",
+      "tag": "Summit",
+      "title": "Techsauce Global Summit 2025",
+      "description": "Represented MMoneyX at Techsauce Global Summit 2025 in Bangkok, Thailand — connecting with the regional tech ecosystem, fintech innovators, and partners across Southeast Asia.",
+      "date": "2025",
+      "location": "Bangkok, Thailand",
+      "cover": "events/techsauce2025/72fb194b-1f51-44a1-ba2b-60d43c6fb6b1.JPG",
+      "images": [
+        "events/techsauce2025/72fb194b-1f51-44a1-ba2b-60d43c6fb6b1.JPG",
+        "events/techsauce2025/66aeea5e-a9da-46ac-9399-bf7e5e937874.jpg",
+        "events/techsauce2025/IMG_4693.jpg",
+        "events/techsauce2025/IMG_4741.jpg"
+      ]
+    },
+    {
+      "id": "guest-speaker-samsung-innovation",
+      "tag": "Speaker",
+      "title": "Guest Speaker — Samsung Innovation",
+      "description": "Invited as a guest speaker at Samsung Innovation — sharing insights on technology, mobile development, and innovation with students and the local tech community.",
+      "date": "Dec 2024",
+      "location": "Vientiane, Laos",
+      "cover": "events/guestspeaker_samsung/IMG_9502.JPG",
+      "images": [
+        "events/guestspeaker_samsung/IMG_9502.JPG",
+        "events/guestspeaker_samsung/IMG_9398.jpg",
+        "events/guestspeaker_samsung/IMG_20241212_152113.jpg",
+        "events/guestspeaker_samsung/IMG_9374.jpg",
+        "events/guestspeaker_samsung/IMG_9379.jpg"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activities — Aoy Phongsakoun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+
+      :root {
+        --bg: #1a1816; --bg2: #24211e; --bg3: #2e2a26; --bg-elev: #353029;
+        --line: rgba(255,248,238,0.07); --line2: rgba(255,248,238,0.12);
+        --ink: #f5f0e8; --ink2: #a89f96; --ink3: #5c554e;
+        --amber: #d4925c; --amber2: #e8b07a; --amber-glow: rgba(212,146,92,0.15);
+        --teal: #6eb8ae;
+        --radius: 12px; --radius-sm: 8px;
+        --shadow: 0 4px 24px rgba(0,0,0,0.25); --shadow-lg: 0 12px 48px rgba(0,0,0,0.35);
+        --serif: "Lora", Georgia, serif; --sans: "Inter", system-ui, sans-serif;
+        --mono: "JetBrains Mono", monospace;
+        --ease: cubic-bezier(0.22,1,0.36,1);
+      }
+
+      body {
+        background: var(--bg); color: var(--ink);
+        font-family: var(--sans); font-size: 15px; line-height: 1.7;
+        overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      }
+      body::before {
+        content: ""; position: fixed; inset: 0; pointer-events: none;
+        z-index: 9999; opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        html { scroll-behavior: auto; }
+      }
+      ::selection { background: rgba(200,132,74,0.25); }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: var(--bg); }
+      ::-webkit-scrollbar-thumb { background: var(--ink3); border-radius: 4px; }
+
+      /* cursor */
+      @media (hover: hover) and (pointer: fine) {
+        body.custom-cursor-active, body.custom-cursor-active * { cursor: none !important; }
+      }
+      .cursor-wrap { position: fixed; top: 0; left: 0; z-index: 10001; pointer-events: none; opacity: 0; transition: opacity 0.35s ease; }
+      body.custom-cursor-active .cursor-wrap { opacity: 1; }
+      body.custom-cursor-hidden .cursor-wrap { opacity: 0; }
+      .cursor-dot, .cursor-ring, .cursor-icon { position: fixed; top: 0; left: 0; pointer-events: none; will-change: transform; }
+      .cursor-dot {
+        width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+        background: var(--amber); box-shadow: 0 0 12px rgba(212,146,92,0.6); z-index: 10003;
+        transform: translate3d(var(--mx,-100px),var(--my,-100px),0);
+        transition: width .25s var(--ease), height .25s var(--ease), margin .25s var(--ease), opacity .25s, transform .15s var(--ease);
+      }
+      .cursor-ring {
+        width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%;
+        border: 1px solid rgba(212,146,92,0.45); z-index: 10002;
+        transform: translate3d(var(--rx,-100px),var(--ry,-100px),0);
+        transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), border-color .25s, background .25s, opacity .25s;
+      }
+      .cursor-icon {
+        width: 22px; height: 22px; margin: -2px 0 0 -2px; z-index: 10004; color: var(--amber2);
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+        transform: translate3d(var(--mx,-100px),var(--my,-100px),0);
+        transition: transform .15s var(--ease), opacity .25s, width .3s var(--ease), height .3s var(--ease), margin .3s var(--ease);
+      }
+      .cursor-icon svg { width: 100%; height: 100%; display: block; }
+      body.cursor-hover .cursor-ring { width: 56px; height: 56px; margin: -28px 0 0 -28px; border-color: var(--amber); background: rgba(212,146,92,0.08); }
+      body.cursor-hover .cursor-dot { width: 4px; height: 4px; margin: -2px 0 0 -2px; opacity: 0.6; }
+      body.cursor-hover .cursor-icon { width: 28px; height: 28px; margin: -4px 0 0 -4px; color: var(--amber); }
+      body.cursor-hover .cursor-icon .icon-pointer { display: none; }
+      body.cursor-hover .cursor-icon .icon-hand { display: block; }
+      body.cursor-click .cursor-ring { width: 32px; height: 32px; margin: -16px 0 0 -16px; background: rgba(212,146,92,0.15); }
+      body.cursor-click .cursor-dot { transform: translate3d(var(--mx),var(--my),0) scale(0.55); }
+      body.cursor-text .cursor-ring { width: 4px; height: 28px; margin: -14px 0 0 -2px; border-radius: 2px; background: rgba(212,146,92,0.2); }
+      body.cursor-text .cursor-icon, body.cursor-text .cursor-dot { opacity: 0; }
+      .cursor-icon .icon-hand { display: none; }
+      .cursor-ripple {
+        position: fixed; width: 8px; height: 8px; margin: -4px 0 0 -4px;
+        border-radius: 50%; border: 1px solid var(--amber); pointer-events: none;
+        z-index: 10001; animation: cursorRipple 0.6s var(--ease) forwards;
+      }
+      @keyframes cursorRipple { to { width: 48px; height: 48px; margin: -24px 0 0 -24px; opacity: 0; } }
+
+      /* nav */
+      nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.5rem 3rem;
+        transition: background 0.4s, border-color 0.4s, padding 0.4s;
+      }
+      nav.s {
+        background: rgba(26,24,22,0.88); backdrop-filter: blur(20px) saturate(1.2);
+        -webkit-backdrop-filter: blur(20px) saturate(1.2);
+        border-bottom: 1px solid var(--line); padding: 1rem 3rem;
+        box-shadow: 0 1px 0 rgba(255,248,238,0.03);
+      }
+      .logo { font-family: var(--serif); font-size: 1.25rem; font-weight: 500; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; transition: color 0.2s; }
+      .logo:hover { color: var(--amber2); }
+      .navLinks { display: flex; gap: 2.5rem; list-style: none; }
+      .navLinks a { font-size: 0.72rem; color: var(--ink2); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; font-family: var(--mono); }
+      .navLinks a:hover { color: var(--ink); }
+      .navLinks a.active { color: var(--amber); }
+      .navCta { font-size: 0.72rem; font-family: var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--amber); text-decoration: none; border: 1px solid rgba(200,132,74,0.35); padding: 0.5rem 1.2rem; border-radius: 3px; transition: background 0.2s, color 0.2s; }
+      .navCta:hover { background: var(--amber); color: var(--bg); border-color: var(--amber); }
+      .navToggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line2); border-radius: var(--radius-sm); background: var(--bg3); cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; transition: border-color 0.2s, background 0.2s; }
+      .navToggle span { display: block; width: 18px; height: 1.5px; background: var(--ink); border-radius: 2px; transition: transform 0.3s var(--ease), opacity 0.2s; }
+      .navToggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .navToggle.open span:nth-child(2) { opacity: 0; }
+      .navToggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .navToggle:hover { border-color: var(--amber); }
+      .mobileMenu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99; background: rgba(26,24,22,0.97); backdrop-filter: blur(24px); padding: 6rem 2rem 2rem; flex-direction: column; gap: 0.5rem; opacity: 0; visibility: hidden; transition: opacity 0.35s var(--ease), visibility 0.35s; }
+      .mobileMenu.open { opacity: 1; visibility: visible; }
+      .mobileMenu a { font-family: var(--serif); font-size: 1.75rem; color: var(--ink2); text-decoration: none; padding: 0.75rem 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(16px); transition: color 0.2s, padding-left 0.3s var(--ease), opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+      .mobileMenu.open a { opacity: 1; transform: translateY(0); }
+      .mobileMenu a:hover { color: var(--amber2); padding-left: 0.5rem; }
+      .mobileMenu .mm-cta { margin-top: 1.5rem; font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); border: 1px solid rgba(212,146,92,0.4); padding: 1rem 1.5rem; border-radius: var(--radius-sm); text-align: center; }
+
+      /* scroll bar */
+      #bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--amber); z-index: 200; width: 0; }
+
+      /* btt */
+      #btt { position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--line2); display: flex; align-items: center; justify-content: center; color: var(--ink2); text-decoration: none; font-size: 0.85rem; z-index: 90; opacity: 0; transform: translateY(8px); transition: opacity 0.3s, transform 0.3s, background 0.2s, color 0.2s; }
+      #btt.show { opacity: 1; transform: translateY(0); }
+      #btt:hover { background: var(--amber); color: var(--bg); border-color: var(--amber); box-shadow: 0 4px 20px rgba(212,146,92,0.3); transform: translateY(-2px); }
+
+      /* footer */
+      footer { background: var(--bg2); border-top: 1px solid var(--line); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+      .f-l { font-family: var(--mono); font-size: 0.62rem; color: var(--ink3); letter-spacing: 0.05em; }
+      .f-c { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--ink2); font-style: italic; }
+
+      /* reveal */
+      .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+      .reveal.on { opacity: 1; transform: translateY(0); }
+      .s-tag { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+      .s-tag.on { opacity: 1; transform: translateY(0); }
+
+      /* page hero */
+      .page-hero { padding: 8rem 3rem 4rem; border-bottom: 1px solid var(--line); background: var(--bg2); }
+      .page-hero-inner { max-width: 1160px; margin: 0 auto; }
+      .s-tag-el { font-family: var(--mono); font-size: 0.65rem; color: var(--amber); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 10px; }
+      .s-tag-el::before { content: ""; display: block; width: 20px; height: 1px; background: var(--amber); }
+      .page-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3.2rem); font-weight: 400; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 0.6rem; line-height: 1.1; }
+      .page-title em { font-style: italic; color: var(--amber2); }
+      .page-sub { color: var(--ink2); max-width: 560px; font-size: 0.95rem; }
+
+      /* section */
+      section { padding: 5rem 3rem; }
+      .wrap { max-width: 1160px; margin: 0 auto; }
+
+      /* activities */
+      .act-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+      .act-card { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease); cursor: pointer; }
+      .act-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+      .act-img-wrap { position: relative; width: 100%; aspect-ratio: 4/3; background: var(--bg3); overflow: hidden; }
+      .act-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s var(--ease); }
+      .act-card:hover .act-img-wrap img { transform: scale(1.05); }
+      .act-img-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--ink3); font-size: 0.8rem; font-family: var(--mono); }
+      .act-img-placeholder svg { opacity: 0.4; }
+      .act-body { padding: 1.25rem; }
+      .act-event-tag { display: inline-block; font-size: 0.7rem; font-family: var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); background: var(--amber-glow); border: 1px solid rgba(212,146,92,0.2); border-radius: 4px; padding: 2px 8px; margin-bottom: 0.6rem; }
+      .act-title { font-family: var(--serif); font-size: 1.05rem; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.4; }
+      .act-meta { font-size: 0.78rem; color: var(--ink3); font-family: var(--mono); }
+
+      /* modal */
+      .act-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+      .act-modal-overlay.open { opacity: 1; pointer-events: all; }
+      .act-modal { background: var(--bg2); border: 1px solid var(--line2); border-radius: var(--radius); width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative; box-shadow: var(--shadow-lg); }
+      .act-modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg3); border: 1px solid var(--line2); color: var(--ink); border-radius: 50%; width: 2.2rem; height: 2.2rem; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+      .act-modal-close:hover { background: var(--bg-elev); }
+      .act-modal-header { margin-bottom: 1.5rem; }
+      .act-modal-title { font-family: var(--serif); font-size: 1.4rem; color: var(--ink); margin: 0.4rem 0 0.6rem; }
+      .act-modal-desc { color: var(--ink2); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.4rem; }
+      .act-modal-meta { font-family: var(--mono); font-size: 0.75rem; color: var(--ink3); }
+      .act-gallery { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+      .act-gallery-img-wrap { flex: 1; position: relative; border-radius: var(--radius-sm); overflow: hidden; background: var(--bg3); aspect-ratio: 16/9; }
+      .act-gallery-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
+      .act-gallery-counter { position: absolute; bottom: 0.6rem; right: 0.7rem; background: rgba(0,0,0,0.6); color: #fff; font-family: var(--mono); font-size: 0.7rem; padding: 2px 8px; border-radius: 20px; }
+      .act-gallery-nav { background: var(--bg3); border: 1px solid var(--line2); color: var(--ink); border-radius: 50%; width: 2.4rem; height: 2.4rem; font-size: 1rem; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+      .act-gallery-nav:hover { background: var(--bg-elev); }
+      .act-gallery-nav:disabled { opacity: 0.25; cursor: default; }
+      .act-thumbs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .act-thumb { width: 60px; height: 60px; border-radius: var(--radius-sm); overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; flex-shrink: 0; }
+      .act-thumb.active { border-color: var(--amber); }
+      .act-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* responsive */
+      @media (max-width: 900px) {
+        nav, nav.s { padding: 1rem 2rem; }
+        .navLinks, .navCta { display: none; }
+        .navToggle { display: flex; }
+        .mobileMenu { display: flex; }
+        footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        section { padding: 4rem 2rem; }
+        .page-hero { padding: 7rem 2rem 3rem; }
+      }
+      @media (max-width: 640px) {
+        .act-grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 560px) {
+        nav, nav.s { padding: 1rem 1.5rem; }
+        footer { padding: 1.5rem; }
+        .page-hero { padding: 6rem 1.5rem 2.5rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor-wrap" id="cursorWrap" aria-hidden="true">
+      <div class="cursor-ring" id="cursorRing"></div>
+      <div class="cursor-dot" id="cursorDot"></div>
+      <div class="cursor-icon" id="cursorIcon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="icon-pointer"><path d="M4 4L4 19L9 14L13 20L15 19L11 13L17 12L4 4Z" fill="currentColor" stroke="currentColor" stroke-width="0.5" stroke-linejoin="round"/></g>
+          <g class="icon-hand"><path d="M8 11V8.5a1.5 1.5 0 013 0V11M11 11V7.5a1.5 1.5 0 013 0V11M14 11V8a1.5 1.5 0 013 0v6a5 5 0 01-5 5h-1a4 4 0 01-4-4v-4a1.5 1.5 0 013 0v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+        </svg>
+      </div>
+    </div>
+
+    <div id="bar"></div>
+    <a id="btt" href="#" aria-label="Back to top">↑</a>
+
+    <nav id="nav">
+      <a class="logo-wrap" href="index.html"><span class="logo">Aoy Phongsakoun</span></a>
+      <ul class="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#education">Education</a></li>
+        <li><a href="activities.html" class="active">Activities</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a class="navCta" href="mailto:aoypsk8@gmail.com">Say hello</a>
+      <button class="navToggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
+      <a href="index.html#about" class="mm-link">About</a>
+      <a href="index.html#experience" class="mm-link">Experience</a>
+      <a href="index.html#skills" class="mm-link">Skills</a>
+      <a href="index.html#projects" class="mm-link">Projects</a>
+      <a href="index.html#education" class="mm-link">Education</a>
+      <a href="activities.html" class="mm-link">Activities</a>
+      <a href="blog.html" class="mm-link">Blog</a>
+      <a href="index.html#contact" class="mm-link">Contact</a>
+      <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello →</a>
+    </div>
+
+    <div class="page-hero">
+      <div class="page-hero-inner">
+        <div class="s-tag-el s-tag">Beyond the screen</div>
+        <h1 class="page-title reveal">Activities &amp; <em>Events</em></h1>
+        <p class="page-sub reveal">Moments from hackathons, meetups, workshops, and community events I've been part of.</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="wrap">
+        <div class="act-grid" id="actGrid"></div>
+      </div>
+    </section>
+
+    <!-- Event Gallery Modal -->
+    <div class="act-modal-overlay" id="actModal" role="dialog" aria-modal="true" aria-label="Event gallery">
+      <div class="act-modal">
+        <button class="act-modal-close" id="actModalClose" aria-label="Close">✕</button>
+        <div class="act-modal-header">
+          <span class="act-event-tag" id="actModalTag"></span>
+          <h3 class="act-modal-title" id="actModalTitle"></h3>
+          <p class="act-modal-desc" id="actModalDesc"></p>
+          <p class="act-modal-meta" id="actModalMeta"></p>
+        </div>
+        <div class="act-gallery">
+          <button class="act-gallery-nav act-gallery-prev" id="actGalleryPrev" aria-label="Previous image">&#8592;</button>
+          <div class="act-gallery-img-wrap">
+            <img id="actGalleryImg" src="" alt="" />
+            <div class="act-gallery-counter" id="actGalleryCounter"></div>
+          </div>
+          <button class="act-gallery-nav act-gallery-next" id="actGalleryNext" aria-label="Next image">&#8594;</button>
+        </div>
+        <div class="act-thumbs" id="actThumbs"></div>
+      </div>
+    </div>
+
+    <footer>
+      <span class="f-l">© 2026 Aoy Phongsakoun</span>
+      <span class="f-c">Made with care.</span>
+      <span class="f-l">Vientiane, Laos</span>
+    </footer>
+
+    <script>
+      // custom cursor
+      (function initCustomCursor() {
+        const canUse = window.matchMedia("(hover: hover) and (pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!canUse) return;
+        const wrap = document.getElementById("cursorWrap"), dot = document.getElementById("cursorDot"), ring = document.getElementById("cursorRing"), icon = document.getElementById("cursorIcon");
+        if (!wrap || !dot || !ring || !icon) return;
+        document.body.classList.add("custom-cursor-active");
+        let mx = -100, my = -100, rx = -100, ry = -100, visible = false;
+        const root = document.documentElement;
+        const setMouse = () => { root.style.setProperty("--mx", mx + "px"); root.style.setProperty("--my", my + "px"); root.style.setProperty("--rx", rx + "px"); root.style.setProperty("--ry", ry + "px"); };
+        document.addEventListener("mousemove", e => { mx = e.clientX; my = e.clientY; if (!visible) { visible = true; document.body.classList.remove("custom-cursor-hidden"); } setMouse(); }, { passive: true });
+        document.addEventListener("mouseleave", () => { document.body.classList.add("custom-cursor-hidden"); visible = false; });
+        document.addEventListener("mouseenter", () => { if (visible) document.body.classList.remove("custom-cursor-hidden"); });
+        const lerp = (a, b, t) => a + (b - a) * t;
+        function tick() { rx = lerp(rx, mx, 0.14); ry = lerp(ry, my, 0.14); setMouse(); requestAnimationFrame(tick); }
+        tick();
+        const hoverSel = 'a, button, .act-card, .act-thumb, .navCta, .logo-wrap, .navToggle, .mm-cta, #btt, [role="button"]';
+        document.addEventListener("mouseover", e => {
+          const t = e.target;
+          if (t.closest(hoverSel)) document.body.classList.add("cursor-hover"); else document.body.classList.remove("cursor-hover");
+        });
+        document.addEventListener("mousedown", () => {
+          document.body.classList.add("cursor-click");
+          const r = document.createElement("div"); r.className = "cursor-ripple"; r.style.left = mx + "px"; r.style.top = my + "px";
+          document.body.appendChild(r); r.addEventListener("animationend", () => r.remove());
+        });
+        document.addEventListener("mouseup", () => document.body.classList.remove("cursor-click"));
+      })();
+
+      // nav + progress + btt
+      const nav = document.getElementById("nav"), bar = document.getElementById("bar"), btt = document.getElementById("btt");
+      window.addEventListener("scroll", () => {
+        const st = document.documentElement.scrollTop;
+        const sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        bar.style.width = (st / sh) * 100 + "%";
+        nav.classList.toggle("s", st > 60);
+        btt.classList.toggle("show", st > 300);
+      }, { passive: true });
+
+      // mobile menu
+      const navToggle = document.getElementById("navToggle"), mobileMenu = document.getElementById("mobileMenu");
+      function closeMenu() { navToggle.classList.remove("open"); mobileMenu.classList.remove("open"); mobileMenu.setAttribute("aria-hidden","true"); navToggle.setAttribute("aria-expanded","false"); document.body.style.overflow = ""; }
+      navToggle.addEventListener("click", () => { const open = mobileMenu.classList.toggle("open"); navToggle.classList.toggle("open", open); navToggle.setAttribute("aria-expanded", open); mobileMenu.setAttribute("aria-hidden", !open); document.body.style.overflow = open ? "hidden" : ""; });
+      mobileMenu.querySelectorAll("a").forEach((a, i) => { a.addEventListener("click", closeMenu); a.style.transitionDelay = `${0.05 + i * 0.04}s`; });
+
+      // reveal
+      const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("on"); }); }, { threshold: 0.08, rootMargin: "0px 0px -32px 0px" });
+      document.querySelectorAll(".reveal, .s-tag").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 0.07 + "s"; io.observe(el); });
+
+      // activities gallery
+      const actModal = document.getElementById("actModal"), modalClose = document.getElementById("actModalClose");
+      const modalTag = document.getElementById("actModalTag"), modalTitle = document.getElementById("actModalTitle");
+      const modalDesc = document.getElementById("actModalDesc"), modalMeta = document.getElementById("actModalMeta");
+      const galleryImg = document.getElementById("actGalleryImg"), galleryCounter = document.getElementById("actGalleryCounter");
+      const thumbsWrap = document.getElementById("actThumbs"), prevBtn = document.getElementById("actGalleryPrev"), nextBtn = document.getElementById("actGalleryNext");
+      let currentImages = [], currentIndex = 0;
+
+      function showImage(index) {
+        currentIndex = index;
+        galleryImg.style.opacity = "0";
+        setTimeout(() => { galleryImg.src = currentImages[index]; galleryImg.style.opacity = "1"; }, 150);
+        galleryCounter.textContent = `${index + 1} / ${currentImages.length}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === currentImages.length - 1;
+        thumbsWrap.querySelectorAll(".act-thumb").forEach((t, i) => t.classList.toggle("active", i === index));
+      }
+
+      function openModal(event) {
+        modalTag.textContent = event.tag;
+        modalTitle.textContent = event.title;
+        modalDesc.textContent = event.description;
+        modalMeta.textContent = `${event.date} · ${event.location}`;
+        currentImages = event.images;
+        thumbsWrap.innerHTML = "";
+        event.images.forEach((src, i) => {
+          const thumb = document.createElement("div"); thumb.className = "act-thumb";
+          thumb.innerHTML = `<img src="${src}" alt="Photo ${i+1}" loading="lazy">`;
+          thumb.addEventListener("click", () => showImage(i));
+          thumbsWrap.appendChild(thumb);
+        });
+        showImage(0);
+        actModal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() { actModal.classList.remove("open"); document.body.style.overflow = ""; }
+      prevBtn.addEventListener("click", () => { if (currentIndex > 0) showImage(currentIndex - 1); });
+      nextBtn.addEventListener("click", () => { if (currentIndex < currentImages.length - 1) showImage(currentIndex + 1); });
+      modalClose.addEventListener("click", closeModal);
+      actModal.addEventListener("click", e => { if (e.target === actModal) closeModal(); });
+      document.addEventListener("keydown", e => {
+        if (!actModal.classList.contains("open")) return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowLeft" && currentIndex > 0) showImage(currentIndex - 1);
+        if (e.key === "ArrowRight" && currentIndex < currentImages.length - 1) showImage(currentIndex + 1);
+      });
+
+      function renderCards(events) {
+        const grid = document.getElementById("actGrid");
+        grid.innerHTML = "";
+        events.forEach(ev => {
+          const card = document.createElement("div"); card.className = "act-card reveal";
+          card.innerHTML = `
+            <div class="act-img-wrap">
+              <img src="${ev.cover}" alt="${ev.title}" loading="lazy"
+                onerror="this.parentElement.innerHTML='<div class=\\'act-img-placeholder\\'><svg width=\\'40\\' height=\\'40\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\' viewBox=\\'0 0 24 24\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\'/><path d=\\'M3 9h18M9 21V9\\'/></svg><span>No image yet</span></div>'" />
+            </div>
+            <div class="act-body">
+              <span class="act-event-tag">${ev.tag}</span>
+              <p class="act-title">${ev.title}</p>
+              <p class="act-meta">${ev.date} · ${ev.location}</p>
+            </div>`;
+          card.addEventListener("click", () => openModal(ev));
+          grid.appendChild(card);
+          io.observe(card);
+        });
+      }
+
+      fetch("events/data.json")
+        .then(r => r.json())
+        .then(renderCards)
+        .catch(() => {
+          document.getElementById("actGrid").innerHTML = '<p style="color:var(--ink3);font-family:var(--mono);font-size:.85rem;padding:3rem 0">No events found. Add entries to events/data.json and serve from a web server.</p>';
+        });
+    </script>
+  </body>
+</html>

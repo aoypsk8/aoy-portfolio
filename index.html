@@ -2709,222 +2709,6 @@
         }
       }
 
-      /* ── ACTIVITIES ── */
-      #activities { padding: 6rem 0; }
-      .act-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-        margin-top: 3rem;
-      }
-      .act-card {
-        background: var(--bg2);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        overflow: hidden;
-        transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
-      }
-      .act-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-      }
-      .act-img-wrap {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 4/3;
-        background: var(--bg3);
-        overflow: hidden;
-      }
-      .act-img-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.4s var(--ease);
-      }
-      .act-card:hover .act-img-wrap img {
-        transform: scale(1.05);
-      }
-      .act-img-placeholder {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        color: var(--ink3);
-        font-size: 0.8rem;
-        font-family: var(--mono);
-      }
-      .act-img-placeholder svg { opacity: 0.4; }
-      .act-body { padding: 1.25rem; }
-      .act-event-tag {
-        display: inline-block;
-        font-size: 0.7rem;
-        font-family: var(--mono);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--amber);
-        background: var(--amber-glow);
-        border: 1px solid rgba(212,146,92,0.2);
-        border-radius: 4px;
-        padding: 2px 8px;
-        margin-bottom: 0.6rem;
-      }
-      .act-title {
-        font-family: var(--serif);
-        font-size: 1.05rem;
-        color: var(--ink);
-        margin-bottom: 0.4rem;
-        line-height: 1.4;
-      }
-      .act-meta {
-        font-size: 0.78rem;
-        color: var(--ink3);
-        font-family: var(--mono);
-      }
-      /* ── Event Gallery Modal ── */
-      .act-modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.92);
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.25s;
-      }
-      .act-modal-overlay.open {
-        opacity: 1;
-        pointer-events: all;
-      }
-      .act-modal {
-        background: var(--bg2);
-        border: 1px solid var(--line2);
-        border-radius: var(--radius);
-        width: 100%;
-        max-width: 800px;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 2rem;
-        position: relative;
-        box-shadow: var(--shadow-lg);
-      }
-      .act-modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: var(--bg3);
-        border: 1px solid var(--line2);
-        color: var(--ink);
-        border-radius: 50%;
-        width: 2.2rem;
-        height: 2.2rem;
-        font-size: 1rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-      }
-      .act-modal-close:hover { background: var(--bg-elev); }
-      .act-modal-header { margin-bottom: 1.5rem; }
-      .act-modal-title {
-        font-family: var(--serif);
-        font-size: 1.4rem;
-        color: var(--ink);
-        margin: 0.4rem 0 0.6rem;
-      }
-      .act-modal-desc {
-        color: var(--ink2);
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 0.4rem;
-      }
-      .act-modal-meta {
-        font-family: var(--mono);
-        font-size: 0.75rem;
-        color: var(--ink3);
-      }
-      .act-gallery {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-      }
-      .act-gallery-img-wrap {
-        flex: 1;
-        position: relative;
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        background: var(--bg3);
-        aspect-ratio: 16/9;
-      }
-      .act-gallery-img-wrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: opacity 0.2s;
-      }
-      .act-gallery-counter {
-        position: absolute;
-        bottom: 0.6rem;
-        right: 0.7rem;
-        background: rgba(0,0,0,0.6);
-        color: #fff;
-        font-family: var(--mono);
-        font-size: 0.7rem;
-        padding: 2px 8px;
-        border-radius: 20px;
-      }
-      .act-gallery-nav {
-        background: var(--bg3);
-        border: 1px solid var(--line2);
-        color: var(--ink);
-        border-radius: 50%;
-        width: 2.4rem;
-        height: 2.4rem;
-        font-size: 1rem;
-        cursor: pointer;
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-      }
-      .act-gallery-nav:hover { background: var(--bg-elev); }
-      .act-gallery-nav:disabled { opacity: 0.25; cursor: default; }
-      .act-thumbs {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-      }
-      .act-thumb {
-        width: 60px;
-        height: 60px;
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: border-color 0.2s;
-        flex-shrink: 0;
-      }
-      .act-thumb.active { border-color: var(--amber); }
-      .act-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .act-card { cursor: pointer; }
-      @media (max-width: 640px) {
-        .act-grid { grid-template-columns: 1fr; }
-      }
     </style>
   </head>
   <body>
@@ -2972,7 +2756,8 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#education">Education</a></li>
-        <li><a href="#activities">Activities</a></li>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a class="navCta" href="mailto:aoypsk8@gmail.com">Say hello</a>
@@ -2993,7 +2778,8 @@
       <a href="#skills" class="mm-link">Skills</a>
       <a href="#projects" class="mm-link">Projects</a>
       <a href="#education" class="mm-link">Education</a>
-      <a href="#activities" class="mm-link">Activities</a>
+      <a href="activities.html" class="mm-link">Activities</a>
+      <a href="blog.html" class="mm-link">Blog</a>
       <a href="#contact" class="mm-link">Contact</a>
       <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello →</a>
     </div>
@@ -4018,40 +3804,6 @@
       </div>
     </section>
 
-    <!-- ACTIVITIES -->
-    <section id="activities">
-      <div class="wrap">
-        <div class="s-tag">Beyond the screen</div>
-        <h2 class="s-heading reveal">Activities &amp; <em>Events</em></h2>
-        <p class="s-sub reveal">Moments from hackathons, meetups, workshops, and community events I've been part of.</p>
-        <div class="act-grid" id="actGrid">
-          <!-- Cards injected by JS from events/data.json -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Event Gallery Modal -->
-    <div class="act-modal-overlay" id="actModal" role="dialog" aria-modal="true" aria-label="Event gallery">
-      <div class="act-modal">
-        <button class="act-modal-close" id="actModalClose" aria-label="Close">✕</button>
-        <div class="act-modal-header">
-          <span class="act-event-tag" id="actModalTag"></span>
-          <h3 class="act-modal-title" id="actModalTitle"></h3>
-          <p class="act-modal-desc" id="actModalDesc"></p>
-          <p class="act-modal-meta" id="actModalMeta"></p>
-        </div>
-        <div class="act-gallery">
-          <button class="act-gallery-nav act-gallery-prev" id="actGalleryPrev" aria-label="Previous image">&#8592;</button>
-          <div class="act-gallery-img-wrap">
-            <img id="actGalleryImg" src="" alt="" />
-            <div class="act-gallery-counter" id="actGalleryCounter"></div>
-          </div>
-          <button class="act-gallery-nav act-gallery-next" id="actGalleryNext" aria-label="Next image">&#8594;</button>
-        </div>
-        <div class="act-thumbs" id="actThumbs"></div>
-      </div>
-    </div>
-
     <!-- CONTACT -->
     <section id="contact">
       <div class="wrap">
@@ -4441,103 +4193,6 @@
           }
         });
       }
-    </script>
-    <script>
-      // ── Activities: load events/data.json and render cards ──
-      const actGrid   = document.getElementById('actGrid');
-      const actModal  = document.getElementById('actModal');
-      const modalClose = document.getElementById('actModalClose');
-      const modalTag  = document.getElementById('actModalTag');
-      const modalTitle = document.getElementById('actModalTitle');
-      const modalDesc  = document.getElementById('actModalDesc');
-      const modalMeta  = document.getElementById('actModalMeta');
-      const galleryImg = document.getElementById('actGalleryImg');
-      const galleryCounter = document.getElementById('actGalleryCounter');
-      const thumbsWrap = document.getElementById('actThumbs');
-      const prevBtn   = document.getElementById('actGalleryPrev');
-      const nextBtn   = document.getElementById('actGalleryNext');
-
-      let currentImages = [];
-      let currentIndex  = 0;
-
-      function showImage(index) {
-        currentIndex = index;
-        galleryImg.style.opacity = '0';
-        setTimeout(() => {
-          galleryImg.src = currentImages[index];
-          galleryImg.style.opacity = '1';
-        }, 150);
-        galleryCounter.textContent = `${index + 1} / ${currentImages.length}`;
-        prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === currentImages.length - 1;
-        thumbsWrap.querySelectorAll('.act-thumb').forEach((t, i) => {
-          t.classList.toggle('active', i === index);
-        });
-      }
-
-      function openModal(event) {
-        modalTag.textContent   = event.tag;
-        modalTitle.textContent = event.title;
-        modalDesc.textContent  = event.description;
-        modalMeta.textContent  = `${event.date} · ${event.location}`;
-        currentImages = event.images;
-
-        thumbsWrap.innerHTML = '';
-        event.images.forEach((src, i) => {
-          const thumb = document.createElement('div');
-          thumb.className = 'act-thumb';
-          thumb.innerHTML = `<img src="${src}" alt="Photo ${i+1}" loading="lazy">`;
-          thumb.addEventListener('click', () => showImage(i));
-          thumbsWrap.appendChild(thumb);
-        });
-
-        showImage(0);
-        actModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        actModal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-
-      prevBtn.addEventListener('click', () => { if (currentIndex > 0) showImage(currentIndex - 1); });
-      nextBtn.addEventListener('click', () => { if (currentIndex < currentImages.length - 1) showImage(currentIndex + 1); });
-      modalClose.addEventListener('click', closeModal);
-      actModal.addEventListener('click', e => { if (e.target === actModal) closeModal(); });
-      document.addEventListener('keydown', e => {
-        if (!actModal.classList.contains('open')) return;
-        if (e.key === 'Escape') closeModal();
-        if (e.key === 'ArrowLeft' && currentIndex > 0) showImage(currentIndex - 1);
-        if (e.key === 'ArrowRight' && currentIndex < currentImages.length - 1) showImage(currentIndex + 1);
-      });
-
-      function renderCards(events) {
-        actGrid.innerHTML = '';
-        events.forEach(ev => {
-          const card = document.createElement('div');
-          card.className = 'act-card reveal';
-          card.innerHTML = `
-            <div class="act-img-wrap">
-              <img src="${ev.cover}" alt="${ev.title}" loading="lazy"
-                onerror="this.parentElement.innerHTML='<div class=\'act-img-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><path d=\'M3 9h18M9 21V9\'/></svg><span>No image yet</span></div>'" />
-            </div>
-            <div class="act-body">
-              <span class="act-event-tag">${ev.tag}</span>
-              <p class="act-title">${ev.title}</p>
-              <p class="act-meta">${ev.date} · ${ev.location}</p>
-            </div>`;
-          card.addEventListener('click', () => openModal(ev));
-          actGrid.appendChild(card);
-        });
-      }
-
-      fetch('events/data.json')
-        .then(r => r.json())
-        .then(renderCards)
-        .catch(() => {
-          actGrid.innerHTML = '<p style="color:var(--ink3);font-family:var(--mono);font-size:.85rem">Could not load events/data.json — make sure you\'re serving the site from a web server.</p>';
-        });
     </script>
   </body>
 </html>

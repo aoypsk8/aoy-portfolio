@@ -2784,46 +2784,144 @@
         color: var(--ink3);
         font-family: var(--mono);
       }
-      .act-lightbox-overlay {
+      /* ── Event Gallery Modal ── */
+      .act-modal-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.88);
+        background: rgba(0,0,0,0.92);
         z-index: 10000;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 1rem;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.25s;
       }
-      .act-lightbox-overlay.open {
+      .act-modal-overlay.open {
         opacity: 1;
         pointer-events: all;
       }
-      .act-lightbox-overlay img {
-        max-width: 90vw;
-        max-height: 88vh;
+      .act-modal {
+        background: var(--bg2);
+        border: 1px solid var(--line2);
         border-radius: var(--radius);
+        width: 100%;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+        position: relative;
         box-shadow: var(--shadow-lg);
       }
-      .act-lb-close {
+      .act-modal-close {
         position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        background: var(--bg2);
+        top: 1rem;
+        right: 1rem;
+        background: var(--bg3);
         border: 1px solid var(--line2);
         color: var(--ink);
         border-radius: 50%;
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1.2rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1rem;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: background 0.2s;
       }
-      .act-lb-close:hover { background: var(--bg3); }
+      .act-modal-close:hover { background: var(--bg-elev); }
+      .act-modal-header { margin-bottom: 1.5rem; }
+      .act-modal-title {
+        font-family: var(--serif);
+        font-size: 1.4rem;
+        color: var(--ink);
+        margin: 0.4rem 0 0.6rem;
+      }
+      .act-modal-desc {
+        color: var(--ink2);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 0.4rem;
+      }
+      .act-modal-meta {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--ink3);
+      }
+      .act-gallery {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .act-gallery-img-wrap {
+        flex: 1;
+        position: relative;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        background: var(--bg3);
+        aspect-ratio: 16/9;
+      }
+      .act-gallery-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: opacity 0.2s;
+      }
+      .act-gallery-counter {
+        position: absolute;
+        bottom: 0.6rem;
+        right: 0.7rem;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        border-radius: 20px;
+      }
+      .act-gallery-nav {
+        background: var(--bg3);
+        border: 1px solid var(--line2);
+        color: var(--ink);
+        border-radius: 50%;
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1rem;
+        cursor: pointer;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .act-gallery-nav:hover { background: var(--bg-elev); }
+      .act-gallery-nav:disabled { opacity: 0.25; cursor: default; }
+      .act-thumbs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .act-thumb {
+        width: 60px;
+        height: 60px;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: border-color 0.2s;
+        flex-shrink: 0;
+      }
+      .act-thumb.active { border-color: var(--amber); }
+      .act-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .act-card { cursor: pointer; }
       @media (max-width: 640px) {
         .act-grid { grid-template-columns: 1fr; }
       }
@@ -3926,82 +4024,32 @@
         <div class="s-tag">Beyond the screen</div>
         <h2 class="s-heading reveal">Activities &amp; <em>Events</em></h2>
         <p class="s-sub reveal">Moments from hackathons, meetups, workshops, and community events I've been part of.</p>
-
-        <div class="act-grid">
-
-          <!-- ── Card 1 ── Replace GOOGLE_DRIVE_FILE_ID with your real file ID -->
-          <div class="act-card reveal">
-            <div class="act-img-wrap">
-              <!-- To use Google Drive: share the file → copy file ID from the link
-                   then replace GOOGLE_DRIVE_FILE_ID below -->
-              <div class="act-img-placeholder">
-                <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                <span>Replace with your image</span>
-              </div>
-              <!-- Uncomment and fill in your Google Drive file ID:
-              <img src="https://drive.google.com/uc?export=view&id=GOOGLE_DRIVE_FILE_ID" alt="Event photo" loading="lazy" />
-              -->
-            </div>
-            <div class="act-body">
-              <span class="act-event-tag">Hackathon</span>
-              <p class="act-title">Event Name Here</p>
-              <p class="act-meta">Month Year · Location</p>
-            </div>
-          </div>
-
-          <!-- ── Card 2 ── -->
-          <div class="act-card reveal">
-            <div class="act-img-wrap">
-              <div class="act-img-placeholder">
-                <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                <span>Replace with your image</span>
-              </div>
-            </div>
-            <div class="act-body">
-              <span class="act-event-tag">Workshop</span>
-              <p class="act-title">Event Name Here</p>
-              <p class="act-meta">Month Year · Location</p>
-            </div>
-          </div>
-
-          <!-- ── Card 3 ── -->
-          <div class="act-card reveal">
-            <div class="act-img-wrap">
-              <div class="act-img-placeholder">
-                <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                <span>Replace with your image</span>
-              </div>
-            </div>
-            <div class="act-body">
-              <span class="act-event-tag">Meetup</span>
-              <p class="act-title">Event Name Here</p>
-              <p class="act-meta">Month Year · Location</p>
-            </div>
-          </div>
-
-          <!-- ── Card 4 ── -->
-          <div class="act-card reveal">
-            <div class="act-img-wrap">
-              <div class="act-img-placeholder">
-                <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                <span>Replace with your image</span>
-              </div>
-            </div>
-            <div class="act-body">
-              <span class="act-event-tag">Conference</span>
-              <p class="act-title">Event Name Here</p>
-              <p class="act-meta">Month Year · Location</p>
-            </div>
-          </div>
-
-        </div><!-- /act-grid -->
-      </div><!-- /wrap -->
+        <div class="act-grid" id="actGrid">
+          <!-- Cards injected by JS from events/data.json -->
+        </div>
+      </div>
     </section>
 
-    <!-- Lightbox -->
-    <div class="act-lightbox-overlay" id="actLightbox" role="dialog" aria-modal="true">
-      <button class="act-lb-close" id="actLbClose" aria-label="Close">✕</button>
-      <img id="actLbImg" src="" alt="" />
+    <!-- Event Gallery Modal -->
+    <div class="act-modal-overlay" id="actModal" role="dialog" aria-modal="true" aria-label="Event gallery">
+      <div class="act-modal">
+        <button class="act-modal-close" id="actModalClose" aria-label="Close">✕</button>
+        <div class="act-modal-header">
+          <span class="act-event-tag" id="actModalTag"></span>
+          <h3 class="act-modal-title" id="actModalTitle"></h3>
+          <p class="act-modal-desc" id="actModalDesc"></p>
+          <p class="act-modal-meta" id="actModalMeta"></p>
+        </div>
+        <div class="act-gallery">
+          <button class="act-gallery-nav act-gallery-prev" id="actGalleryPrev" aria-label="Previous image">&#8592;</button>
+          <div class="act-gallery-img-wrap">
+            <img id="actGalleryImg" src="" alt="" />
+            <div class="act-gallery-counter" id="actGalleryCounter"></div>
+          </div>
+          <button class="act-gallery-nav act-gallery-next" id="actGalleryNext" aria-label="Next image">&#8594;</button>
+        </div>
+        <div class="act-thumbs" id="actThumbs"></div>
+      </div>
     </div>
 
     <!-- CONTACT -->
@@ -4395,29 +4443,101 @@
       }
     </script>
     <script>
-      // Activities lightbox — only activates on cards that have a real <img>
-      const lightbox = document.getElementById('actLightbox');
-      const lbImg    = document.getElementById('actLbImg');
-      const lbClose  = document.getElementById('actLbClose');
+      // ── Activities: load events/data.json and render cards ──
+      const actGrid   = document.getElementById('actGrid');
+      const actModal  = document.getElementById('actModal');
+      const modalClose = document.getElementById('actModalClose');
+      const modalTag  = document.getElementById('actModalTag');
+      const modalTitle = document.getElementById('actModalTitle');
+      const modalDesc  = document.getElementById('actModalDesc');
+      const modalMeta  = document.getElementById('actModalMeta');
+      const galleryImg = document.getElementById('actGalleryImg');
+      const galleryCounter = document.getElementById('actGalleryCounter');
+      const thumbsWrap = document.getElementById('actThumbs');
+      const prevBtn   = document.getElementById('actGalleryPrev');
+      const nextBtn   = document.getElementById('actGalleryNext');
 
-      document.querySelectorAll('.act-img-wrap img').forEach(img => {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', () => {
-          lbImg.src = img.src;
-          lbImg.alt = img.alt;
-          lightbox.classList.add('open');
-          document.body.style.overflow = 'hidden';
+      let currentImages = [];
+      let currentIndex  = 0;
+
+      function showImage(index) {
+        currentIndex = index;
+        galleryImg.style.opacity = '0';
+        setTimeout(() => {
+          galleryImg.src = currentImages[index];
+          galleryImg.style.opacity = '1';
+        }, 150);
+        galleryCounter.textContent = `${index + 1} / ${currentImages.length}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === currentImages.length - 1;
+        thumbsWrap.querySelectorAll('.act-thumb').forEach((t, i) => {
+          t.classList.toggle('active', i === index);
         });
+      }
+
+      function openModal(event) {
+        modalTag.textContent   = event.tag;
+        modalTitle.textContent = event.title;
+        modalDesc.textContent  = event.description;
+        modalMeta.textContent  = `${event.date} · ${event.location}`;
+        currentImages = event.images;
+
+        thumbsWrap.innerHTML = '';
+        event.images.forEach((src, i) => {
+          const thumb = document.createElement('div');
+          thumb.className = 'act-thumb';
+          thumb.innerHTML = `<img src="${src}" alt="Photo ${i+1}" loading="lazy">`;
+          thumb.addEventListener('click', () => showImage(i));
+          thumbsWrap.appendChild(thumb);
+        });
+
+        showImage(0);
+        actModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        actModal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      prevBtn.addEventListener('click', () => { if (currentIndex > 0) showImage(currentIndex - 1); });
+      nextBtn.addEventListener('click', () => { if (currentIndex < currentImages.length - 1) showImage(currentIndex + 1); });
+      modalClose.addEventListener('click', closeModal);
+      actModal.addEventListener('click', e => { if (e.target === actModal) closeModal(); });
+      document.addEventListener('keydown', e => {
+        if (!actModal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft' && currentIndex > 0) showImage(currentIndex - 1);
+        if (e.key === 'ArrowRight' && currentIndex < currentImages.length - 1) showImage(currentIndex + 1);
       });
 
-      function closeLightbox() {
-        lightbox.classList.remove('open');
-        document.body.style.overflow = '';
-        lbImg.src = '';
+      function renderCards(events) {
+        actGrid.innerHTML = '';
+        events.forEach(ev => {
+          const card = document.createElement('div');
+          card.className = 'act-card reveal';
+          card.innerHTML = `
+            <div class="act-img-wrap">
+              <img src="${ev.cover}" alt="${ev.title}" loading="lazy"
+                onerror="this.parentElement.innerHTML='<div class=\'act-img-placeholder\'><svg width=\'40\' height=\'40\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><path d=\'M3 9h18M9 21V9\'/></svg><span>No image yet</span></div>'" />
+            </div>
+            <div class="act-body">
+              <span class="act-event-tag">${ev.tag}</span>
+              <p class="act-title">${ev.title}</p>
+              <p class="act-meta">${ev.date} · ${ev.location}</p>
+            </div>`;
+          card.addEventListener('click', () => openModal(ev));
+          actGrid.appendChild(card);
+        });
       }
-      lbClose.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+      fetch('events/data.json')
+        .then(r => r.json())
+        .then(renderCards)
+        .catch(() => {
+          actGrid.innerHTML = '<p style="color:var(--ink3);font-family:var(--mono);font-size:.85rem">Could not load events/data.json — make sure you\'re serving the site from a web server.</p>';
+        });
     </script>
   </body>
 </html>

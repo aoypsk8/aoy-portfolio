@@ -1,0 +1,44 @@
+[
+  {
+    "id": "hackathon-2024",
+    "tag": "Hackathon",
+    "title": "National Hackathon 2024",
+    "description": "Competed in a 48-hour hackathon building a fintech solution for rural banking access. Our team placed in the top 3 out of 40 teams.",
+    "date": "March 2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/hackathon-2024/cover.jpg",
+    "images": [
+      "events/hackathon-2024/cover.jpg",
+      "events/hackathon-2024/img1.jpg",
+      "events/hackathon-2024/img2.jpg"
+    ]
+  },
+  {
+    "id": "workshop-2024",
+    "tag": "Workshop",
+    "title": "AI & Machine Learning Workshop",
+    "description": "Hands-on workshop covering practical applications of machine learning in Southeast Asia. Covered model training, deployment, and real-world use cases.",
+    "date": "June 2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/workshop-2024/cover.jpg",
+    "images": [
+      "events/workshop-2024/cover.jpg",
+      "events/workshop-2024/img1.jpg"
+    ]
+  },
+  {
+    "id": "meetup-2024",
+    "tag": "Meetup",
+    "title": "Dev Community Meetup",
+    "description": "Monthly developer gathering focused on sharing open-source projects and new tech. Gave a short talk on building REST APIs with Node.js.",
+    "date": "September 2024",
+    "location": "Vientiane, Laos",
+    "cover": "events/meetup-2024/cover.jpg",
+    "images": [
+      "events/meetup-2024/cover.jpg",
+      "events/meetup-2024/img1.jpg",
+      "events/meetup-2024/img2.jpg",
+      "events/meetup-2024/img3.jpg"
+    ]
+  }
+]

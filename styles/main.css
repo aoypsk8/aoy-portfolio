@@ -2842,6 +2842,28 @@
         .hero {
           padding: 0 1.5rem 3.5rem;
         }
+        .hero-tag {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+        .hero-tag--open {
+          width: 100%;
+          max-width: 100%;
+          gap: 0.45rem;
+          padding: 0.48rem 0.7rem 0.48rem 0.55rem;
+        }
+        .tag-open {
+          padding: 0.16rem 0.44rem;
+          font-size: 0.56rem;
+          letter-spacing: 0.08em;
+        }
+        .tag-text {
+          font-size: 0.58rem;
+          letter-spacing: 0.045em;
+          line-height: 1.45;
+          white-space: normal;
+          overflow-wrap: anywhere;
+        }
         .hero-foot {
           flex-direction: column;
           align-items: flex-start;

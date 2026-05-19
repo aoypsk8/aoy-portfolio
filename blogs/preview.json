@@ -8,7 +8,7 @@
       "excerpt": "How I fine-tuned Google's Gemma 4 E4B model to understand and generate Lao text — covering vocab surgery, continual pre-training, and supervised fine-tuning from scratch.",
       "date": "2026-05-14",
       "readTime": "12 min read",
-      "cover": "blogs/building-lao-llm-gemma4/cover.svg"
+      "cover": "https://asset.cloudinary.com/duswpvmeh/cb5059eb461522a2dc974b70d3ba846b"
     }
   ]
 }

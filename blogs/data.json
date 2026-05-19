@@ -1,44 +1,14 @@
 [
   {
-    "id": "getting-started-flutter",
-    "tag": "Flutter",
-    "title": "Getting Started with Flutter in 2024",
-    "excerpt": "A practical guide to building your first cross-platform mobile app with Flutter and Dart. From setup to your first widget.",
-    "date": "2024-11-10",
-    "readTime": "6 min read",
-    "cover": "blogs/getting-started-flutter/cover.svg",
-    "images": [
-      "blogs/getting-started-flutter/cover.svg",
-      "blogs/getting-started-flutter/img1.svg",
-      "blogs/getting-started-flutter/img2.svg"
-    ],
-    "content": "blogs/getting-started-flutter/content.html"
-  },
-  {
-    "id": "fintech-laos",
-    "tag": "Fintech",
-    "title": "Building Fintech Apps in Laos: Lessons Learned",
-    "excerpt": "Real-world experience integrating LaoQR, mobile banking APIs, and eKYC into production apps for the Lao market.",
-    "date": "2024-08-22",
-    "readTime": "8 min read",
-    "cover": "blogs/fintech-laos/cover.svg",
-    "images": [
-      "blogs/fintech-laos/cover.svg",
-      "blogs/fintech-laos/img1.svg",
-      "blogs/fintech-laos/img2.svg"
-    ],
-    "content": "blogs/fintech-laos/content.html"
-  },
-  {
     "id": "building-lao-llm-gemma4",
     "tag": "AI/ML",
     "title": "Building a Lao Language LLM with Gemma 4: A Complete Guide",
     "excerpt": "How I fine-tuned Google's Gemma 4 E4B model to understand and generate Lao text — covering vocab surgery, continual pre-training, and supervised fine-tuning from scratch.",
     "date": "2026-05-14",
     "readTime": "12 min read",
-    "cover": "blogs/building-lao-llm-gemma4/cover.svg",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779161827/blogs/Screenshot_2026-05-06_at_10.41.37_1_qvfvyo.jpg",
     "images": [
-      "blogs/building-lao-llm-gemma4/cover.svg"
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779161827/blogs/Screenshot_2026-05-06_at_10.41.37_1_qvfvyo.jpg"
     ],
     "content": "blogs/building-lao-llm-gemma4/content.html",
     "sections": [

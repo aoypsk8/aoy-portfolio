@@ -1,5 +1,21 @@
 [
   {
+    "id": "ux-ui-hackathon-elderly-care-2nd-prize",
+    "tag": "Hackathon",
+    "title": "UX/UI Hackathon — Elderly Care (2nd Prize)",
+    "description": "Participated in a UX/UI Hackathon and built an Elderly Care solution focused on accessibility, clarity, and practical daily support workflows. Our team won 2nd Prize.",
+    "date": "2024",
+    "location": "Vientiane, Laos",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5923_bsombo.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259570/uxui_hackathon/IMG_5921_fecebb.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259572/uxui_hackathon/IMG_5844_hcy9ui.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5922_ur2fqx.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5923_bsombo.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259570/uxui_hackathon/IMG_5921_fecebb.jpg"
+    ]
+  },
+  {
     "id": "flutter-beginner-workshop-nuol-2024",
     "tag": "Workshop",
     "title": "Flutter Beginner Workshop for NUOL Students (Year 1–3)",
@@ -262,6 +278,7 @@
     "location": "Vientiane, Laos",
     "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6174_ruxm2m.jpg",
     "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259853/jdb_bussiness/07CA9063-CB76-48EB-9101-C6528FB2DEEF_jugjp9.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6174_ruxm2m.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6176_k6s6kx.jpg"
     ]

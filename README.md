@@ -29,6 +29,13 @@ Social crawlers read **static** Open Graph tags in HTML. They do not run `blogs.
 
 Reader URL (for humans): `blogs.html?id=docker-for-beginners-2026` — cover meta is updated in the browser via `js/blog-social-meta.js`, but Facebook needs `/post/{id}/`.
 
+**Example (SQL article):** share  
+`https://aoypsk8.github.io/aoy-portfolio/post/basic-sql-commands-2026/`  
+not  
+`https://aoypsk8.github.io/aoy-portfolio/blogs.html?id=basic-sql-commands-2026`
+
+After updating a post cover in `blogs/data.json`, run `node scripts/generate-blog-share-pages.mjs` and deploy so `/post/{id}/` picks up the new `og:image`.
+
 ## Troubleshooting
 
 - **Blog/Activities cards not loading:** Make sure you are running via local server, not direct file path.

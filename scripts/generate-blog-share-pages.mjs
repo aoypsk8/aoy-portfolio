@@ -68,6 +68,9 @@ function buildPage(post) {
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${excerpt}" />
     <meta property="og:image" content="${escapeHtml(image)}" />
+    <meta property="og:image:secure_url" content="${escapeHtml(image)}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="${shareUrl}" />
     ${
       date

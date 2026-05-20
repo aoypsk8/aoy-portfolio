@@ -1,5 +1,71 @@
 /* Enhanced blog article reading UI (modal + full page) */
 
+.blog-share-bar {
+  margin: 0 0 1.25rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.03));
+}
+
+.blog-share-label {
+  margin: 0 0 0.55rem;
+  font-size: 0.82rem;
+  color: var(--ink2);
+}
+
+.blog-share-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.blog-share-input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  padding: 0.5rem 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.blog-share-copy {
+  flex-shrink: 0;
+  padding: 0.5rem 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.blog-share-copy:hover,
+.blog-share-copy.is-copied {
+  color: #6ee7c8;
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+.blog-share-hint {
+  margin: 0.55rem 0 0;
+  font-size: 0.75rem;
+  color: var(--ink3);
+  line-height: 1.5;
+}
+
+.blog-share-hint code {
+  font-size: 0.72rem;
+}
+
 .blog-tag--devops {
   color: #7ec8ff;
   background: rgba(36, 150, 237, 0.14);

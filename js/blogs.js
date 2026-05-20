@@ -770,6 +770,39 @@
     if (cfg.seeMoreHref) appendSeeMoreCard(cfg.seeMoreLabel, total);
   }
 
+  function renderShareBarHtml(post) {
+    if (!window.BlogSocialMeta) return "";
+    const shareUrl = window.BlogSocialMeta.sharePageUrl(
+      window.BlogSocialMeta.getSiteUrl(cfg),
+      post.id
+    );
+    return `
+      <div class="blog-share-bar" role="region" aria-label="Share this article">
+        <p class="blog-share-label">Share link (shows cover on Facebook / LINE / Discord)</p>
+        <div class="blog-share-row">
+          <input type="text" class="blog-share-input" readonly value="${escapeHtml(shareUrl)}" aria-label="Share URL with preview image" />
+          <button type="button" class="blog-share-copy" data-share-url="${escapeHtml(shareUrl)}">Copy link</button>
+        </div>
+        <p class="blog-share-hint">The <code>?id=</code> URL in your browser bar is for reading only ù social apps need this link instead.</p>
+      </div>`;
+  }
+
+  function bindShareCopyButton(root) {
+    const btn = root?.querySelector(".blog-share-copy");
+    if (!btn || btn.dataset.bound) return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", async () => {
+      const url = btn.dataset.shareUrl || root.querySelector(".blog-share-input")?.value || "";
+      const ok = await copyTextToClipboard(url);
+      btn.textContent = ok ? "Copied" : "Failed";
+      btn.classList.toggle("is-copied", ok);
+      setTimeout(() => {
+        btn.textContent = "Copy link";
+        btn.classList.remove("is-copied");
+      }, 1600);
+    });
+  }
+
   function renderFullPagePost(post) {
     if (window.BlogSocialMeta) window.BlogSocialMeta.apply(post, cfg);
     blogGrid.classList.add("blog-grid--single");
@@ -791,12 +824,14 @@
           <p class="blog-full-meta">${blogMetaHtml(post)}</p>
           <p class="blog-full-desc">${escapeHtml(post.excerpt)}</p>
         </header>
+        ${renderShareBarHtml(post)}
         ${coverSrc ? `<img class="blog-full-cover" src="${escapeHtml(coverSrc)}" alt="${escapeHtml(post.title)}" loading="lazy" />` : ""}
         <section class="blog-full-body" id="blogFullBody">
           ${bodyPlaceholder}
         </section>
       </article>
     `;
+    bindShareCopyButton(blogGrid);
     const bodyEl = document.getElementById("blogFullBody");
     if (bodyEl) loadPostBodyToElement(post, bodyEl);
   }

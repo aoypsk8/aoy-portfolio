@@ -59,7 +59,7 @@
   tick();
 
   const hoverSel =
-    "a, button, .btn, .navCta, .pf, .ct-link, .eu-card, .lang-card, .pj, .sk-tag, .num-block, .logo-wrap, .logo, .navToggle, .mm-cta, #btt, label, [role='button'], .act-card, .blog-card, .act-gallery-nav, .blog-modal-close, .act-modal-close, .blog-code-copy";
+    "a, button, .btn, .navCta, .pf, .ct-link, .eu-card, .lang-card, .pj, .sk-tag, .num-block, .logo-wrap, .logo, .navToggle, .mm-cta, #btt, label, [role='button'], .act-card, .blog-card, .act-gallery-nav, .blog-modal-close, .act-modal-close, .blog-code-copy, .blog-share-copy";
   const textSel =
     "p, .hero-desc, .about-body, .exp-points li, .pj-desc, .ct-sub, h1, h2, h3, .s-title, .about-intro, .blog-excerpt, .blog-modal-body";
 

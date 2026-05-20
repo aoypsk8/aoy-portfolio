@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="MVC vs MVVM">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1816"/>
+      <stop offset="55%" stop-color="#332a1e"/>
+      <stop offset="100%" stop-color="#1a1816"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <g font-family="ui-monospace, monospace" font-size="18" font-weight="600">
+    <rect x="120" y="200" width="200" height="72" rx="10" fill="rgba(110,165,255,0.2)" stroke="#6ea5ff"/>
+    <text x="220" y="244" fill="#9ec5ff" text-anchor="middle">MVC</text>
+    <rect x="120" y="300" width="90" height="56" rx="8" fill="rgba(137,87,229,0.15)" stroke="#c4a8f5"/>
+    <text x="165" y="334" fill="#c4a8f5" text-anchor="middle" font-size="14">View</text>
+    <rect x="230" y="300" width="90" height="56" rx="8" fill="rgba(110,165,255,0.15)" stroke="#6ea5ff"/>
+    <text x="275" y="334" fill="#9ec5ff" text-anchor="middle" font-size="14">Ctrl</text>
+    <rect x="340" y="300" width="90" height="56" rx="8" fill="rgba(16,185,129,0.15)" stroke="#10b981"/>
+    <text x="385" y="334" fill="#6ee7c8" text-anchor="middle" font-size="14">Model</text>
+    <rect x="520" y="200" width="220" height="72" rx="10" fill="rgba(212,146,92,0.2)" stroke="#d4925c"/>
+    <text x="630" y="244" fill="#f0c27a" text-anchor="middle">MVVM</text>
+    <rect x="520" y="300" width="90" height="56" rx="8" fill="rgba(137,87,229,0.15)" stroke="#c4a8f5"/>
+    <text x="565" y="334" fill="#c4a8f5" text-anchor="middle" font-size="14">View</text>
+    <rect x="630" y="300" width="100" height="56" rx="8" fill="rgba(212,146,92,0.15)" stroke="#d4925c"/>
+    <text x="680" y="334" fill="#f0c27a" text-anchor="middle" font-size="13">ViewModel</text>
+    <rect x="750" y="300" width="90" height="56" rx="8" fill="rgba(16,185,129,0.15)" stroke="#10b981"/>
+    <text x="795" y="334" fill="#6ee7c8" text-anchor="middle" font-size="14">Model</text>
+  </g>
+  <text x="600" y="420" text-anchor="middle" fill="#f5f0e8" font-family="Georgia, serif" font-size="48" font-weight="600">MVC vs MVVM</text>
+  <text x="600" y="468" text-anchor="middle" fill="#a89f96" font-family="ui-monospace, monospace" font-size="22" letter-spacing="0.12em">MODEL · VIEW · CONTROLLER / VIEWMODEL</text>
+</svg>

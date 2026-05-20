@@ -78,7 +78,12 @@
       .replace(/"/g, "&quot;");
   }
 
-  const BLOG_TAG_THEMES = { DevOps: "devops", Git: "git", Database: "database" };
+  const BLOG_TAG_THEMES = {
+    DevOps: "devops",
+    Git: "git",
+    Database: "database",
+    Architecture: "architecture",
+  };
 
   function blogTagClass(tag) {
     const theme = BLOG_TAG_THEMES[tag];
@@ -128,6 +133,9 @@
     yaml: "Docker Compose",
     yml: "YAML",
     json: "JSON",
+    javascript: "JavaScript",
+    js: "JavaScript",
+    html: "HTML",
     powershell: "PowerShell",
   };
 
@@ -392,8 +400,126 @@
     return `<ul class="${cls}">${items}</ul>`;
   }
 
+  /** ??????????????? MVC / MVVM (:::arch mvc | mvvm | dual) */
+  function renderArchDiagram(type) {
+    const t = String(type || "").trim().toLowerCase();
+    const mvcDiagram = `
+      <div class="blog-arch-panel blog-arch-panel--mvc">
+        <p class="blog-arch-panel-title">MVC</p>
+        <div class="blog-arch-triangle">
+          <div class="blog-arch-node blog-arch-node--view">
+            <span class="blog-arch-node-label">View</span>
+            <span class="blog-arch-node-sub">UI only</span>
+          </div>
+          <div class="blog-arch-row">
+            <div class="blog-arch-node blog-arch-node--controller">
+              <span class="blog-arch-node-label">Controller</span>
+              <span class="blog-arch-node-sub">Handles input</span>
+            </div>
+            <span class="blog-arch-link" aria-hidden="true">?</span>
+            <div class="blog-arch-node blog-arch-node--model">
+              <span class="blog-arch-node-label">Model</span>
+              <span class="blog-arch-node-sub">Data + rules</span>
+            </div>
+          </div>
+        </div>
+        <div class="blog-arch-pipeline">
+          <span class="blog-arch-step">User</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--controller">Controller</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--model">Model</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--controller">Controller</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--view">View</span>
+        </div>
+      </div>`;
+
+    const mvvmDiagram = `
+      <div class="blog-arch-panel blog-arch-panel--mvvm">
+        <p class="blog-arch-panel-title">MVVM</p>
+        <div class="blog-arch-triangle">
+          <div class="blog-arch-node blog-arch-node--view">
+            <span class="blog-arch-node-label">View</span>
+            <span class="blog-arch-node-sub">UI + binding</span>
+          </div>
+          <div class="blog-arch-row">
+            <div class="blog-arch-node blog-arch-node--viewmodel">
+              <span class="blog-arch-node-label">ViewModel</span>
+              <span class="blog-arch-node-sub">UI state</span>
+            </div>
+            <span class="blog-arch-link blog-arch-link--bind" aria-hidden="true" title="Data binding">?</span>
+            <div class="blog-arch-node blog-arch-node--model">
+              <span class="blog-arch-node-label">Model</span>
+              <span class="blog-arch-node-sub">Data + rules</span>
+            </div>
+          </div>
+        </div>
+        <div class="blog-arch-pipeline">
+          <span class="blog-arch-step">User</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--viewmodel">ViewModel</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--model">Model</span>
+          <span class="blog-arch-arrow" aria-hidden="true">?</span>
+          <span class="blog-arch-step blog-arch-step--viewmodel">ViewModel</span>
+          <span class="blog-arch-arrow blog-arch-bind" aria-hidden="true">? auto</span>
+          <span class="blog-arch-step blog-arch-step--view">View</span>
+        </div>
+      </div>`;
+
+    if (t === "mvc") {
+      return `<div class="blog-arch blog-arch--single" role="group" aria-label="MVC architecture diagram">${mvcDiagram}</div>`;
+    }
+    if (t === "mvvm") {
+      return `<div class="blog-arch blog-arch--single" role="group" aria-label="MVVM architecture diagram">${mvvmDiagram}</div>`;
+    }
+    if (t === "dual" || t === "compare") {
+      return `<div class="blog-arch blog-arch--dual" role="group" aria-label="MVC and MVVM architecture comparison">${mvcDiagram}${mvvmDiagram}</div>`;
+    }
+    return "";
+  }
+
+  function renderTableBlock(inner) {
+    const rows = inner
+      .split("\n")
+      .map((l) => l.trim())
+      .filter((l) => l.startsWith("|"));
+    if (rows.length < 2) return "";
+
+    const parseRow = (line) =>
+      line
+        .replace(/^\|/, "")
+        .replace(/\|$/, "")
+        .split("|")
+        .map((c) => c.trim());
+
+    const header = parseRow(rows[0]);
+    const bodyRows = rows.slice(2).map(parseRow);
+
+    const thead = `<thead><tr>${header.map((c) => `<th>${formatParagraphHtml(c)}</th>`).join("")}</tr></thead>`;
+    const tbody = `<tbody>${bodyRows
+      .map(
+        (cells) =>
+          `<tr>${cells.map((c, i) => (i === 0 ? `<th scope="row">${formatParagraphHtml(c)}</th>` : `<td>${formatParagraphHtml(c)}</td>`)).join("")}</tr>`
+      )
+      .join("")}</tbody>`;
+
+    return `<div class="blog-table-wrap"><table class="blog-table">${thead}${tbody}</table></div>`;
+  }
+
   function renderSpecialBlock(para) {
     const trimmed = para.trim();
+    if (trimmed.startsWith(":::arch")) {
+      const match = trimmed.match(/^:::arch\s+(\w+)\s*:::\s*$/);
+      if (match) return renderArchDiagram(match[1]);
+    }
+    if (trimmed.startsWith(":::table")) {
+      const inner = trimmed.replace(/^:::table\n?/, "").replace(/\n:::\s*$/, "").trim();
+      const table = renderTableBlock(inner);
+      if (table) return table;
+    }
     if (trimmed.startsWith(":::callout")) {
       const match = trimmed.match(/^:::callout\s+(\w+)\n([\s\S]*?):::\s*$/);
       if (!match) return "";

@@ -285,5 +285,52 @@
         "body": "You now have the **CRUD** core — Create, Read, Update, Delete:\n\n:::reminders\n**SELECT**|Read data\n**INSERT**|Create rows\n**UPDATE**|Change rows\n**DELETE**|Remove rows\n:::\n\n:::steps\n1) Practice on https://sqliteonline.com with a `users` table.\n2) Learn **JOIN** to combine tables (orders + customers).\n3) Add **indexes** when queries slow down on large data.\n4) Model relationships with **foreign keys**.\n:::\n\nIn fintech I use SQL daily — transaction history, account filters, report queries. Once it clicks, backend work gets much faster."
       }
     ]
+  },
+  {
+    "id": "mvc-vs-mvvm-2026",
+    "tag": "Architecture",
+    "title": "MVC vs MVVM: Which Pattern Should You Use?",
+    "excerpt": "MVC and MVVM are two popular ways to structure your app's code. Learn what they mean, how they differ, and which one fits your project.",
+    "date": "2026-05-20",
+    "readTime": "7 min read",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779268346/blogs/Gemini_Generated_Image_8zt06r8zt06r8zt0_wgyljz.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779268346/blogs/Gemini_Generated_Image_8zt06r8zt06r8zt0_wgyljz.jpg"
+    ],
+    "content": "blogs/mvc-vs-mvvm-2026/content.html",
+    "sections": [
+      {
+        "title": "Why Do We Need These Patterns?",
+        "body": "Early projects often mix UI, API calls, and business rules in one file. That works until the app grows — then every change feels risky.\n\n:::analogy\nThink of an app like a restaurant:\n- **Model** = kitchen (prepares data)\n- **View** = dining area (what guests see)\n- **Controller / ViewModel** = waiter (coordinates orders)\n:::\n\n:::reminders\n**Single responsibility**|Each layer does one job\n**Easier testing**|Test logic without the UI\n**Team parallelism**|Frontend and backend can move independently\n:::\n\n**MVC** and **MVVM** are the two patterns you will see most in real jobs."
+      },
+      {
+        "title": "MVC — Model, View, Controller",
+        "body": "**MVC** splits responsibility into three layers. The **Controller** is the hub — it receives user actions and decides what the Model and View should do.\n\n:::arch mvc:::\n\n:::defs\n**Model**|Data + business rules (API, database, validation)\n**View**|Screens, HTML, widgets — display only\n**Controller**|Maps user input → Model → updated View\n:::\n\n:::callout tip\nIn MVC the View does **not** update itself. The Controller explicitly tells the View what to render after the Model responds.\n:::"
+      },
+      {
+        "title": "MVC in Practice — Simple Example",
+        "body": "Node.js + Express style — one file per layer:\n\n**Model** — `models/user.js`\n```javascript\nconst getUser = (id) =>\n  db.query('SELECT * FROM users WHERE id = ?', [id]);\n```\n\n**Controller** — `controllers/userController.js`\n```javascript\nconst { getUser } = require('../models/user');\n\nconst showUser = async (req, res) => {\n  const user = await getUser(req.params.id);\n  res.render('userView', { user });\n};\n```\n\n**View** — `views/userView.html`\n```html\n<h1>Hello, {{ user.name }}</h1>\n<p>Email: {{ user.email }}</p>\n```\n\n:::callout tip\nIf business logic creeps into the View template, move it back to the Model or Controller — keep the View dumb.\n:::"
+      },
+      {
+        "title": "MVVM — Model, View, ViewModel",
+        "body": "**MVVM** keeps the Model similar, but replaces the Controller with a **ViewModel** that holds UI state. The View **binds** to the ViewModel — when state changes, the UI refreshes automatically.\n\n:::arch mvvm:::\n\n:::defs\n**Model**|Same role as MVC — data source and rules\n**View**|UI that observes the ViewModel (Flutter `watch`, React state)\n**ViewModel**|UI state + commands; calls the Model; exposes bindable properties\n:::\n\n:::compare\n**MVC**|Controller pushes updates to the View manually\n**MVVM**|ViewModel changes → View rebuilds via data binding\n:::"
+      },
+      {
+        "title": "MVVM in Practice — Flutter Example",
+        "body": "Standard Flutter setup with Provider / Riverpod:\n\n**Model** — `models/user.dart`\n```dart\nclass User {\n  final String name;\n  final String email;\n  User({required this.name, required this.email});\n}\n```\n\n**ViewModel** — `viewmodels/user_viewmodel.dart`\n```dart\nclass UserViewModel extends ChangeNotifier {\n  User? user;\n\n  Future<void> loadUser() async {\n    user = await UserService.fetchUser();\n    notifyListeners();\n  }\n}\n```\n\n**View** — `screens/user_screen.dart`\n```dart\nclass UserScreen extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    final vm = context.watch<UserViewModel>();\n    return Text(vm.user?.name ?? 'Loading...');\n  }\n}\n```\n\n:::callout tip\n`notifyListeners()` is the binding signal — the View does not ask the Model directly.\n:::"
+      },
+      {
+        "title": "MVC vs MVVM — Side by Side",
+        "body": "Same problem, different coordination style:\n\n:::arch dual:::\n\n:::table\n| Topic | MVC | MVVM |\n| Middle layer | Controller | ViewModel |\n| View update | Controller pushes update | View auto-binds to ViewModel |\n| Best for | Web backends, REST APIs | UI-heavy apps, mobile |\n| Common in | Node.js, Laravel, Django | Flutter, React, SwiftUI |\n| Testing focus | Controller + Model | ViewModel + Model |\n| Learning curve | Simpler to start | Slightly more setup |\n:::\n\n**One-line summary:** MVC = waiter brings each dish; MVVM = kitchen bell rings and the table updates itself."
+      },
+      {
+        "title": "Which One Should You Use?",
+        "body": ":::compare\n**Choose MVC**|Server-rendered web, classic REST APIs, teams new to architecture\n**Choose MVVM**|Flutter / mobile, reactive UIs, screens with lots of changing state\n:::\n\nIn my work:\n- **MVC** — Node.js APIs at IndochinaBank\n- **MVVM** — Flutter mobile banking apps\n\n:::callout tip\nFollow what your framework encourages — fighting the default pattern costs more than learning it.\n:::"
+      },
+      {
+        "title": "What's Next?",
+        "body": "Once you recognize these shapes, you will spot them in tutorials, repos, and interviews.\n\n:::steps\n1) Sketch **MVC** for your next API route (Model / Controller / View template).\n2) Refactor one Flutter screen to **ViewModel + `notifyListeners()`**.\n3) Learn **Repository pattern** — one interface over API + cache + DB.\n4) Explore **Clean Architecture** or **BLoC** when the app outgrows MVVM.\n:::\n\nThe goal never changes: **separate concerns**, keep each layer testable, and make change safe."
+      }
+    ]
   }
 ]

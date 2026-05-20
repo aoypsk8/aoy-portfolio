@@ -21,6 +21,21 @@
   color: #c4a8f5;
 }
 
+.blog-tag--database {
+  color: #6ee7c8;
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.38);
+}
+
+.blog-cover--database {
+  background: linear-gradient(135deg, #152420 0%, #1e3330 45%, #1a1816 100%);
+}
+
+.blog-cover-placeholder--database {
+  background: linear-gradient(135deg, #152420 0%, #1e3330 50%, #1a1816 100%);
+  color: #6ee7c8;
+}
+
 .blog-cover--devops {
   background: linear-gradient(135deg, #1e2a36 0%, #24303d 45%, #1a1816 100%);
 }
@@ -276,14 +291,81 @@
   font-size: 0.88rem;
 }
 
+.blog-modal-body .blog-code-block,
+.blog-full-body .blog-code-block {
+  margin: 1rem 0 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(0, 0, 0, 0.04));
+}
+
 .blog-modal-body .blog-code-header,
 .blog-full-body .blog-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
+  padding: 0.55rem 0.8rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d9b183;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(212, 146, 92, 0.11), rgba(212, 146, 92, 0.03));
+}
+
+.blog-modal-body .blog-code-block pre,
+.blog-full-body .blog-code-block pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.blog-modal-body .blog-code-block code,
+.blog-full-body .blog-code-block code {
+  display: block;
+  padding: 0.85rem 1rem;
+  color: #d2dcf7;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  white-space: pre;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.blog-modal-body .blog-code-block .tok-keyword,
+.blog-full-body .blog-code-block .tok-keyword {
+  color: #e3b676;
+  font-weight: 600;
+}
+
+.blog-modal-body .blog-code-block .tok-string,
+.blog-full-body .blog-code-block .tok-string {
+  color: #98c98f;
+}
+
+.blog-modal-body .blog-code-block .tok-comment,
+.blog-full-body .blog-code-block .tok-comment {
+  color: #8e9aae;
+  font-style: italic;
+}
+
+.blog-modal-body .blog-code-block .tok-number,
+.blog-full-body .blog-code-block .tok-number {
+  color: #8abfd8;
 }
 
 .blog-code-copy {
+  flex-shrink: 0;
   margin-left: auto;
-  padding: 0.2rem 0.55rem;
+  padding: 0.35rem 0.7rem;
+  z-index: 1;
+  position: relative;
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.05em;

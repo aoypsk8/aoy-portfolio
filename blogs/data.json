@@ -238,5 +238,52 @@
         "body": "When the basics feel natural, level up with:\n\n:::steps\n1) Add a **`.gitignore`** so secrets and `node_modules` never get committed.\n2) Try **GitHub Pages** — free static hosting from any public repo.\n3) Practice **Pull Requests** on a real team repo (even a friend's side project).\n4) **Fork** an open-source repo, fix a small issue, and open your first PR.\n:::\n\nOfficial starting guide:\nhttps://docs.github.com/en/get-started\n\nThe fastest way to learn is one real project on GitHub this week — not another tutorial."
       }
     ]
+  },
+  {
+    "id": "basic-sql-commands-2026",
+    "tag": "Database",
+    "title": "Basic SQL Commands Every Developer Should Know",
+    "excerpt": "SQL is the language you use to talk to databases. Learn the essential commands — SELECT, INSERT, UPDATE, DELETE — with simple examples you can try right now.",
+    "date": "2026-05-20",
+    "readTime": "7 min read",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779267158/blogs/Gemini_Generated_Image_jkr4oyjkr4oyjkr4_ad13k1.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779267158/blogs/Gemini_Generated_Image_jkr4oyjkr4oyjkr4_ad13k1.jpg"
+    ],
+    "content": "blogs/basic-sql-commands-2026/content.html",
+    "sections": [
+      {
+        "title": "What Is SQL?",
+        "body": "**SQL (Structured Query Language)** is how apps talk to relational databases — read, insert, update, and delete data with plain statements.\n\n:::analogy\nThink of a database like a set of spreadsheets:\n- Each **table** = one sheet (users, orders, products)\n- Each **row** = one record\n- Each **column** = one field (name, email, age)\n:::\n\n:::defs\n**PostgreSQL**|Popular in production backends and fintech\n**MySQL**|Common in web apps and LAMP stacks\n**SQLite**|Lightweight — mobile apps, prototypes, and learning\n:::\n\nSQL is a **query language**, not a general programming language like Python. You ask; the database answers with rows."
+      },
+      {
+        "title": "Your First Table",
+        "body": "Data lives in **tables** — rows and columns with a fixed schema.\n\nExample `users` table:\n\n```text\nid | name  | email              | age\n1  | Aoy   | aoy@example.com    | 24\n2  | Som   | som@example.com    | 28\n3  | Kham  | kham@example.com   | 22\n```\n\nCreate it:\n```sql\nCREATE TABLE users (\n  id    INT PRIMARY KEY,\n  name  VARCHAR(100),\n  email VARCHAR(100),\n  age   INT\n);\n```\n\n:::defs\n**INT**|Whole numbers (age, quantity, IDs)\n**VARCHAR(n)**|Text up to `n` characters\n**PRIMARY KEY**|Unique identifier per row — no duplicates\n:::"
+      },
+      {
+        "title": "SELECT — Read Data",
+        "body": "`SELECT` reads data — the command you will use most.\n\n:::reminders\n**SELECT * FROM users;**|All columns, all rows\n**SELECT name, email FROM users;**|Only the columns you need\n**SELECT * FROM users WHERE age > 23;**|Filter rows\n**SELECT * FROM users ORDER BY age ASC LIMIT 2;**|Sort + cap results\n:::\n\nExamples:\n```sql\nSELECT * FROM users;\nSELECT name, email FROM users;\nSELECT * FROM users WHERE age > 23;\nSELECT * FROM users ORDER BY age ASC;\nSELECT * FROM users LIMIT 2;\n```\n\n:::callout tip\nPrefer naming columns over `*` in production — smaller result sets and clearer intent.\n:::"
+      },
+      {
+        "title": "INSERT — Add New Data",
+        "body": "`INSERT` adds new rows.\n\nSingle row:\n```sql\nINSERT INTO users (id, name, email, age)\nVALUES (4, 'Ping', 'ping@example.com', 26);\n```\n\nMultiple rows:\n```sql\nINSERT INTO users (id, name, email, age)\nVALUES\n  (5, 'Noy', 'noy@example.com', 30),\n  (6, 'Bee', 'bee@example.com', 25);\n```\n\n:::callout tip\nColumn order in the list must match value order in `VALUES` — mismatch causes wrong data or errors.\n:::"
+      },
+      {
+        "title": "UPDATE — Change Existing Data",
+        "body": "`UPDATE` changes existing rows — always scope with `WHERE`.\n\nSafe update (one user):\n```sql\nUPDATE users\nSET age = 25\nWHERE id = 1;\n```\n\nMultiple columns:\n```sql\nUPDATE users\nSET age = 25, email = 'newaoy@example.com'\nWHERE id = 1;\n```\n\n:::compare\n**With WHERE**|Only matching rows change — what you usually want.\n**Without WHERE**|Every row in the table updates — a common production accident.\n:::\n\nDangerous example:\n```sql\nUPDATE users SET age = 0;\n```\n\n:::callout warn\nRun `SELECT * FROM users WHERE ...` first to verify which rows match before `UPDATE` or `DELETE`.\n:::"
+      },
+      {
+        "title": "DELETE — Remove Data",
+        "body": "`DELETE` removes rows — `WHERE` is required for safety.\n\nTargeted deletes:\n```sql\nDELETE FROM users WHERE id = 3;\nDELETE FROM users WHERE age < 23;\n```\n\n:::compare\n**DELETE FROM users WHERE id = 3;**|Removes matching rows only.\n**DELETE FROM users;**|Removes every row — rarely what you want.\n:::\n\nEmpty a whole table faster (structure stays):\n```sql\nTRUNCATE TABLE users;\n```\n\n:::callout warn\n`DELETE` without `WHERE` wipes the table. In production, use transactions and backups before bulk deletes.\n:::"
+      },
+      {
+        "title": "WHERE Conditions — Filter Like a Pro",
+        "body": "`WHERE` filters rows for `SELECT`, `UPDATE`, and `DELETE`.\n\n:::defs\n**= / !=**|Equal / not equal\n**> / >=**|Greater than (or equal)\n**BETWEEN a AND b**|Inclusive range\n**LIKE 'A%'**|Pattern match (`%` = any suffix)\n**AND / OR**|Combine conditions\n:::\n\nExamples:\n```sql\nSELECT * FROM users WHERE age = 24;\nSELECT * FROM users WHERE age BETWEEN 20 AND 30;\nSELECT * FROM users WHERE name LIKE 'A%';\nSELECT * FROM users WHERE age > 20 AND name LIKE 'A%';\nSELECT * FROM users WHERE age < 22 OR age > 27;\n```"
+      },
+      {
+        "title": "What's Next?",
+        "body": "You now have the **CRUD** core — Create, Read, Update, Delete:\n\n:::reminders\n**SELECT**|Read data\n**INSERT**|Create rows\n**UPDATE**|Change rows\n**DELETE**|Remove rows\n:::\n\n:::steps\n1) Practice on https://sqliteonline.com with a `users` table.\n2) Learn **JOIN** to combine tables (orders + customers).\n3) Add **indexes** when queries slow down on large data.\n4) Model relationships with **foreign keys**.\n:::\n\nIn fintech I use SQL daily — transaction history, account filters, report queries. Once it clicks, backend work gets much faster."
+      }
+    ]
   }
 ]

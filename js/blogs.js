@@ -78,7 +78,7 @@
       .replace(/"/g, "&quot;");
   }
 
-  const BLOG_TAG_THEMES = { DevOps: "devops", Git: "git" };
+  const BLOG_TAG_THEMES = { DevOps: "devops", Git: "git", Database: "database" };
 
   function blogTagClass(tag) {
     const theme = BLOG_TAG_THEMES[tag];
@@ -123,6 +123,8 @@
     py: "Python",
     dart: "Dart",
     dockerfile: "Dockerfile",
+    sql: "SQL",
+    text: "Output",
     yaml: "Docker Compose",
     yml: "YAML",
     json: "JSON",
@@ -205,12 +207,92 @@
     return text;
   }
 
+  function highlightSql(code) {
+    let text = escapeCodeHtml(code);
+    const slots = [];
+    const stash = (regex, cls) => {
+      text = text.replace(regex, (m) => {
+        const id = `__tok_${slots.length}__`;
+        slots.push(`<span class="tok-${cls}">${m}</span>`);
+        return id;
+      });
+    };
+
+    stash(/--[^\n]*/g, "comment");
+    stash(/'(?:''|[^'])*'/g, "string");
+
+    const sqlKeywords =
+      /\b(SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|JOIN|INNER|LEFT|RIGHT|OUTER|ON|AND|OR|NOT|IN|INTO|VALUES|SET|CREATE|TABLE|PRIMARY|KEY|INT|VARCHAR|ORDER|BY|ASC|DESC|LIMIT|BETWEEN|LIKE|TRUNCATE|NULL|AS|DISTINCT|GROUP|HAVING|INDEX|FOREIGN|ALTER|DROP|ADD|COMMIT|ROLLBACK|UNION|ALL|EXISTS|CASE|WHEN|THEN|ELSE|END)\b/gi;
+    text = text.replace(sqlKeywords, (m) => `<span class="tok-keyword">${m}</span>`);
+    text = text.replace(/\b\d+\b/g, '<span class="tok-number">$&</span>');
+
+    slots.forEach((slot, i) => {
+      text = text.replace(`__tok_${i}__`, slot);
+    });
+    return text;
+  }
+
   function highlightCode(code, lang) {
     const normalized = String(lang || "").toLowerCase();
     if (normalized === "python" || normalized === "py") return highlightPython(code);
     if (normalized === "bash" || normalized === "sh" || normalized === "shell") return highlightBash(code);
     if (normalized === "dockerfile") return highlightDockerfile(code);
+    if (normalized === "sql") return highlightSql(code);
     return escapeCodeHtml(code);
+  }
+
+  function encodeCodeAttr(code) {
+    return escapeHtml(String(code)).replace(/"/g, "&quot;");
+  }
+
+  /** ????????????? ù ?????????? clipboard API ????????? */
+  async function copyTextToClipboard(text) {
+    const value = String(text ?? "");
+    if (!value) return false;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return true;
+      }
+    } catch {
+      /* fallback ???????? */
+    }
+    const ta = document.createElement("textarea");
+    ta.value = value;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } catch {
+      ok = false;
+    }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function getCodeFromBlock(block) {
+    const codeEl = block?.querySelector("code");
+    if (!codeEl) return "";
+    if (codeEl.dataset.codeSource) return codeEl.dataset.codeSource;
+    return codeEl.textContent || "";
+  }
+
+  function buildCodeBlockHtml(code, lang) {
+    const normalized = String(lang || "bash").toLowerCase();
+    const highlighted = highlightCode(code, normalized);
+    const label = codeLangLabel(normalized);
+    return `
+        <div class="blog-code-block">
+          <div class="blog-code-header">
+            <span>${escapeHtml(label)}</span>
+            <button type="button" class="blog-code-copy" aria-label="Copy code to clipboard" title="Copy code">Copy</button>
+          </div>
+          <pre><code class="lang-${escapeHtml(normalized)}" data-code-source="${encodeCodeAttr(code)}">${highlighted}</code></pre>
+        </div>
+      `;
   }
 
   function bindCodeCopyButtons(root) {
@@ -220,19 +302,32 @@
       btn.dataset.bound = "1";
       btn.addEventListener("click", async () => {
         const block = btn.closest(".blog-code-block");
-        const code = block?.querySelector("code")?.textContent || "";
-        try {
-          await navigator.clipboard.writeText(code);
-          btn.textContent = "Copied";
-          btn.classList.add("is-copied");
-          setTimeout(() => {
-            btn.textContent = "Copy";
-            btn.classList.remove("is-copied");
-          }, 1600);
-        } catch {
-          btn.textContent = "Failed";
-        }
+        const raw = getCodeFromBlock(block);
+        const ok = await copyTextToClipboard(raw);
+        btn.textContent = ok ? "Copied" : "Failed";
+        btn.classList.toggle("is-copied", ok);
+        setTimeout(() => {
+          btn.textContent = "Copy";
+          btn.classList.remove("is-copied");
+        }, 1600);
       });
+    });
+  }
+
+  /** ??? <pre> ???????????? Copy (???? content.html ??????) */
+  function wrapOrphanPreBlocks(root) {
+    if (!root) return;
+    root.querySelectorAll("pre").forEach((pre) => {
+      if (pre.closest(".blog-code-block")) return;
+      const codeEl = pre.querySelector("code");
+      const raw = (codeEl || pre).textContent || "";
+      if (!raw.trim()) return;
+      const langMatch = (codeEl?.className || "").match(/lang-([a-z0-9_-]+)/i);
+      const lang = langMatch?.[1] || pre.getAttribute("data-lang") || "text";
+      const tmp = document.createElement("div");
+      tmp.innerHTML = buildCodeBlockHtml(raw, lang).trim();
+      const block = tmp.firstElementChild;
+      if (block) pre.replaceWith(block);
     });
   }
 
@@ -408,7 +503,7 @@
   function renderBodyHtml(body) {
     const source = String(body || "");
     const parts = [];
-    const codeFence = /```([a-zA-Z0-9_-]+)?\n([\s\S]*?)```/g;
+    const codeFence = /```([a-zA-Z0-9_-]+)?\s*\n([\s\S]*?)```/g;
     let lastIndex = 0;
     let match;
 
@@ -418,17 +513,7 @@
 
       const lang = match[1] || "bash";
       const code = (match[2] || "").trim();
-      const highlighted = highlightCode(code, lang);
-      const label = codeLangLabel(lang);
-      parts.push(`
-        <div class="blog-code-block">
-          <div class="blog-code-header">
-            <span>${escapeHtml(label)}</span>
-            <button type="button" class="blog-code-copy" aria-label="Copy code">Copy</button>
-          </div>
-          <pre><code class="lang-${escapeHtml(lang.toLowerCase())}">${highlighted}</code></pre>
-        </div>
-      `);
+      parts.push(buildCodeBlockHtml(code, lang));
       lastIndex = codeFence.lastIndex;
     }
 
@@ -454,6 +539,7 @@
 
   function enhanceArticleBody(root) {
     if (!root) return;
+    wrapOrphanPreBlocks(root);
     bindCodeCopyButtons(root);
   }
 

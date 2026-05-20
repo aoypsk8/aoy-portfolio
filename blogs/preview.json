@@ -45,6 +45,15 @@
       "date": "2026-05-20",
       "readTime": "6 min read",
       "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779266613/blogs/Gemini_Generated_Image_mkidq8mkidq8mkid_odrekd.jpg"
+    },
+    {
+      "id": "basic-sql-commands-2026",
+      "tag": "Database",
+      "title": "Basic SQL Commands Every Developer Should Know",
+      "excerpt": "SQL is the language you use to talk to databases. Learn the essential commands — SELECT, INSERT, UPDATE, DELETE — with simple examples you can try right now.",
+      "date": "2026-05-20",
+      "readTime": "7 min read",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779267158/blogs/Gemini_Generated_Image_jkr4oyjkr4oyjkr4_ad13k1.jpg"
     }
   ]
 }

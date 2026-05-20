@@ -1,6 +1,22 @@
 {
-  "total": 16,
+  "total": 17,
   "preview": [
+    {
+      "id": "flutter-beginner-workshop-nuol-2024",
+      "tag": "Workshop",
+      "title": "Flutter Beginner Workshop for NUOL Students (Year 1–3)",
+      "description": "Organized and led my own beginner Flutter workshop for Year 1–3 students at the National University of Laos — covering mobile fundamentals, setup, project structure, state management, networking, and APK build workflow.",
+      "date": "Feb 2024",
+      "location": "National University of Laos · Vientiane, Laos",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258753/flutter_workshop_aoy/IMG_0206_jjj2jn.jpg",
+      "images": [
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258754/flutter_workshop_aoy/IMG_0207_pj31lm.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258753/flutter_workshop_aoy/IMG_0206_jjj2jn.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258752/flutter_workshop_aoy/IMG_0208_rixsig.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258751/flutter_workshop_aoy/IMG_0209_zwt6h6.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258751/flutter_workshop_aoy/IMG_0210_s1glkc.jpg"
+      ]
+    },
     {
       "id": "bachelor-graduation-nuol",
       "tag": "Graduation",

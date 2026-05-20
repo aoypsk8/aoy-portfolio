@@ -19,7 +19,7 @@
       },
       {
         "title": "Step 1 — Collect Lao Language Data",
-        "body": "After I fetched all Lao text sources, I followed this exact next pipeline to produce a usable Lao tokenizer model.\n\nStep 1) Normalize every fetched Lao file (not only one file) to ensure consistent Unicode, filtering, and dedup quality.\n```python\nfrom pathlib import Path\nfrom subprocess import run\n\nfor src in Path(\"data/raw\").glob(\"*.txt\"):\n    dst = Path(\"data/processed\") / f\"{src.stem}_clean.txt\"\n    run([\n        \"python\", \"scripts/normalize_lao.py\",\n        str(src), str(dst), \"--filter-lao\", \"0.30\", \"--dedup\"\n    ], check=True)\n```\n\nStep 2) Merge all normalized files into one training corpus for tokenizer training.\n```python\nfrom pathlib import Path\n\nparts = [p.read_text(encoding=\"utf-8\") for p in Path(\"data/processed\").glob(\"*_clean.txt\")]\nPath(\"data/processed/all_lao_clean.txt\").write_text(\"\\n\".join(parts), encoding=\"utf-8\")\n```\n\nStep 3) Train the Lao tokenizer model from the merged normalized corpus.\n```python\nfrom subprocess import run\n\nrun([\n    \"python\", \"models/tokenizer/train_tokenizer.py\",\n    \"--corpus\", \"data/processed/all_lao_clean.txt\",\n    \"--output-dir\", \"models/tokenizer/lao_tokenizer_v1\"\n], check=True)\n```\n\nStep 4) Test tokenizer quality and loading behavior before using it in downstream training.\n```python\nfrom subprocess import run\n\nrun([\n    \"python\", \"models/tokenizer/train_tokenizer.py\",\n    \"--test-only\",\n    \"--model-dir\", \"models/tokenizer/lao_tokenizer_v1/hf_tokenizer\"\n], check=True)\n```\n\nResult: this flow gives a reproducible Lao tokenizer model trained from all fetched and normalized Lao data.\n\nCredit: data collection inspiration and source references from GitHub user therngbtg (https://github.com/therngbtg), LinkedIn (https://www.linkedin.com/in/bountherng-phetlasy-489a3316b/)."
+        "body": "Step 1 is the full data-engineering pipeline that turns noisy web text into a tokenizer-ready Lao corpus.\n\nStep 1.1) Define source strategy and output contract.\nGoal: collect broad Lao language coverage (encyclopedic + news + domain text) and produce deterministic raw artifacts.\n```python\nSOURCES = {\n    \"wikipedia\": \"lo.wikipedia.org\",\n    \"news\": [\"kpl.gov.la\", \"vientianemai.com\"],\n    \"domain\": [\"banking_docs\", \"public_notices\"],\n    \"eval\": [\"FLORES-200\"],\n}\nRAW_DIR = \"data/raw\"\nPROCESSED_DIR = \"data/processed\"\n```\n\nStep 1.2) Collect raw Lao text from each source with traceability.\n```python\nfrom subprocess import run\n\nrun([\"python\", \"tools/data_collection/collect_wikipedia.py\", \"--output\", \"data/raw/wiki_lao.txt\"], check=True)\nrun([\"python\", \"tools/data_collection/collect_news.py\", \"--group\", \"newspapers\", \"--max-pages\", \"50\"], check=True)\nrun([\"python\", \"tools/data_collection/collect_news.py\", \"--source\", \"kpl\", \"--cat\", \"1\", \"--max-pages\", \"30\"], check=True)\n```\n\nStep 1.3) Normalize each fetched file independently (Unicode, Lao-ratio filtering, dedup).\n```python\nfrom pathlib import Path\nfrom subprocess import run\n\nfor src in Path(\"data/raw\").glob(\"*.txt\"):\n    dst = Path(\"data/processed\") / f\"{src.stem}_clean.txt\"\n    run([\n        \"python\", \"scripts/normalize_lao.py\",\n        str(src), str(dst), \"--filter-lao\", \"0.30\", \"--dedup\"\n    ], check=True)\n```\n\nStep 1.4) Run quality checks before merge (minimum length, Lao ratio, duplicate drift).\n```python\nfrom pathlib import Path\n\nstats = {}\nfor p in Path(\"data/processed\").glob(\"*_clean.txt\"):\n    lines = [x.strip() for x in p.read_text(encoding=\"utf-8\").splitlines() if x.strip()]\n    stats[p.name] = {\"lines\": len(lines), \"sample\": lines[0][:120] if lines else \"\"}\nprint(stats)\n```\n\nStep 1.5) Merge cleaned shards into one training corpus.\n```python\nfrom pathlib import Path\n\nparts = [p.read_text(encoding=\"utf-8\") for p in Path(\"data/processed\").glob(\"*_clean.txt\")]\nPath(\"data/processed/all_lao_clean.txt\").write_text(\"\\n\".join(parts), encoding=\"utf-8\")\n```\n\nStep 1.6) Train tokenizer from merged corpus.\n```python\nfrom subprocess import run\n\nrun([\n    \"python\", \"models/tokenizer/train_tokenizer.py\",\n    \"--corpus\", \"data/processed/all_lao_clean.txt\",\n    \"--output-dir\", \"models/tokenizer/lao_tokenizer_v1\"\n], check=True)\n```\n\nStep 1.7) Validate tokenizer behavior before model surgery.\n```python\nfrom subprocess import run\n\nrun([\n    \"python\", \"models/tokenizer/train_tokenizer.py\",\n    \"--test-only\",\n    \"--model-dir\", \"models/tokenizer/lao_tokenizer_v1/hf_tokenizer\"\n], check=True)\n```\n\nExample output (short):\n```bash\nRaw files: 12\nProcessed files: 12\nMerged corpus: data/processed/all_lao_clean.txt\nTokenizer vocab: 32,000\nTokenizer test: PASS\n```\n\nResult: a reproducible, audited, tokenizer-ready Lao corpus and a validated tokenizer model for downstream vocab surgery/CPT.\n\nCredit: data collection inspiration and source references from GitHub user therngbtg (https://github.com/therngbtg), LinkedIn (https://www.linkedin.com/in/bountherng-phetlasy-489a3316b/)."
       },
       {
         "title": "Step 2 — Tokenizer Audit and Vocab Surgery",
@@ -99,6 +99,108 @@
       {
         "title": "Call to Action",
         "body": "If you are blocked by a setup error, share your `flutter doctor -v` output plus OS (Windows version or macOS version) + IDE version. Most environment failures are deterministic and fixable once diagnostics are visible.\nIf you want, I can write a follow-up guide on integrating AI features into Flutter using either REST APIs or on-device inference (`tflite_flutter`) with production-safe architecture."
+      }
+    ]
+  },
+  {
+    "id": "absolute-beginners-guide-flutter",
+    "tag": "Mobile",
+    "title": "The Absolute Beginner’s Guide to Flutter: From Zero to First App (iOS & Android)",
+    "excerpt": "A practical beginner guide to set up Flutter on Windows and macOS, run your first app on iOS and Android, and avoid common environment setup issues.",
+    "date": "2026-05-20",
+    "readTime": "12 min read",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png"
+    ],
+    "content": "blogs/absolute-beginners-guide-flutter/content.html",
+    "sections": [
+      {
+        "title": "Introduction",
+        "body": "Flutter is a game-changer for cross-platform development, especially if you come from web or backend systems. But in professional teams, \"it runs on my machine\" is not good enough. We need a reproducible setup that every engineer (and intern) can bootstrap with minimal friction.\nThis guide walks through a robust Flutter setup on both Windows and macOS, with the engineering mindset I use in real projects: clean environment boundaries, deterministic tooling, and repeatable verification steps.\n\nPlatform support summary:\n- macOS: can build for both iOS and Android. Required if you want to ship to the App Store.\n- Windows: can build for Android only. iOS builds require a Mac (or a remote macOS build server / CI like Codemagic / GitHub Actions macOS runners)."
+      },
+      {
+        "title": "Phase 1 — Environment Philosophy and Prerequisites",
+        "body": "Start with a dedicated development directory to avoid permission conflicts and scattered SDK paths.\n\n**macOS / Linux:**\n```bash\nmkdir -p ~/Dev\ncd ~/Dev\n```\n\n**Windows (PowerShell):**\n```powershell\nNew-Item -ItemType Directory -Force -Path C:\\Dev\nSet-Location C:\\Dev\n```\nKeep the path short and free of spaces (e.g., `C:\\Dev`, not `C:\\Users\\My Name\\Documents\\Dev`). Long paths and spaces are a common source of obscure Flutter / Gradle errors on Windows.\n\nCore prerequisites (both OS):\n1) Visual Studio Code (recommended editor for speed + extension ecosystem).\n2) Git (required to clone Flutter SDK and manage channel upgrades cleanly).\n3) Android Studio (Android SDK, AVD, command-line tools).\n4) JDK 17 (bundled with recent Android Studio; otherwise install separately).\n\nmacOS only:\n5) Xcode (mandatory for iOS build/signing).\n6) Optional but recommended: Homebrew for easier package management.\n\nWindows only:\n5) Enable long path support and Developer Mode (Settings → System → For developers → Developer Mode = On). This prevents the classic `path too long` and symlink errors during `flutter doctor` and Gradle builds.\n6) Optional: install Chocolatey or winget for easier package management."
+      },
+      {
+        "title": "Phase 2 — Installing the Flutter SDK (Git-Based)",
+        "body": "For professional workflows, install Flutter SDK via Git instead of manual ZIP extraction. This gives you easier channel switching (`stable`, `beta`, `master`) and predictable updates.\n\n**macOS / Linux:**\n```bash\ncd ~/Dev\ngit clone https://github.com/flutter/flutter.git -b stable\n```\nAdd Flutter to PATH (zsh example):\n```bash\necho 'export PATH=\"$PATH:$HOME/Dev/flutter/bin\"' >> ~/.zshrc\nsource ~/.zshrc\nflutter --version\n```\nIf you use bash instead of zsh, append the same line to `~/.bashrc` or `~/.bash_profile`.\n\n**Windows (PowerShell):**\n```powershell\nSet-Location C:\\Dev\ngit clone https://github.com/flutter/flutter.git -b stable\n```\nAdd Flutter to PATH (user-level, no admin needed):\n```powershell\n$flutterBin = \"C:\\Dev\\flutter\\bin\"\n[Environment]::SetEnvironmentVariable(\n    \"Path\",\n    [Environment]::GetEnvironmentVariable(\"Path\", \"User\") + \";$flutterBin\",\n    \"User\"\n)\n```\nClose and reopen PowerShell, then verify:\n```powershell\nflutter --version\n```\nIf `flutter` is not recognized, log out and back in (or restart) so the new PATH is picked up.\n\nVS Code setup (both OS):\n1) Install the `Flutter` extension (Dart is auto-installed).\n2) Restart VS Code.\n3) Confirm the extension sees the SDK path (Command Palette → `Flutter: Change SDK`)."
+      },
+      {
+        "title": "Phase 3a — Android Toolchain Setup (Windows & macOS)",
+        "body": "The Android toolchain is identical in concept on both OSes; only the install method differs.\n\n1) Install Android Studio (download from developer.android.com, or `brew install --cask android-studio` on macOS, or `winget install Google.AndroidStudio` on Windows).\n2) Launch Android Studio once and finish the initial SDK setup wizard.\n3) Open Settings/Preferences → Languages & Frameworks → Android SDK.\n4) In the `SDK Tools` tab, enable:\n   - `Android SDK Command-line Tools (latest)`\n   - `Android SDK Build-Tools`\n   - `Android SDK Platform-Tools`\n   - `Android Emulator`\n5) Accept all SDK licenses:\n```bash\nflutter doctor --android-licenses\n```\nOn Windows, run the same command in PowerShell. Type `y` and Enter for each license prompt.\n\n6) Create an Android Virtual Device (AVD): Android Studio → Device Manager → Create Device → pick a Pixel profile + a recent system image (API 34 or 35 recommended).\n\nWindows-specific note: enable hardware acceleration. On Intel CPUs, install `Intel HAXM` via the SDK Manager. On AMD CPUs or modern Intel, enable `Windows Hypervisor Platform` (Control Panel → Programs → Turn Windows features on or off). Without this, the emulator will be painfully slow or refuse to start."
+      },
+      {
+        "title": "Phase 3b — iOS Toolchain Setup (macOS Only)",
+        "body": "iOS development requires macOS. If you are on Windows, skip this phase and use a Mac, a cloud Mac service (MacStadium, MacInCloud), or CI runners (Codemagic, GitHub Actions macOS) for iOS builds.\n\n1) Install Xcode from the Mac App Store (large download, plan for 8–15 GB).\n2) Open Xcode once and complete the initial component install.\n3) Set the active developer directory and accept the license:\n```bash\nsudo xcode-select --switch /Applications/Xcode.app/Contents/Developer\nsudo xcodebuild -license accept\n```\n4) Install the iOS Simulator runtime (Xcode → Settings → Platforms → iOS → Get).\n5) Install CocoaPods for iOS plugin dependency resolution:\n```bash\nsudo gem install cocoapods\npod --version\n```\nOn Apple Silicon Macs, if you hit Ruby/FFI errors, prefer installing CocoaPods via Homebrew instead:\n```bash\nbrew install cocoapods\n```\n6) Launch the simulator at least once to confirm it boots:\n```bash\nopen -a Simulator\n```"
+      },
+      {
+        "title": "Phase 4 — The Flutter Doctor Ritual (Verification Gate)",
+        "body": "Run diagnostics and treat this as your environment unit test. Same command on both OSes:\n```bash\nflutter doctor\n```\n\nA healthy macOS output should show:\n```bash\n[✓] Flutter (Channel stable)\n[✓] Android toolchain - develop for Android devices\n[✓] Xcode - develop for iOS and macOS\n[✓] Chrome - develop for the web\n[✓] Android Studio\n[✓] VS Code\n[✓] Connected device\n```\n\nA healthy Windows output should show:\n```bash\n[✓] Flutter (Channel stable, on Microsoft Windows)\n[✓] Windows Version (Windows 10/11)\n[✓] Android toolchain - develop for Android devices\n[✓] Chrome - develop for the web\n[✓] Visual Studio - develop Windows apps (optional, only if you target Windows desktop)\n[✓] Android Studio\n[✓] VS Code\n[✓] Connected device\n```\nXcode will NOT appear on Windows — that is expected.\n\nIf any item has `[!]` or `[✗]`, fix it before creating your project. For verbose diagnostics:\n```bash\nflutter doctor -v\n```\nThis single habit prevents most onboarding pain."
+      },
+      {
+        "title": "Phase 5 — First Project, Run Commands, and Clean Starter App",
+        "body": "Create and run your first project (same commands on Windows and macOS):\n```bash\nflutter create my_first_lao_app\ncd my_first_lao_app\nflutter devices\nflutter run\n```\n\nA cleaner starter `lib/main.dart` example:\n```dart\nimport 'package:flutter/material.dart';\n\nvoid main() => runApp(const MyApp());\n\nclass MyApp extends StatelessWidget {\n  const MyApp({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      home: Scaffold(\n        appBar: AppBar(title: const Text('First Lao Flutter App')),\n        body: Center(\n          child: Column(\n            mainAxisAlignment: MainAxisAlignment.center,\n            children: [\n              const Text('ສະບາຍດີ! (Hello!)'),\n              const SizedBox(height: 20),\n              ElevatedButton(\n                onPressed: () => debugPrint('Button Pressed!'),\n                child: const Text('Click Me'),\n              ),\n            ],\n          ),\n        ),\n      ),\n    );\n  }\n}\n```\n\nPlatform-specific run commands:\n```bash\n# Android (works on both Windows and macOS)\nflutter run -d <android-device-id>\n\n# iOS (macOS only)\nflutter run -d <ios-device-id>\n```\nGet device IDs from `flutter devices`. On Windows, the iOS option will not appear — that is normal."
+      },
+      {
+        "title": "Common Setup Errors & Fixes",
+        "body": "Windows:\n- `cmdline-tools component is missing`: open Android Studio SDK Manager → SDK Tools → check `Android SDK Command-line Tools (latest)`, click Apply, then re-run `flutter doctor --android-licenses`.\n- `Unable to locate Android SDK`: set the environment variable manually: `setx ANDROID_HOME \"C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk\"`, reopen PowerShell.\n- Long path errors / symlink failures: enable Developer Mode in Windows Settings, and run `git config --global core.longpaths true`.\n- Gradle build hangs forever: disable antivirus real-time scanning on `C:\\Dev` and the Flutter SDK folder.\n\nmacOS:\n- `CocoaPods not installed`: prefer `brew install cocoapods` over `sudo gem install` on Apple Silicon.\n- `xcrun: error: invalid active developer path`: run `sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`.\n- iOS simulator does not boot: open Xcode → Settings → Platforms → reinstall the iOS runtime.\n- Permission denied on `~/.zshrc`: check ownership with `ls -la ~/.zshrc`; fix with `sudo chown $(whoami) ~/.zshrc`."
+      },
+      {
+        "title": "Pro Tips",
+        "body": "1) Hot Reload is your feedback superpower; use it constantly during UI work.\n2) On older machines, prefer physical devices over emulators to reduce memory pressure. On Windows especially, USB debugging on a real Android phone is much faster than the AVD.\n3) Use `flutter pub add <package>` instead of manually editing `pubspec.yaml`.\n4) Install VS Code extensions: `Awesome Flutter Snippets` and `Error Lens`.\n5) For production apps, start learning Flavors early (Dev/Staging/Prod) to isolate API configs and signing safely.\n6) Pin your Flutter version per project with `flutter --version` output committed to the repo (or use `fvm` for multi-version teams) so every machine — Windows or Mac — builds the same binary."
+      },
+      {
+        "title": "Call to Action",
+        "body": "If you are blocked by a setup error, share your `flutter doctor -v` output plus OS (Windows version or macOS version) + IDE version. Most environment failures are deterministic and fixable once diagnostics are visible.\nIf you want, I can write a follow-up guide on integrating AI features into Flutter using either REST APIs or on-device inference (`tflite_flutter`) with production-safe architecture."
+      }
+    ]
+  },
+  {
+    "id": "blutter-flutter-reverse-engineering",
+    "tag": "Security",
+    "title": "B(l)utter: Flutter Mobile Application Reverse Engineering Tool",
+    "excerpt": "A practical technical overview of B(l)utter for analyzing Flutter Android libapp.so, including setup, usage, and output artifact breakdown.",
+    "date": "2025-01-23",
+    "readTime": "9 min read",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258177/blogs/Gemini_Generated_Image_h3jdouh3jdouh3jd_lxjbiw.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258177/blogs/Gemini_Generated_Image_h3jdouh3jdouh3jd_lxjbiw.jpg"
+    ],
+    "content": "blogs/blutter-flutter-reverse-engineering/content.html",
+    "sections": [
+      {
+        "title": "Introduction",
+        "body": "B(l)utter is a Flutter mobile reverse engineering tool focused on Dart AOT runtime analysis. It is designed to inspect Flutter Android binaries (specifically `libapp.so`) and generate useful artifacts for static/dynamic analysis workflows. At the moment, support is centered on Android ARM64 and recent Dart runtime versions."
+      },
+      {
+        "title": "What B(l)utter Is Good For",
+        "body": "In practical security and reverse engineering workflows, B(l)utter helps you:\n1) Analyze Dart AOT internals from Flutter release binaries.\n2) Extract assembly and object-pool related artifacts for deeper inspection.\n3) Generate a Frida script template to accelerate runtime instrumentation.\n4) Build a repeatable pipeline for app triage and technical research."
+      },
+      {
+        "title": "Environment Setup",
+        "body": "B(l)utter requires modern C++ toolchains (for example g++ >= 13 or Clang >= 16 in current upstream notes). Linux is commonly preferred for easier setup.\n\nDebian / Ubuntu-style setup:\n```bash\napt install python3-pyelftools python3-requests git cmake ninja-build \\\n    build-essential pkg-config libicu-dev libcapstone-dev\n```\n\nWindows setup:\n1) Install Git and Python 3.\n2) Install latest Visual Studio with C++ desktop + CMake tools.\n3) Install required libs (`libcapstone`, `libicu4c`) via project helper script.\n```powershell\npython scripts\\init_env_win.py\n```\nThen use `x64 Native Tools Command Prompt`.\n\nmacOS setup:\n```bash\nbrew install cmake ninja pkg-config icu4c capstone\npip3 install pyelftools requests\n```\n(Older macOS versions may require specific LLVM versions as documented upstream.)"
+      },
+      {
+        "title": "Usage Workflow",
+        "body": "Extract the `lib` folder from an APK first, then run B(l)utter against `arm64-v8a`:\n```bash\npython3 blutter.py path/to/app/lib/arm64-v8a out_dir\n```\n`blutter.py` auto-detects Dart version from Flutter engine metadata and selects the matching blutter executable.\nIf the required executable does not exist locally, it can fetch/build dependencies automatically."
+      },
+      {
+        "title": "Output Artifacts",
+        "body": "Typical output files you will use in analysis:\n- `asm/*`: generated libapp assemblies with symbols.\n- `blutter_frida.js`: Frida template for dynamic instrumentation.\n- `objs.txt`: nested object dump from object pool.\n- `pp.txt`: full Dart objects in the object pool.\n\nThese artifacts provide both static visibility and runtime hook-entry context."
+      },
+      {
+        "title": "Project Directory Anatomy",
+        "body": "- `bin`: built blutter executables per Dart version / OS / arch.\n- `blutter`: core source code.\n- `build`: temporary build projects (safe to delete after build).\n- `dartsdk`: checked-out Dart runtime sources (safe to delete after build).\n- `external`: third-party libraries (especially relevant on Windows).\n- `packages`: static libraries of Dart runtime.\n- `scripts`: helper scripts for fetching/building Dart-related components."
+      },
+      {
+        "title": "Operational Notes and Limits",
+        "body": "Current practical limits:\n1) Main support target is Android `libapp.so` ARM64.\n2) Works best with recent Dart runtime versions.\n3) iOS and heavily obfuscated targets may need additional manual workflows.\n\nFor updates, keep the repo synced (`git pull`) and rebuild when required."
+      },
+      {
+        "title": "Reference",
+        "body": "Official repository and documentation:\nhttps://github.com/worawit/blutter\n\nIf you want, I can create a follow-up post showing a safe, legal analysis checklist (scope definition, permissions, and red-team/blue-team reporting format) for Flutter reverse engineering projects."
       }
     ]
   }

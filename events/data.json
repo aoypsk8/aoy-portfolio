@@ -14,10 +14,26 @@
     ]
   },
   {
-    "id": "ux-ui-hackathon-elderly-care-2nd-prize",
+    "id": "synergy-visit-exchange-thailand",
+    "tag": "Visit",
+    "title": "Synergy Visited — Exchange in Thailand",
+    "description": "Synergy visited during my exchange programme in Thailand — connecting and sharing moments together while I was on the Silpakorn University summer camp exchange.",
+    "date": "2025",
+    "location": "Thailand",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263507/synergy/IMG_0254_jxmxgj.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263507/synergy/IMG_0254_jxmxgj.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263508/synergy/IMG_0255_i4iumf.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263510/synergy/IMG_0258_n1nq13.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263511/synergy/IMG_0257_rydsuz.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263512/synergy/IMG_0256_xrzofa.jpg"
+    ]
+  },
+  {
+    "id": "ux-ui-hackathon-elderly-care-3rd-prize",
     "tag": "Hackathon",
-    "title": "UX/UI Hackathon — Elderly Care (2nd Prize)",
-    "description": "Participated in a UX/UI Hackathon and built an Elderly Care solution focused on accessibility, clarity, and practical daily support workflows. Our team won 2nd Prize.",
+    "title": "UX/UI Hackathon — Elderly Care (3rd Prize)",
+    "description": "Participated in a UX/UI Hackathon and built an Elderly Care solution focused on accessibility, clarity, and practical daily support workflows. Our team won 3rd Prize.",
     "date": "2024",
     "location": "Vientiane, Laos",
     "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5923_bsombo.jpg",
@@ -26,7 +42,12 @@
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259572/uxui_hackathon/IMG_5844_hcy9ui.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5922_ur2fqx.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5923_bsombo.jpg",
-      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259570/uxui_hackathon/IMG_5921_fecebb.jpg"
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259570/uxui_hackathon/IMG_5921_fecebb.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263396/uxui_hackathon/IMG_0259_fmpsvo.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263397/uxui_hackathon/IMG_0260_szeme9.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263396/uxui_hackathon/IMG_0263_jf3ie6.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263397/uxui_hackathon/IMG_0262_u6le2j.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263398/uxui_hackathon/IMG_0261_c2dmfr.jpg"
     ]
   },
   {
@@ -290,9 +311,11 @@
     "description": "Invited by Joint Development Bank (JDB) to the Executive Business Forum 2025 — hosted by JDB, bringing together leaders to discuss business, finance, and economic development in Laos.",
     "date": "2025",
     "location": "Vientiane, Laos",
-    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6174_ruxm2m.jpg",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263655/jdb_bussiness/IMG_0251_s8b91m.jpg",
     "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263655/jdb_bussiness/IMG_0251_s8b91m.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259853/jdb_bussiness/07CA9063-CB76-48EB-9101-C6528FB2DEEF_jugjp9.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6174_ruxm2m.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6174_ruxm2m.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117033/jdb_bussiness/IMG_6176_k6s6kx.jpg"
     ]
@@ -332,14 +355,20 @@
     ]
   },
   {
-    "id": "tplus-ai-code-camp-2023",
+    "id": "tplus-ai-code-camp-2023-2nd-prize",
     "tag": "Bootcamp",
-    "title": "Tplus AI Code Camp 2023",
-    "description": "Joined Tplus AI Code Camp 2023 to strengthen practical AI and coding foundations through intensive workshops, team collaboration, and hands-on implementation sessions.",
+    "title": "Tplus AI Code Camp 2023 (2nd Prize)",
+    "description": "Joined Tplus AI Code Camp 2023 to strengthen practical AI and coding foundations through intensive workshops, team collaboration, and hands-on implementation sessions. Our team won 2nd Prize.",
     "date": "2023",
     "location": "Vientiane, Laos",
-    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0237_iswtmz.jpg",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0248_kpje6e.jpg",
     "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0248_kpje6e.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263719/tplus_codecamp2023/IMG_0249_nxsi8k.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263719/tplus_codecamp2023/IMG_0244_k4yjgv.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0243_zwav6s.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0245_by0cz7.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0246_uhgzqn.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0237_iswtmz.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0238_zqtub7.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260834/tplus_codecamp2023/IMG_0235_uqwcef.jpg"

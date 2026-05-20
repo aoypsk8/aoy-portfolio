@@ -103,61 +103,6 @@
     ]
   },
   {
-    "id": "absolute-beginners-guide-flutter",
-    "tag": "Mobile",
-    "title": "The Absolute Beginner’s Guide to Flutter: From Zero to First App (iOS & Android)",
-    "excerpt": "A practical beginner guide to set up Flutter on Windows and macOS, run your first app on iOS and Android, and avoid common environment setup issues.",
-    "date": "2026-05-20",
-    "readTime": "12 min read",
-    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png",
-    "images": [
-      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png"
-    ],
-    "content": "blogs/absolute-beginners-guide-flutter/content.html",
-    "sections": [
-      {
-        "title": "Introduction",
-        "body": "Flutter is a game-changer for cross-platform development, especially if you come from web or backend systems. But in professional teams, \"it runs on my machine\" is not good enough. We need a reproducible setup that every engineer (and intern) can bootstrap with minimal friction.\nThis guide walks through a robust Flutter setup on both Windows and macOS, with the engineering mindset I use in real projects: clean environment boundaries, deterministic tooling, and repeatable verification steps.\n\nPlatform support summary:\n- macOS: can build for both iOS and Android. Required if you want to ship to the App Store.\n- Windows: can build for Android only. iOS builds require a Mac (or a remote macOS build server / CI like Codemagic / GitHub Actions macOS runners)."
-      },
-      {
-        "title": "Phase 1 — Environment Philosophy and Prerequisites",
-        "body": "Start with a dedicated development directory to avoid permission conflicts and scattered SDK paths.\n\n**macOS / Linux:**\n```bash\nmkdir -p ~/Dev\ncd ~/Dev\n```\n\n**Windows (PowerShell):**\n```powershell\nNew-Item -ItemType Directory -Force -Path C:\\Dev\nSet-Location C:\\Dev\n```\nKeep the path short and free of spaces (e.g., `C:\\Dev`, not `C:\\Users\\My Name\\Documents\\Dev`). Long paths and spaces are a common source of obscure Flutter / Gradle errors on Windows.\n\nCore prerequisites (both OS):\n1) Visual Studio Code (recommended editor for speed + extension ecosystem).\n2) Git (required to clone Flutter SDK and manage channel upgrades cleanly).\n3) Android Studio (Android SDK, AVD, command-line tools).\n4) JDK 17 (bundled with recent Android Studio; otherwise install separately).\n\nmacOS only:\n5) Xcode (mandatory for iOS build/signing).\n6) Optional but recommended: Homebrew for easier package management.\n\nWindows only:\n5) Enable long path support and Developer Mode (Settings → System → For developers → Developer Mode = On). This prevents the classic `path too long` and symlink errors during `flutter doctor` and Gradle builds.\n6) Optional: install Chocolatey or winget for easier package management."
-      },
-      {
-        "title": "Phase 2 — Installing the Flutter SDK (Git-Based)",
-        "body": "For professional workflows, install Flutter SDK via Git instead of manual ZIP extraction. This gives you easier channel switching (`stable`, `beta`, `master`) and predictable updates.\n\n**macOS / Linux:**\n```bash\ncd ~/Dev\ngit clone https://github.com/flutter/flutter.git -b stable\n```\nAdd Flutter to PATH (zsh example):\n```bash\necho 'export PATH=\"$PATH:$HOME/Dev/flutter/bin\"' >> ~/.zshrc\nsource ~/.zshrc\nflutter --version\n```\nIf you use bash instead of zsh, append the same line to `~/.bashrc` or `~/.bash_profile`.\n\n**Windows (PowerShell):**\n```powershell\nSet-Location C:\\Dev\ngit clone https://github.com/flutter/flutter.git -b stable\n```\nAdd Flutter to PATH (user-level, no admin needed):\n```powershell\n$flutterBin = \"C:\\Dev\\flutter\\bin\"\n[Environment]::SetEnvironmentVariable(\n    \"Path\",\n    [Environment]::GetEnvironmentVariable(\"Path\", \"User\") + \";$flutterBin\",\n    \"User\"\n)\n```\nClose and reopen PowerShell, then verify:\n```powershell\nflutter --version\n```\nIf `flutter` is not recognized, log out and back in (or restart) so the new PATH is picked up.\n\nVS Code setup (both OS):\n1) Install the `Flutter` extension (Dart is auto-installed).\n2) Restart VS Code.\n3) Confirm the extension sees the SDK path (Command Palette → `Flutter: Change SDK`)."
-      },
-      {
-        "title": "Phase 3a — Android Toolchain Setup (Windows & macOS)",
-        "body": "The Android toolchain is identical in concept on both OSes; only the install method differs.\n\n1) Install Android Studio (download from developer.android.com, or `brew install --cask android-studio` on macOS, or `winget install Google.AndroidStudio` on Windows).\n2) Launch Android Studio once and finish the initial SDK setup wizard.\n3) Open Settings/Preferences → Languages & Frameworks → Android SDK.\n4) In the `SDK Tools` tab, enable:\n   - `Android SDK Command-line Tools (latest)`\n   - `Android SDK Build-Tools`\n   - `Android SDK Platform-Tools`\n   - `Android Emulator`\n5) Accept all SDK licenses:\n```bash\nflutter doctor --android-licenses\n```\nOn Windows, run the same command in PowerShell. Type `y` and Enter for each license prompt.\n\n6) Create an Android Virtual Device (AVD): Android Studio → Device Manager → Create Device → pick a Pixel profile + a recent system image (API 34 or 35 recommended).\n\nWindows-specific note: enable hardware acceleration. On Intel CPUs, install `Intel HAXM` via the SDK Manager. On AMD CPUs or modern Intel, enable `Windows Hypervisor Platform` (Control Panel → Programs → Turn Windows features on or off). Without this, the emulator will be painfully slow or refuse to start."
-      },
-      {
-        "title": "Phase 3b — iOS Toolchain Setup (macOS Only)",
-        "body": "iOS development requires macOS. If you are on Windows, skip this phase and use a Mac, a cloud Mac service (MacStadium, MacInCloud), or CI runners (Codemagic, GitHub Actions macOS) for iOS builds.\n\n1) Install Xcode from the Mac App Store (large download, plan for 8–15 GB).\n2) Open Xcode once and complete the initial component install.\n3) Set the active developer directory and accept the license:\n```bash\nsudo xcode-select --switch /Applications/Xcode.app/Contents/Developer\nsudo xcodebuild -license accept\n```\n4) Install the iOS Simulator runtime (Xcode → Settings → Platforms → iOS → Get).\n5) Install CocoaPods for iOS plugin dependency resolution:\n```bash\nsudo gem install cocoapods\npod --version\n```\nOn Apple Silicon Macs, if you hit Ruby/FFI errors, prefer installing CocoaPods via Homebrew instead:\n```bash\nbrew install cocoapods\n```\n6) Launch the simulator at least once to confirm it boots:\n```bash\nopen -a Simulator\n```"
-      },
-      {
-        "title": "Phase 4 — The Flutter Doctor Ritual (Verification Gate)",
-        "body": "Run diagnostics and treat this as your environment unit test. Same command on both OSes:\n```bash\nflutter doctor\n```\n\nA healthy macOS output should show:\n```bash\n[✓] Flutter (Channel stable)\n[✓] Android toolchain - develop for Android devices\n[✓] Xcode - develop for iOS and macOS\n[✓] Chrome - develop for the web\n[✓] Android Studio\n[✓] VS Code\n[✓] Connected device\n```\n\nA healthy Windows output should show:\n```bash\n[✓] Flutter (Channel stable, on Microsoft Windows)\n[✓] Windows Version (Windows 10/11)\n[✓] Android toolchain - develop for Android devices\n[✓] Chrome - develop for the web\n[✓] Visual Studio - develop Windows apps (optional, only if you target Windows desktop)\n[✓] Android Studio\n[✓] VS Code\n[✓] Connected device\n```\nXcode will NOT appear on Windows — that is expected.\n\nIf any item has `[!]` or `[✗]`, fix it before creating your project. For verbose diagnostics:\n```bash\nflutter doctor -v\n```\nThis single habit prevents most onboarding pain."
-      },
-      {
-        "title": "Phase 5 — First Project, Run Commands, and Clean Starter App",
-        "body": "Create and run your first project (same commands on Windows and macOS):\n```bash\nflutter create my_first_lao_app\ncd my_first_lao_app\nflutter devices\nflutter run\n```\n\nA cleaner starter `lib/main.dart` example:\n```dart\nimport 'package:flutter/material.dart';\n\nvoid main() => runApp(const MyApp());\n\nclass MyApp extends StatelessWidget {\n  const MyApp({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      home: Scaffold(\n        appBar: AppBar(title: const Text('First Lao Flutter App')),\n        body: Center(\n          child: Column(\n            mainAxisAlignment: MainAxisAlignment.center,\n            children: [\n              const Text('ສະບາຍດີ! (Hello!)'),\n              const SizedBox(height: 20),\n              ElevatedButton(\n                onPressed: () => debugPrint('Button Pressed!'),\n                child: const Text('Click Me'),\n              ),\n            ],\n          ),\n        ),\n      ),\n    );\n  }\n}\n```\n\nPlatform-specific run commands:\n```bash\n# Android (works on both Windows and macOS)\nflutter run -d <android-device-id>\n\n# iOS (macOS only)\nflutter run -d <ios-device-id>\n```\nGet device IDs from `flutter devices`. On Windows, the iOS option will not appear — that is normal."
-      },
-      {
-        "title": "Common Setup Errors & Fixes",
-        "body": "Windows:\n- `cmdline-tools component is missing`: open Android Studio SDK Manager → SDK Tools → check `Android SDK Command-line Tools (latest)`, click Apply, then re-run `flutter doctor --android-licenses`.\n- `Unable to locate Android SDK`: set the environment variable manually: `setx ANDROID_HOME \"C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk\"`, reopen PowerShell.\n- Long path errors / symlink failures: enable Developer Mode in Windows Settings, and run `git config --global core.longpaths true`.\n- Gradle build hangs forever: disable antivirus real-time scanning on `C:\\Dev` and the Flutter SDK folder.\n\nmacOS:\n- `CocoaPods not installed`: prefer `brew install cocoapods` over `sudo gem install` on Apple Silicon.\n- `xcrun: error: invalid active developer path`: run `sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`.\n- iOS simulator does not boot: open Xcode → Settings → Platforms → reinstall the iOS runtime.\n- Permission denied on `~/.zshrc`: check ownership with `ls -la ~/.zshrc`; fix with `sudo chown $(whoami) ~/.zshrc`."
-      },
-      {
-        "title": "Pro Tips",
-        "body": "1) Hot Reload is your feedback superpower; use it constantly during UI work.\n2) On older machines, prefer physical devices over emulators to reduce memory pressure. On Windows especially, USB debugging on a real Android phone is much faster than the AVD.\n3) Use `flutter pub add <package>` instead of manually editing `pubspec.yaml`.\n4) Install VS Code extensions: `Awesome Flutter Snippets` and `Error Lens`.\n5) For production apps, start learning Flavors early (Dev/Staging/Prod) to isolate API configs and signing safely.\n6) Pin your Flutter version per project with `flutter --version` output committed to the repo (or use `fvm` for multi-version teams) so every machine — Windows or Mac — builds the same binary."
-      },
-      {
-        "title": "Call to Action",
-        "body": "If you are blocked by a setup error, share your `flutter doctor -v` output plus OS (Windows version or macOS version) + IDE version. Most environment failures are deterministic and fixable once diagnostics are visible.\nIf you want, I can write a follow-up guide on integrating AI features into Flutter using either REST APIs or on-device inference (`tflite_flutter`) with production-safe architecture."
-      }
-    ]
-  },
-  {
     "id": "blutter-flutter-reverse-engineering",
     "tag": "Security",
     "title": "B(l)utter: Flutter Mobile Application Reverse Engineering Tool",

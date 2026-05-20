@@ -1,6 +1,69 @@
 {
-  "total": 18,
+  "total": 23,
   "preview": [
+    {
+      "id": "tplus-ai-code-camp-2023-2nd-prize",
+      "tag": "Bootcamp",
+      "title": "Tplus AI Code Camp 2023 (2nd Prize)",
+      "description": "Joined Tplus AI Code Camp 2023 to strengthen practical AI and coding foundations through intensive workshops, team collaboration, and hands-on implementation sessions. Our team won 2nd Prize.",
+      "date": "2023",
+      "location": "Vientiane, Laos",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0248_kpje6e.jpg",
+      "images": [
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0248_kpje6e.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263719/tplus_codecamp2023/IMG_0249_nxsi8k.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263719/tplus_codecamp2023/IMG_0244_k4yjgv.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0243_zwav6s.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0245_by0cz7.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263720/tplus_codecamp2023/IMG_0246_uhgzqn.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0237_iswtmz.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0238_zqtub7.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260834/tplus_codecamp2023/IMG_0235_uqwcef.jpg"
+      ]
+    },
+    {
+      "id": "ux-ui-hackathon-elderly-care-3rd-prize",
+      "tag": "Hackathon",
+      "title": "UX/UI Hackathon — Elderly Care (3rd Prize)",
+      "description": "Participated in a UX/UI Hackathon and built an Elderly Care solution focused on accessibility, clarity, and practical daily support workflows. Our team won 3rd Prize.",
+      "date": "2024",
+      "location": "Vientiane, Laos",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5923_bsombo.jpg",
+      "images": [
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259570/uxui_hackathon/IMG_5921_fecebb.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259572/uxui_hackathon/IMG_5844_hcy9ui.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5922_ur2fqx.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259571/uxui_hackathon/IMG_5923_bsombo.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779259570/uxui_hackathon/IMG_5921_fecebb.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263396/uxui_hackathon/IMG_0259_fmpsvo.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263397/uxui_hackathon/IMG_0260_szeme9.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263396/uxui_hackathon/IMG_0263_jf3ie6.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263397/uxui_hackathon/IMG_0262_u6le2j.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779263398/uxui_hackathon/IMG_0261_c2dmfr.jpg"
+      ]
+    },
+    {
+      "id": "her-in-tech-women-for-the-future",
+      "tag": "Speaker",
+      "title": "Her in Tech — Guest Speaker & Teaching Assistant",
+      "description": "Served as guest speaker and teaching assistant for the Her in Tech programme, organized by Women for the Future — supporting women in technology through workshops, mentorship, and hands-on learning.",
+      "date": "2024",
+      "location": "Vientiane, Laos",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117038/herintech/HerInTech_2_-43_qrathd.jpg",
+      "images": [
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117035/herintech/DSC06356_bwtzur.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117035/herintech/HerInTech_1_-140_tchglu.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117036/herintech/HerInTech_1_-153_l56gw6.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117036/herintech/HerInTech_1_-177_q47oz9.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117034/herintech/HerInTech_1_-30_oiwqlq.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117034/herintech/HerInTech_1_-45_i0wr7j.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117038/herintech/HerInTech_1_-79_uhjszj.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117037/herintech/HerInTech_2_-129_zipday.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117037/herintech/HerInTech_2_-38_a282wt.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117038/herintech/HerInTech_2_-43_qrathd.jpg",
+        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117038/herintech/IMG_3991_kokc11.jpg"
+      ]
+    },
     {
       "id": "flutter-beginner-workshop-nuol-2024",
       "tag": "Workshop",
@@ -15,40 +78,6 @@
         "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258752/flutter_workshop_aoy/IMG_0208_rixsig.jpg",
         "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258751/flutter_workshop_aoy/IMG_0209_zwt6h6.jpg",
         "https://res.cloudinary.com/duswpvmeh/image/upload/v1779258751/flutter_workshop_aoy/IMG_0210_s1glkc.jpg"
-      ]
-    },
-    {
-      "id": "bachelor-graduation-nuol",
-      "tag": "Graduation",
-      "title": "Bachelor's Graduation — Computer Programming Development",
-      "description": "Graduated with a Bachelor's degree in Computer Programming Development from the National University of Laos (NUOL) — celebrating years of study, projects, and growth as a software engineer.",
-      "date": "September 2025",
-      "location": "National University of Laos · Vientiane, Laos",
-      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117042/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c_yikbvf.jpg",
-      "images": [
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117041/graduated_bachelor/0A33DB83-C0C1-4B03-9728-0245E0E2603E_ol7pis.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117042/graduated_bachelor/76673557-f9b6-4ac5-a063-517a26388cf4_mh3wof.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117041/graduated_bachelor/16a66c94-2b48-4eb1-97b3-54886bfbc4ec_sj2i9c.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117044/graduated_bachelor/IMG_5825_fexmfs.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117060/graduated_bachelor/IMG_5827_pfpidu.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117045/graduated_bachelor/IMG_5841_waohbw.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117043/graduated_bachelor/447550d1-96a6-46f8-b902-523282c9f659_cxb0bo.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117042/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c_yikbvf.jpg"
-      ]
-    },
-    {
-      "id": "techsauce-global-summit-2025",
-      "tag": "Summit",
-      "title": "Techsauce Global Summit 2025",
-      "description": "Represented MMoneyX at Techsauce Global Summit 2025 in Bangkok, Thailand — connecting with the regional tech ecosystem, fintech innovators, and partners across Southeast Asia.",
-      "date": "2025",
-      "location": "Bangkok, Thailand",
-      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779116966/techsauce2025/72fb194b-1f51-44a1-ba2b-60d43c6fb6b1_rqtxpz.jpg",
-      "images": [
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779116966/techsauce2025/72fb194b-1f51-44a1-ba2b-60d43c6fb6b1_rqtxpz.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779116966/techsauce2025/66aeea5e-a9da-46ac-9399-bf7e5e937874_fxi06l.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779116966/techsauce2025/IMG_4693_thyov9.jpg",
-        "https://res.cloudinary.com/duswpvmeh/image/upload/v1779116975/techsauce2025/IMG_4741_ysqz6s.jpg"
       ]
     },
     {

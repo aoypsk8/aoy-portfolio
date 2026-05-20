@@ -1,5 +1,19 @@
 [
   {
+    "id": "university-of-luxembourg-scholarship-2026",
+    "tag": "Scholarship",
+    "title": "University of Luxembourg Scholarship — First Lao Computer Student",
+    "description": "Received an official congratulatory announcement for being awarded a scholarship to pursue a Master in Information and Computer Sciences at the University of Luxembourg. This marks me as the first computer student from Laos to receive this Luxembourg scholarship under the University of Luxembourg and National University of Laos (NUOL) academic cooperation.",
+    "date": "2026",
+    "location": "Vientiane, Laos",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261329/jaocandev2023/lux2026/IMG_0240_pj0xk4.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261329/jaocandev2023/lux2026/IMG_0240_pj0xk4.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261522/jaocandev2023/lux2026/IMG_0242_k7mnpk.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261522/jaocandev2023/lux2026/IMG_0241_kxs5x7.jpg"
+    ]
+  },
+  {
     "id": "ux-ui-hackathon-elderly-care-2nd-prize",
     "tag": "Hackathon",
     "title": "UX/UI Hackathon — Elderly Care (2nd Prize)",
@@ -315,6 +329,36 @@
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117045/graduated_bachelor/IMG_5841_waohbw.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117043/graduated_bachelor/447550d1-96a6-46f8-b902-523282c9f659_cxb0bo.jpg",
       "https://res.cloudinary.com/duswpvmeh/image/upload/v1779117042/graduated_bachelor/d5da89e1-ff4f-4bdf-a6c3-f2d78101264c_yikbvf.jpg"
+    ]
+  },
+  {
+    "id": "tplus-ai-code-camp-2023",
+    "tag": "Bootcamp",
+    "title": "Tplus AI Code Camp 2023",
+    "description": "Joined Tplus AI Code Camp 2023 to strengthen practical AI and coding foundations through intensive workshops, team collaboration, and hands-on implementation sessions.",
+    "date": "2023",
+    "location": "Vientiane, Laos",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0237_iswtmz.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0237_iswtmz.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260833/tplus_codecamp2023/IMG_0238_zqtub7.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779260834/tplus_codecamp2023/IMG_0235_uqwcef.jpg"
+    ]
+  },
+  {
+    "id": "jao-can-dev-3-2023",
+    "tag": "Community",
+    "title": "Jao Can Dev 3 2023",
+    "description": "Participated in Jao Can Dev 3 in 2023 — a developer community event focused on practical coding, peer learning, and sharing real-world software engineering experience.",
+    "date": "2023",
+    "location": "Vientiane, Laos",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261059/jaocandev2023/IMG_0017_gxn7fz.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261059/jaocandev2023/IMG_0017_gxn7fz.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261105/jaocandev2023/IMG_0012_mmqynn.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261104/jaocandev2023/IMG_0011_q1w7vo.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261057/jaocandev2023/IMG_0013_zgfort.jpg",
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779261057/jaocandev2023/IMG_0014_xxex1o.jpg"
     ]
   }
 ]

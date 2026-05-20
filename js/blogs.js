@@ -343,7 +343,9 @@
     blogModalTitle.textContent = post.title;
     blogModalDesc.textContent = post.excerpt;
     blogModalMeta.textContent = `${fmtDate(post.date)} \u00b7 ${post.readTime}`;
-    blogModalBody.innerHTML = '<p class="blog-modal-loading">Loading\u2026</p>';
+    blogModalBody.innerHTML = window.GridSkeleton
+      ? window.GridSkeleton.blogBodySkeletonHtml()
+      : '<p class="blog-modal-loading">Loading\u2026</p>';
 
     setupBlogGallery(post);
     blogModal.classList.add("open");
@@ -452,7 +454,21 @@
     };
   }
 
+  function defaultSkeletonCount() {
+    return cfg.seeMoreHref ? 4 : 8;
+  }
+
+  function showGridSkeleton() {
+    const n = cfg.skeletonCount ?? defaultSkeletonCount();
+    if (window.GridSkeleton) {
+      window.GridSkeleton.renderBlogSkeletons(blogGrid, n);
+    } else {
+      blogGrid.setAttribute("aria-busy", "true");
+    }
+  }
+
   function renderPosts(posts, total) {
+    if (window.GridSkeleton) window.GridSkeleton.setGridLoading(blogGrid, false);
     blogGrid.innerHTML = "";
     if (!posts.length && !cfg.seeMoreHref) {
       blogGrid.innerHTML =
@@ -465,18 +481,21 @@
 
   function renderFullPagePost(post) {
     blogGrid.classList.add("blog-grid--single");
+    const bodyPlaceholder = window.GridSkeleton
+      ? window.GridSkeleton.blogBodySkeletonHtml()
+      : '<p class="blog-modal-loading">Loading\u2026</p>';
     blogGrid.innerHTML = `
       <article class="blog-full-article">
         <a class="blog-full-back" href="blogs.html">&larr; Back to all blogs</a>
         <header class="blog-full-head">
           <span class="blog-tag">${escapeHtml(post.tag)}</span>
           <h1 class="blog-full-title">${escapeHtml(post.title)}</h1>
-          <p class="blog-full-meta">${escapeHtml(fmtDate(post.date))} · ${escapeHtml(post.readTime)}</p>
+          <p class="blog-full-meta">${escapeHtml(fmtDate(post.date))} \u00b7 ${escapeHtml(post.readTime)}</p>
           <p class="blog-full-desc">${escapeHtml(post.excerpt)}</p>
         </header>
         ${post.cover ? `<img class="blog-full-cover" src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.title)}" loading="lazy" />` : ""}
         <section class="blog-full-body" id="blogFullBody">
-          <p class="blog-modal-loading">Loading…</p>
+          ${bodyPlaceholder}
         </section>
       </article>
     `;
@@ -484,7 +503,22 @@
     if (bodyEl) loadPostBodyToElement(post, bodyEl);
   }
 
+  function renderFullPageSkeleton() {
+    blogGrid.classList.add("blog-grid--single");
+    blogGrid.innerHTML = window.GridSkeleton
+      ? window.GridSkeleton.blogFullPageSkeletonHtml()
+      : '<p class="blog-modal-loading">Loading\u2026</p>';
+    blogGrid.setAttribute("aria-busy", "true");
+  }
+
   const dataUrl = cfg.dataUrl || "blogs/data.json";
+
+  if (articleId) {
+    renderFullPageSkeleton();
+  } else {
+    showGridSkeleton();
+  }
+
   fetch(dataUrl)
     .then((r) => {
       if (!r.ok) throw new Error(r.statusText);
@@ -494,6 +528,7 @@
       const { posts, total } = parsePayload(data);
       if (articleId) {
         const target = posts.find((p) => p.id === articleId);
+        blogGrid.removeAttribute("aria-busy");
         if (!target) {
           blogGrid.innerHTML = '<p class="blog-empty">Article not found.</p>';
           return;
@@ -504,6 +539,8 @@
       renderPosts(posts, total);
     })
     .catch(() => {
+      if (window.GridSkeleton) window.GridSkeleton.setGridLoading(blogGrid, false);
+      blogGrid.removeAttribute("aria-busy");
       blogGrid.innerHTML =
         '<p class="blog-empty">Could not load blogs. Serve the site with a local web server (e.g. python3 -m http.server).</p>';
     });

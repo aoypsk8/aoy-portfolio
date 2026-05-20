@@ -183,7 +183,21 @@
     };
   }
 
+  function defaultSkeletonCount() {
+    return cfg.seeMoreHref ? 6 : 8;
+  }
+
+  function showGridSkeleton() {
+    const n = cfg.skeletonCount ?? defaultSkeletonCount();
+    if (window.GridSkeleton) {
+      window.GridSkeleton.renderActSkeletons(actGrid, n);
+    } else {
+      actGrid.setAttribute("aria-busy", "true");
+    }
+  }
+
   function renderCards(events, total) {
+    if (window.GridSkeleton) window.GridSkeleton.setGridLoading(actGrid, false);
     actGrid.innerHTML = "";
     if (!events.length && !cfg.seeMoreHref) {
       actGrid.innerHTML =
@@ -197,6 +211,7 @@
   }
 
   const dataUrl = cfg.dataUrl || "events/data.json";
+  showGridSkeleton();
   fetch(dataUrl)
     .then((r) => {
       if (!r.ok) throw new Error(r.statusText);
@@ -207,6 +222,7 @@
       renderCards(events, total);
     })
     .catch(() => {
+      if (window.GridSkeleton) window.GridSkeleton.setGridLoading(actGrid, false);
       actGrid.innerHTML =
         '<p class="act-empty">Could not load events. Serve the site with a local web server (e.g. python3 -m http.server).</p>';
     });

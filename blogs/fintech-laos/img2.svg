@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
-  <rect width="800" height="450" fill="#1a1816"/>
-  <circle cx="280" cy="225" r="70" fill="none" stroke="#6eb8ae" stroke-width="3"/>
-  <circle cx="520" cy="225" r="70" fill="none" stroke="#d4925c" stroke-width="3"/>
-  <path d="M350 225 L470 225" stroke="#a89f96" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="280" y="330" font-family="system-ui,sans-serif" font-size="16" fill="#6eb8ae" text-anchor="middle">eKYC</text>
-  <text x="520" y="330" font-family="system-ui,sans-serif" font-size="16" fill="#d4925c" text-anchor="middle">Bank API</text>
-  <text x="400" y="80" font-family="system-ui,sans-serif" font-size="20" fill="#f5f0e8" text-anchor="middle">Secure integration</text>
-</svg>

@@ -1,11 +1,14 @@
 /**
- * Blog ù load JSON, render cards, article modal
+ * Blog ÔøΩ load JSON, render cards, article modal
  * Configure via window.__BLOGS_CONFIG__ before this script runs.
  */
 (function () {
   const cfg = window.__BLOGS_CONFIG__ || {};
   const blogGrid = document.getElementById(cfg.gridId || "blogGrid");
   if (!blogGrid) return;
+  const openMode = cfg.openMode || "modal"; // "modal" | "page"
+  const articlePagePath = cfg.articlePagePath || "blogs.html";
+  const articleId = new URLSearchParams(window.location.search).get("id");
 
   const blogModal = document.getElementById("blogModal");
   const blogModalClose = document.getElementById("blogModalClose");
@@ -20,8 +23,7 @@
   const blogGalleryPrev = document.getElementById("blogGalleryPrev");
   const blogGalleryNext = document.getElementById("blogGalleryNext");
   const blogModalBody = document.getElementById("blogModalBody");
-
-  if (!blogModal || !blogModalClose) return;
+  const modalAvailable = !!blogModal && !!blogModalClose;
 
   let blogImages = [];
   let blogImageIndex = 0;
@@ -66,12 +68,98 @@
       .replace(/"/g, "&quot;");
   }
 
+  function escapeCodeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function linkifyText(text) {
+    const urlRegex = /(https?:\/\/[^\s)]+)/g;
+    return text.replace(urlRegex, (url) => {
+      const safeUrl = escapeHtml(url);
+      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeUrl}</a>`;
+    });
+  }
+
+  function formatInlineText(text) {
+    let out = text;
+    out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    out = out.replace(/`([^`]+)`/g, "<code>$1</code>");
+    out = out.replace(/(^|<br>)(\d+\)\s)/g, '$1<span class="blog-list-num">$2</span>');
+    out = out.replace(/(^|<br>)(-\s)/g, '$1<span class="blog-list-bullet">$2</span>');
+    return out;
+  }
+
+  function highlightPython(code) {
+    let text = escapeCodeHtml(code);
+    const slots = [];
+    const stash = (regex, cls) => {
+      text = text.replace(regex, (m) => {
+        const id = `__tok_${slots.length}__`;
+        slots.push(`<span class="tok-${cls}">${m}</span>`);
+        return id;
+      });
+    };
+
+    // ?????????: comment/string ???????????????? keyword
+    stash(/#.*/gm, "comment");
+    stash(/("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')/g, "string");
+
+    const pyKeywords =
+      /\b(def|class|return|if|elif|else|for|while|try|except|finally|raise|import|from|as|with|pass|break|continue|lambda|yield|True|False|None|and|or|not|in|is|global|nonlocal|assert|async|await)\b/g;
+    text = text.replace(pyKeywords, `<span class="tok-keyword">$1</span>`);
+    text = text.replace(/\b(self|print|len|range|dict|list|set|tuple|str|int|float|bool|sum|min|max|map|filter|open|enumerate|zip)\b/g, `<span class="tok-builtin">$1</span>`);
+    text = text.replace(/\b\d+(?:\.\d+)?\b/g, `<span class="tok-number">$&</span>`);
+
+    slots.forEach((slot, i) => {
+      text = text.replace(`__tok_${i}__`, slot);
+    });
+    return text;
+  }
+
+  function highlightBash(code) {
+    let text = escapeCodeHtml(code);
+    const slots = [];
+    const stash = (regex, cls) => {
+      text = text.replace(regex, (m) => {
+        const id = `__tok_${slots.length}__`;
+        slots.push(`<span class="tok-${cls}">${m}</span>`);
+        return id;
+      });
+    };
+
+    stash(/#.*/gm, "comment");
+    stash(/"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'/g, "string");
+
+    const shKeywords =
+      /\b(if|then|else|fi|for|while|do|done|case|esac|function|in|export|local|echo|cat|grep|awk|sed|curl|python|pip|chmod|chown|cd|ls|mkdir|rm|cp|mv)\b/g;
+    text = text.replace(shKeywords, `<span class="tok-keyword">$1</span>`);
+    text = text.replace(/\$(?:\{[^}]+\}|[A-Za-z_][A-Za-z0-9_]*)/g, `<span class="tok-var">$&</span>`);
+    text = text.replace(/\b\d+\b/g, `<span class="tok-number">$&</span>`);
+
+    slots.forEach((slot, i) => {
+      text = text.replace(`__tok_${i}__`, slot);
+    });
+    return text;
+  }
+
+  function highlightCode(code, lang) {
+    const normalized = String(lang || "").toLowerCase();
+    if (normalized === "python" || normalized === "py") return highlightPython(code);
+    if (normalized === "bash" || normalized === "sh" || normalized === "shell") return highlightBash(code);
+    return escapeCodeHtml(code);
+  }
+
   function closeBlogModal() {
+    if (!modalAvailable) return;
     blogModal.classList.remove("open");
     document.body.style.overflow = "";
   }
 
   function showBlogImage(index) {
+    if (!modalAvailable) return;
     blogImageIndex = index;
     blogGalleryImg.style.opacity = "0";
     setTimeout(() => {
@@ -88,6 +176,7 @@
   }
 
   function setupBlogGallery(post) {
+    if (!modalAvailable) return;
     blogImages =
       post.images && post.images.length
         ? post.images
@@ -112,18 +201,66 @@
     showBlogImage(0);
   }
 
+  function renderBodyHtml(body) {
+    const source = String(body || "");
+    const parts = [];
+    const codeFence = /```([a-zA-Z0-9_-]+)?\n([\s\S]*?)```/g;
+    let lastIndex = 0;
+    let match;
+    const renderParagraphs = (text) => {
+      const paragraphs = text.trim().split(/\n{2,}/);
+      paragraphs.forEach((para) => {
+        const line = para.trim();
+        const escaped = formatInlineText(
+          linkifyText(escapeHtml(line)).replace(/\n/g, "<br>")
+        );
+        if (/^Credit:/i.test(line)) {
+          parts.push(`<p class="blog-credit">${escaped}</p>`);
+        } else {
+          parts.push(`<p>${escaped}</p>`);
+        }
+      });
+    };
+
+    while ((match = codeFence.exec(source)) !== null) {
+      const plainText = source.slice(lastIndex, match.index);
+      if (plainText.trim()) {
+        renderParagraphs(plainText);
+      }
+
+      const lang = (match[1] || "bash").toUpperCase();
+      const code = (match[2] || "").trim();
+      const highlighted = highlightCode(code, lang);
+      parts.push(`
+        <div class="blog-code-block">
+          <div class="blog-code-header">${escapeHtml(lang)} Example</div>
+          <pre><code class="lang-${lang.toLowerCase()}">${highlighted}</code></pre>
+        </div>
+      `);
+      lastIndex = codeFence.lastIndex;
+    }
+
+    const tail = source.slice(lastIndex);
+    if (tail.trim()) {
+      renderParagraphs(tail);
+    }
+
+    return parts.join("");
+  }
+
   function renderSectionsHtml(sections) {
     return sections
       .map(
         (s) => `
       <h2>${escapeHtml(s.title)}</h2>
-      <p>${escapeHtml(s.body)}</p>
+      ${renderBodyHtml(s.body)}
     `
       )
       .join("");
   }
 
   function loadBlogBody(post) {
+    if (!modalAvailable) return;
     if (post.sections && post.sections.length) {
       blogModalBody.innerHTML = renderSectionsHtml(post.sections);
       return;
@@ -140,6 +277,30 @@
       })
       .catch(() => {
         blogModalBody.innerHTML = `
+          <h2>Summary</h2>
+          <p>${escapeHtml(post.excerpt)}</p>
+          <p style="color:var(--ink3);font-family:var(--mono);font-size:.8rem">
+            Add <code>sections</code> in data.json or <code>${escapeHtml(contentPath)}</code>
+          </p>`;
+      });
+  }
+
+  function loadPostBodyToElement(post, targetEl) {
+    if (post.sections && post.sections.length) {
+      targetEl.innerHTML = renderSectionsHtml(post.sections);
+      return Promise.resolve();
+    }
+    const contentPath = post.content || `blogs/${post.id}/content.html`;
+    return fetch(contentPath)
+      .then((r) => {
+        if (!r.ok) throw new Error("not found");
+        return r.text();
+      })
+      .then((html) => {
+        targetEl.innerHTML = html;
+      })
+      .catch(() => {
+        targetEl.innerHTML = `
           <h2>Summary</h2>
           <p>${escapeHtml(post.excerpt)}</p>
           <p style="color:var(--ink3);font-family:var(--mono);font-size:.8rem">
@@ -177,6 +338,7 @@
   }
 
   function openBlogModal(post) {
+    if (!modalAvailable) return;
     blogModalTag.textContent = post.tag;
     blogModalTitle.textContent = post.title;
     blogModalDesc.textContent = post.excerpt;
@@ -192,24 +354,33 @@
       loadBlogBody(full);
     });
   }
+  if (modalAvailable) {
+    blogModalClose.addEventListener("click", closeBlogModal);
+    blogModal.addEventListener("click", (e) => {
+      if (e.target === blogModal) closeBlogModal();
+    });
+    blogGalleryPrev.addEventListener("click", () => {
+      if (blogImageIndex > 0) showBlogImage(blogImageIndex - 1);
+    });
+    blogGalleryNext.addEventListener("click", () => {
+      if (blogImageIndex < blogImages.length - 1) showBlogImage(blogImageIndex + 1);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!blogModal.classList.contains("open")) return;
+      if (e.key === "Escape") closeBlogModal();
+      if (e.key === "ArrowLeft" && blogImageIndex > 0) showBlogImage(blogImageIndex - 1);
+      if (e.key === "ArrowRight" && blogImageIndex < blogImages.length - 1)
+        showBlogImage(blogImageIndex + 1);
+    });
+  }
 
-  blogModalClose.addEventListener("click", closeBlogModal);
-  blogModal.addEventListener("click", (e) => {
-    if (e.target === blogModal) closeBlogModal();
-  });
-  blogGalleryPrev.addEventListener("click", () => {
-    if (blogImageIndex > 0) showBlogImage(blogImageIndex - 1);
-  });
-  blogGalleryNext.addEventListener("click", () => {
-    if (blogImageIndex < blogImages.length - 1) showBlogImage(blogImageIndex + 1);
-  });
-  document.addEventListener("keydown", (e) => {
-    if (!blogModal.classList.contains("open")) return;
-    if (e.key === "Escape") closeBlogModal();
-    if (e.key === "ArrowLeft" && blogImageIndex > 0) showBlogImage(blogImageIndex - 1);
-    if (e.key === "ArrowRight" && blogImageIndex < blogImages.length - 1)
-      showBlogImage(blogImageIndex + 1);
-  });
+  function openPost(post) {
+    if (openMode === "page") {
+      window.location.href = `${articlePagePath}?id=${encodeURIComponent(post.id)}`;
+      return;
+    }
+    openBlogModal(post);
+  }
 
   function buildCard(post, index) {
     const card = document.createElement("div");
@@ -242,11 +413,11 @@
         coverEl.appendChild(o);
       }
     }
-    card.addEventListener("click", () => openBlogModal(post));
+    card.addEventListener("click", () => openPost(post));
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        openBlogModal(post);
+        openPost(post);
       }
     });
     blogGrid.appendChild(card);
@@ -292,6 +463,27 @@
     if (cfg.seeMoreHref) appendSeeMoreCard(cfg.seeMoreLabel, total);
   }
 
+  function renderFullPagePost(post) {
+    blogGrid.classList.add("blog-grid--single");
+    blogGrid.innerHTML = `
+      <article class="blog-full-article">
+        <a class="blog-full-back" href="blogs.html">&larr; Back to all blogs</a>
+        <header class="blog-full-head">
+          <span class="blog-tag">${escapeHtml(post.tag)}</span>
+          <h1 class="blog-full-title">${escapeHtml(post.title)}</h1>
+          <p class="blog-full-meta">${escapeHtml(fmtDate(post.date))} ∑ ${escapeHtml(post.readTime)}</p>
+          <p class="blog-full-desc">${escapeHtml(post.excerpt)}</p>
+        </header>
+        ${post.cover ? `<img class="blog-full-cover" src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.title)}" loading="lazy" />` : ""}
+        <section class="blog-full-body" id="blogFullBody">
+          <p class="blog-modal-loading">LoadingÖ</p>
+        </section>
+      </article>
+    `;
+    const bodyEl = document.getElementById("blogFullBody");
+    if (bodyEl) loadPostBodyToElement(post, bodyEl);
+  }
+
   const dataUrl = cfg.dataUrl || "blogs/data.json";
   fetch(dataUrl)
     .then((r) => {
@@ -300,6 +492,15 @@
     })
     .then((data) => {
       const { posts, total } = parsePayload(data);
+      if (articleId) {
+        const target = posts.find((p) => p.id === articleId);
+        if (!target) {
+          blogGrid.innerHTML = '<p class="blog-empty">Article not found.</p>';
+          return;
+        }
+        resolveFullPost(target).then((full) => renderFullPagePost(full));
+        return;
+      }
       renderPosts(posts, total);
     })
     .catch(() => {

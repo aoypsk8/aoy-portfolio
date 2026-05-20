@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
-  <rect width="800" height="450" fill="#1a1816"/>
-  <rect x="200" y="40" width="180" height="380" rx="24" fill="#2e2a26" stroke="#54C5F8" stroke-width="2"/>
-  <rect x="420" y="80" width="180" height="340" rx="24" fill="#2e2a26" stroke="#d4925c" stroke-width="2"/>
-  <text x="400" y="30" font-family="system-ui,sans-serif" font-size="18" fill="#a89f96" text-anchor="middle">iOS · Android · Web</text>
-</svg>

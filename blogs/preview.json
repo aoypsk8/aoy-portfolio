@@ -1,14 +1,23 @@
 {
-  "total": 0,
+  "total": 2,
   "preview": [
+    {
+      "id": "absolute-beginners-guide-flutter",
+      "tag": "Flutter",
+      "title": "The Absolute Beginner’s Guide to Flutter: From Zero to First App (iOS & Android)",
+      "excerpt": "A developer-grade Flutter setup guide for iOS and Android: reproducible environment, toolchain verification, first run, and practical troubleshooting.",
+      "date": "2026-05-20",
+      "readTime": "10 min read",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png"
+    },
     {
       "id": "building-lao-llm-gemma4",
       "tag": "AI/ML",
       "title": "Building a Lao Language LLM with Gemma 4: A Complete Guide",
       "excerpt": "How I fine-tuned Google's Gemma 4 E4B model to understand and generate Lao text — covering vocab surgery, continual pre-training, and supervised fine-tuning from scratch.",
       "date": "2026-05-14",
-      "readTime": "12 min read",
-      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779161827/blogs/Screenshot_2026-05-06_at_10.41.37_1_qvfvyo.jpg"
+      "readTime": "15 min read",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png"
     }
   ]
 }

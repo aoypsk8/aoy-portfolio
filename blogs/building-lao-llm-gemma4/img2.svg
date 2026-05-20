@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
-  <rect width="800" height="450" fill="#1a1816"/>
-  <text x="400" y="60" font-family="system-ui,sans-serif" font-size="20" fill="#f5f0e8" text-anchor="middle">Continual Pre-Training (CPT)</text>
-  <polyline points="120,350 280,280 440,220 600,180 680,160" fill="none" stroke="#6eb8ae" stroke-width="3"/>
-  <text x="140" y="370" font-family="monospace" font-size="12" fill="#a89f96">0.82</text>
-  <text x="640" y="150" font-family="monospace" font-size="12" fill="#d4925c">0.60</text>
-  <text x="400" y="400" font-family="monospace" font-size="13" fill="#a89f96" text-anchor="middle">RTX 4090 · 9,945 steps · ~17.5h</text>
-</svg>

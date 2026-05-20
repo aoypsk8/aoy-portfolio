@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Docker for Beginners">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1816"/>
+      <stop offset="55%" stop-color="#24303d"/>
+      <stop offset="100%" stop-color="#1a1816"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2496ed" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#2496ed" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2496ed" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect y="520" width="1200" height="155" fill="url(#wave)"/>
+  <g fill="#2496ed" opacity="0.92">
+    <rect x="380" y="260" width="52" height="38" rx="6"/>
+    <rect x="440" y="260" width="52" height="38" rx="6"/>
+    <rect x="500" y="260" width="52" height="38" rx="6"/>
+    <rect x="560" y="260" width="52" height="38" rx="6"/>
+    <rect x="410" y="220" width="52" height="38" rx="6"/>
+    <rect x="470" y="220" width="52" height="38" rx="6"/>
+    <rect x="530" y="220" width="52" height="38" rx="6"/>
+    <rect x="500" y="300" width="52" height="52" rx="6"/>
+  </g>
+  <text x="600" y="420" text-anchor="middle" fill="#f5f0e8" font-family="Georgia, serif" font-size="52" font-weight="600">Docker for Beginners</text>
+  <text x="600" y="468" text-anchor="middle" fill="#a89f96" font-family="ui-monospace, monospace" font-size="22" letter-spacing="0.12em">CONTAINERS · IMAGES · COMPOSE</text>
+</svg>

@@ -148,5 +148,48 @@
         "body": "Official repository and documentation:\nhttps://github.com/worawit/blutter\n\nIf you want, I can create a follow-up post showing a safe, legal analysis checklist (scope definition, permissions, and red-team/blue-team reporting format) for Flutter reverse engineering projects."
       }
     ]
+  },
+  {
+    "id": "docker-for-beginners-2026",
+    "tag": "DevOps",
+    "title": "Docker for Beginners: What It Is and How to Use It",
+    "excerpt": "Docker lets you run apps in containers so they work the same everywhere. Here's a simple guide to get started from zero.",
+    "date": "2026-05-20",
+    "readTime": "6 min read",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779265567/blogs/Gemini_Generated_Image_xemsx0xemsx0xems_f2nhct.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779265567/blogs/Gemini_Generated_Image_xemsx0xemsx0xems_f2nhct.jpg"
+    ],
+    "content": "blogs/docker-for-beginners-2026/content.html",
+    "sections": [
+      {
+        "title": "What Is Docker?",
+        "body": "Docker packages your app and everything it needs into one unit called a **container** — so it runs the same on your laptop, a teammate's PC, or a cloud server.\n\n:::compare\n**Without Docker**|You install Node.js 18 locally, but production runs Node.js 16. Small mismatches can break the app.\n**With Docker**|Your app ships with its own runtime inside the image. Same behavior everywhere.\n:::\n\n:::analogy\nThink of it like a lunchbox:\n- The **lunchbox** = container\n- The **food inside** = your app + dependencies\n- You can move it anywhere and it stays the same\n:::"
+      },
+      {
+        "title": "Image vs Container — What's the Difference?",
+        "body": "These two words confuse most beginners. Here is the short version:\n\n:::defs\n**Image**|A read-only blueprint — like a recipe. Downloaded from registries such as Docker Hub (hub.docker.com).\n**Container**|A running instance of an image — like the meal you cooked from that recipe.\n:::\n\nOne image can power many containers at the same time. Docker Hub includes ready-made images for Node.js, Python, Nginx, PostgreSQL, and more."
+      },
+      {
+        "title": "Installing Docker",
+        "body": "**macOS / Windows**\nDownload Docker Desktop:\nhttps://docs.docker.com/get-docker/\n\nIt includes the engine, CLI, and a simple GUI.\n\n**Ubuntu Linux**\n```bash\ncurl -fsSL https://get.docker.com -o get-docker.sh\nsudo sh get-docker.sh\n```\n\nVerify installation:\n```bash\ndocker run hello-world\n```\n\n:::callout tip\nIf you see `Hello from Docker!` in the terminal, your setup is ready.\n:::"
+      },
+      {
+        "title": "Run Your First Container",
+        "body": "Start a real web server in one command:\n```bash\ndocker run -d -p 8080:80 --name my-nginx nginx\n```\n\nWhat each flag does:\n- `-d` — run in the background\n- `-p 8080:80` — map port 8080 on your machine to port 80 in the container\n- `--name my-nginx` — readable container name\n- `nginx` — image pulled from Docker Hub automatically\n\nOpen `http://localhost:8080` — you should see the Nginx welcome page.\n\nHandy commands:\n```bash\ndocker ps\ndocker stop my-nginx\ndocker rm my-nginx\n```"
+      },
+      {
+        "title": "Your First Dockerfile",
+        "body": "A **Dockerfile** tells Docker how to build your own image. Minimal Node.js example:\n\n```dockerfile\nFROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"index.js\"]\n```\n\nBuild and run:\n```bash\ndocker build -t my-app .\ndocker run -d -p 3000:3000 my-app\n```\n\nYour app is now running inside a container at `http://localhost:3000`."
+      },
+      {
+        "title": "3 Things to Remember as a Beginner",
+        "body": ":::reminders\n**Data disappears with the container**|Files stored only inside a container are lost when you delete it. Use volumes for persistence.\n**Add a `.dockerignore` file**|Like `.gitignore` — exclude `node_modules`, `.env`, and `.git` from the build context.\n**Clean up old images**|Containers and images accumulate quickly. Run `docker system prune -a` when you need space.\n:::\n\nVolume example:\n```bash\ndocker run -v mydata:/app/data my-app\n```\n\n`.dockerignore` example:\n```bash\nnode_modules\n.env\n.git\n```"
+      },
+      {
+        "title": "What's Next?",
+        "body": "When the basics feel comfortable, learn **Docker Compose** — one file to run multiple services together (for example API + database).\n\n:::steps\n1) Dockerize one small project you already have.\n2) Try Compose with an app and PostgreSQL.\n3) Read the official getting-started guide for best practices.\n:::\n\nOfficial docs:\nhttps://docs.docker.com/get-started/\n\nFor me, Docker clicked when I needed the same Python ML environment on different machines — once you use it on a real repo, it makes sense fast."
+      }
+    ]
   }
 ]

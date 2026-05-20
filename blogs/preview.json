@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "preview": [
     {
       "id": "blutter-flutter-reverse-engineering",
@@ -27,6 +27,15 @@
       "date": "2026-05-14",
       "readTime": "15 min read",
       "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779249277/blogs/ChatGPT_Image_May_20_2026_10_53_20_AM_bsxrnd.png"
+    },
+    {
+      "id": "docker-for-beginners-2026",
+      "tag": "DevOps",
+      "title": "Docker for Beginners: What It Is and How to Use It",
+      "excerpt": "Docker lets you run apps in containers so they work the same everywhere. Here's a simple guide to get started from zero.",
+      "date": "2026-05-20",
+      "readTime": "6 min read",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779265567/blogs/Gemini_Generated_Image_xemsx0xemsx0xems_f2nhct.jpg"
     }
   ]
 }

@@ -60,6 +60,16 @@
     });
   }
 
+  /** ?????? + ???????? � ??? span ?????????????????? (::before) ??????????????? */
+  function blogMetaHtml(post) {
+    return `<span>${escapeHtml(fmtDate(post.date))}</span><span>${escapeHtml(post.readTime)}</span>`;
+  }
+
+  function setBlogMeta(el, post) {
+    if (!el) return;
+    el.innerHTML = blogMetaHtml(post);
+  }
+
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, "&amp;")
@@ -89,7 +99,35 @@
     out = out.replace(/`([^`]+)`/g, "<code>$1</code>");
     out = out.replace(/(^|<br>)(\d+\)\s)/g, '$1<span class="blog-list-num">$2</span>');
     out = out.replace(/(^|<br>)(-\s)/g, '$1<span class="blog-list-bullet">$2</span>');
+    out = out.replace(/[?????????]/g, "");
     return out;
+  }
+
+  const CODE_LANG_LABELS = {
+    bash: "Terminal",
+    sh: "Terminal",
+    shell: "Terminal",
+    python: "Python",
+    py: "Python",
+    dart: "Dart",
+    dockerfile: "Dockerfile",
+    yaml: "Docker Compose",
+    yml: "YAML",
+    json: "JSON",
+    powershell: "PowerShell",
+  };
+
+  function codeLangLabel(lang) {
+    const key = String(lang || "bash").toLowerCase();
+    return CODE_LANG_LABELS[key] || key.toUpperCase();
+  }
+
+  function isPlaceholderAsset(url) {
+    return !url || String(url).includes("PLACEHOLDER");
+  }
+
+  function formatParagraphHtml(line) {
+    return formatInlineText(linkifyText(escapeHtml(line)).replace(/\n/g, "<br>"));
   }
 
   function highlightPython(code) {
@@ -145,11 +183,45 @@
     return text;
   }
 
+  function highlightDockerfile(code) {
+    let text = escapeCodeHtml(code);
+    text = text.replace(/#.*/gm, '<span class="tok-comment">$&</span>');
+    text = text.replace(
+      /\b(FROM|RUN|COPY|ADD|WORKDIR|EXPOSE|CMD|ENTRYPOINT|ENV|ARG|USER|LABEL|VOLUME|HEALTHCHECK)\b/g,
+      '<span class="tok-keyword">$1</span>'
+    );
+    return text;
+  }
+
   function highlightCode(code, lang) {
     const normalized = String(lang || "").toLowerCase();
     if (normalized === "python" || normalized === "py") return highlightPython(code);
     if (normalized === "bash" || normalized === "sh" || normalized === "shell") return highlightBash(code);
+    if (normalized === "dockerfile") return highlightDockerfile(code);
     return escapeCodeHtml(code);
+  }
+
+  function bindCodeCopyButtons(root) {
+    if (!root) return;
+    root.querySelectorAll(".blog-code-copy").forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", async () => {
+        const block = btn.closest(".blog-code-block");
+        const code = block?.querySelector("code")?.textContent || "";
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.textContent = "Copied";
+          btn.classList.add("is-copied");
+          setTimeout(() => {
+            btn.textContent = "Copy";
+            btn.classList.remove("is-copied");
+          }, 1600);
+        } catch {
+          btn.textContent = "Failed";
+        }
+      });
+    });
   }
 
   function closeBlogModal() {
@@ -177,12 +249,13 @@
 
   function setupBlogGallery(post) {
     if (!modalAvailable) return;
-    blogImages =
+    const rawImages =
       post.images && post.images.length
         ? post.images
         : post.cover
           ? [post.cover]
           : [];
+    blogImages = rawImages.filter((src) => !isPlaceholderAsset(src));
     blogThumbs.innerHTML = "";
 
     if (!blogImages.length) {
@@ -201,68 +274,182 @@
     showBlogImage(0);
   }
 
+  function renderBulletList(lines, compact) {
+    const cls = compact ? "blog-ul blog-ul--compact" : "blog-ul";
+    const items = lines
+      .map((line) => {
+        const text = line.replace(/^-\s+/, "").trim();
+        return `<li>${formatParagraphHtml(text)}</li>`;
+      })
+      .join("");
+    return `<ul class="${cls}">${items}</ul>`;
+  }
+
+  function renderSpecialBlock(para) {
+    const trimmed = para.trim();
+    if (trimmed.startsWith(":::callout")) {
+      const match = trimmed.match(/^:::callout\s+(\w+)\n([\s\S]*?):::\s*$/);
+      if (!match) return "";
+      const type = match[1].toLowerCase();
+      const body = match[2].trim();
+      const label = type === "warn" ? "Watch out" : "Tip";
+      return `<div class="blog-callout blog-callout--${escapeHtml(type)}"><span class="blog-callout-label">${label}</span><p>${formatParagraphHtml(body)}</p></div>`;
+    }
+    if (trimmed.startsWith(":::compare")) {
+      const inner = trimmed.replace(/^:::compare\n?/, "").replace(/\n:::\s*$/, "").trim();
+      const rows = inner.split("\n").filter(Boolean);
+      const cards = rows
+        .map((row, i) => {
+          const [title, ...rest] = row.split("|");
+          const desc = rest.join("|").trim();
+          const tone = i === 1 ? "good" : "bad";
+          return `<div class="blog-compare-card blog-compare-card--${tone}"><div class="blog-compare-title">${formatParagraphHtml((title || "").replace(/^\*\*|\*\*$/g, "").trim())}</div><p>${formatParagraphHtml(desc)}</p></div>`;
+        })
+        .join("");
+      return `<div class="blog-compare">${cards}</div>`;
+    }
+    if (trimmed.startsWith(":::analogy")) {
+      const inner = trimmed.replace(/^:::analogy\n?/, "").replace(/\n:::\s*$/, "").trim();
+      const lines = inner.split("\n").map((l) => l.trim()).filter(Boolean);
+      let intro = "";
+      const bullets = [];
+      lines.forEach((line) => {
+        if (line.startsWith("- ")) bullets.push(line.replace(/^-\s+/, ""));
+        else if (!intro) intro = line;
+      });
+      const introHtml = intro ? `<p class="blog-analogy-intro">${formatParagraphHtml(intro)}</p>` : "";
+      const listHtml = bullets.length
+        ? `<ul class="blog-ul blog-ul--compact">${bullets.map((b) => `<li>${formatParagraphHtml(b)}</li>`).join("")}</ul>`
+        : "";
+      return `<div class="blog-analogy">${introHtml}${listHtml}</div>`;
+    }
+    if (trimmed.startsWith(":::reminders")) {
+      const inner = trimmed.replace(/^:::reminders\n?/, "").replace(/\n:::\s*$/, "").trim();
+      const items = inner
+        .split("\n")
+        .filter(Boolean)
+        .map((row, i) => {
+          const [title, ...rest] = row.split("|");
+          const desc = rest.join("|").trim();
+          const num = String(i + 1).padStart(2, "0");
+          return `<div class="blog-reminder-item"><span class="blog-reminder-num">${num}</span><div><strong>${formatParagraphHtml((title || "").replace(/^\*\*|\*\*$/g, "").trim())}</strong><p>${formatParagraphHtml(desc)}</p></div></div>`;
+        })
+        .join("");
+      return `<div class="blog-reminders">${items}</div>`;
+    }
+    if (trimmed.startsWith(":::defs")) {
+      const inner = trimmed.replace(/^:::defs\n?/, "").replace(/\n:::\s*$/, "").trim();
+      const items = inner
+        .split("\n")
+        .filter(Boolean)
+        .map((row) => {
+          const [term, ...rest] = row.split("|");
+          const desc = rest.join("|").trim();
+          const termHtml = formatParagraphHtml((term || "").replace(/^\*\*|\*\*$/g, "").trim());
+          return `<div class="blog-def-item"><strong>${termHtml}</strong><p>${formatParagraphHtml(desc)}</p></div>`;
+        })
+        .join("");
+      return `<div class="blog-def-list">${items}</div>`;
+    }
+    if (trimmed.startsWith(":::steps")) {
+      const inner = trimmed.replace(/^:::steps\n?/, "").replace(/\n:::\s*$/, "").trim();
+      const items = inner
+        .split("\n")
+        .filter(Boolean)
+        .map((line) => {
+          const text = line.replace(/^\d+\)\s*/, "").trim();
+          return `<li>${formatParagraphHtml(text)}</li>`;
+        })
+        .join("");
+      return `<ol class="blog-learning-path">${items}</ol>`;
+    }
+    return "";
+  }
+
+  function renderParagraphs(text) {
+    const paragraphs = text.trim().split(/\n{2,}/);
+    const parts = [];
+    paragraphs.forEach((para) => {
+      const trimmed = para.trim();
+      if (!trimmed) return;
+      if (trimmed.startsWith(":::")) {
+        const block = renderSpecialBlock(trimmed);
+        if (block) {
+          parts.push(block);
+          return;
+        }
+      }
+      const lines = trimmed.split("\n").map((l) => l.trim()).filter(Boolean);
+      if (lines.length >= 2 && lines.every((l) => l.startsWith("- "))) {
+        parts.push(renderBulletList(lines, lines.length > 5));
+        return;
+      }
+      if (/^Credit:/i.test(trimmed)) {
+        parts.push(`<p class="blog-credit">${formatParagraphHtml(trimmed)}</p>`);
+        return;
+      }
+      parts.push(`<p>${formatParagraphHtml(trimmed)}</p>`);
+    });
+    return parts.join("");
+  }
+
   function renderBodyHtml(body) {
     const source = String(body || "");
     const parts = [];
     const codeFence = /```([a-zA-Z0-9_-]+)?\n([\s\S]*?)```/g;
     let lastIndex = 0;
     let match;
-    const renderParagraphs = (text) => {
-      const paragraphs = text.trim().split(/\n{2,}/);
-      paragraphs.forEach((para) => {
-        const line = para.trim();
-        const escaped = formatInlineText(
-          linkifyText(escapeHtml(line)).replace(/\n/g, "<br>")
-        );
-        if (/^Credit:/i.test(line)) {
-          parts.push(`<p class="blog-credit">${escaped}</p>`);
-        } else {
-          parts.push(`<p>${escaped}</p>`);
-        }
-      });
-    };
 
     while ((match = codeFence.exec(source)) !== null) {
       const plainText = source.slice(lastIndex, match.index);
-      if (plainText.trim()) {
-        renderParagraphs(plainText);
-      }
+      if (plainText.trim()) parts.push(renderParagraphs(plainText));
 
-      const lang = (match[1] || "bash").toUpperCase();
+      const lang = match[1] || "bash";
       const code = (match[2] || "").trim();
       const highlighted = highlightCode(code, lang);
+      const label = codeLangLabel(lang);
       parts.push(`
         <div class="blog-code-block">
-          <div class="blog-code-header">${escapeHtml(lang)} Example</div>
-          <pre><code class="lang-${lang.toLowerCase()}">${highlighted}</code></pre>
+          <div class="blog-code-header">
+            <span>${escapeHtml(label)}</span>
+            <button type="button" class="blog-code-copy" aria-label="Copy code">Copy</button>
+          </div>
+          <pre><code class="lang-${escapeHtml(lang.toLowerCase())}">${highlighted}</code></pre>
         </div>
       `);
       lastIndex = codeFence.lastIndex;
     }
 
     const tail = source.slice(lastIndex);
-    if (tail.trim()) {
-      renderParagraphs(tail);
-    }
+    if (tail.trim()) parts.push(renderParagraphs(tail));
 
     return parts.join("");
   }
 
   function renderSectionsHtml(sections) {
     return sections
-      .map(
-        (s) => `
-      <h2>${escapeHtml(s.title)}</h2>
-      ${renderBodyHtml(s.body)}
-    `
-      )
+      .map((s, i) => {
+        const idx = String(i + 1).padStart(2, "0");
+        return `
+      <section class="blog-section">
+        <h2 class="blog-section-title"><span class="blog-section-idx">${idx}</span>${escapeHtml(s.title)}</h2>
+        ${renderBodyHtml(s.body)}
+      </section>
+    `;
+      })
       .join("");
+  }
+
+  function enhanceArticleBody(root) {
+    if (!root) return;
+    bindCodeCopyButtons(root);
   }
 
   function loadBlogBody(post) {
     if (!modalAvailable) return;
     if (post.sections && post.sections.length) {
       blogModalBody.innerHTML = renderSectionsHtml(post.sections);
+      enhanceArticleBody(blogModalBody);
       return;
     }
 
@@ -274,6 +461,7 @@
       })
       .then((html) => {
         blogModalBody.innerHTML = html;
+        enhanceArticleBody(blogModalBody);
       })
       .catch(() => {
         blogModalBody.innerHTML = `
@@ -288,6 +476,7 @@
   function loadPostBodyToElement(post, targetEl) {
     if (post.sections && post.sections.length) {
       targetEl.innerHTML = renderSectionsHtml(post.sections);
+      enhanceArticleBody(targetEl);
       return Promise.resolve();
     }
     const contentPath = post.content || `blogs/${post.id}/content.html`;
@@ -298,6 +487,7 @@
       })
       .then((html) => {
         targetEl.innerHTML = html;
+        enhanceArticleBody(targetEl);
       })
       .catch(() => {
         targetEl.innerHTML = `
@@ -340,9 +530,10 @@
   function openBlogModal(post) {
     if (!modalAvailable) return;
     blogModalTag.textContent = post.tag;
+    blogModalTag.className = "blog-tag" + (post.tag === "DevOps" ? " blog-tag--devops" : "");
     blogModalTitle.textContent = post.title;
     blogModalDesc.textContent = post.excerpt;
-    blogModalMeta.textContent = `${fmtDate(post.date)} \u00b7 ${post.readTime}`;
+    setBlogMeta(blogModalMeta, post);
     blogModalBody.innerHTML = window.GridSkeleton
       ? window.GridSkeleton.blogBodySkeletonHtml()
       : '<p class="blog-modal-loading">Loading\u2026</p>';
@@ -390,20 +581,23 @@
     card.setAttribute("role", "button");
     card.tabIndex = 0;
     card.setAttribute("aria-label", post.title);
+    const tagClass = post.tag === "DevOps" ? " blog-tag--devops" : "";
+    const coverClass =
+      post.tag === "DevOps" ? "blog-cover blog-cover--devops" : "blog-cover";
+    const coverSrc = isPlaceholderAsset(post.cover)
+      ? `blogs/${post.id}-cover.svg`
+      : post.cover;
     card.innerHTML = `
-      <div class="blog-cover">
-        <img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.title)}" loading="lazy"
-          onerror="this.parentElement.innerHTML='<div class=\\'blog-cover-placeholder\\'><svg width=\\'40\\' height=\\'40\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\' viewBox=\\'0 0 24 24\\'><path d=\\'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z\\'/><polyline points=\\'14 2 14 8 20 8\\'/></svg><span>No cover yet</span></div>'" />
+      <div class="${coverClass}">
+        <img src="${escapeHtml(coverSrc)}" alt="${escapeHtml(post.title)}" loading="lazy"
+          onerror="this.parentElement.innerHTML='<div class=\\'blog-cover-placeholder blog-cover-placeholder--devops\\'><span>No cover yet</span></div>'" />
         <div class="blog-cover-overlay"><span class="blog-cover-hint">Read article \u2192</span></div>
       </div>
       <div class="blog-body">
-        <span class="blog-tag">${escapeHtml(post.tag)}</span>
+        <span class="blog-tag${tagClass}">${escapeHtml(post.tag)}</span>
         <p class="blog-title">${escapeHtml(post.title)}</p>
         <p class="blog-excerpt">${escapeHtml(post.excerpt)}</p>
-        <div class="blog-meta">
-          <span>${escapeHtml(fmtDate(post.date))}</span>
-          <span>${escapeHtml(post.readTime)}</span>
-        </div>
+        <div class="blog-meta">${blogMetaHtml(post)}</div>
       </div>`;
     const coverEl = card.querySelector(".blog-cover");
     if (coverEl) {
@@ -484,16 +678,22 @@
     const bodyPlaceholder = window.GridSkeleton
       ? window.GridSkeleton.blogBodySkeletonHtml()
       : '<p class="blog-modal-loading">Loading\u2026</p>';
+    const tagClass = post.tag === "DevOps" ? " blog-tag--devops" : "";
+    const coverSrc = post.cover
+      ? isPlaceholderAsset(post.cover)
+        ? `blogs/${post.id}-cover.svg`
+        : post.cover
+      : "";
     blogGrid.innerHTML = `
       <article class="blog-full-article">
         <a class="blog-full-back" href="blogs.html">&larr; Back to all blogs</a>
         <header class="blog-full-head">
-          <span class="blog-tag">${escapeHtml(post.tag)}</span>
+          <span class="blog-tag${tagClass}">${escapeHtml(post.tag)}</span>
           <h1 class="blog-full-title">${escapeHtml(post.title)}</h1>
-          <p class="blog-full-meta">${escapeHtml(fmtDate(post.date))} \u00b7 ${escapeHtml(post.readTime)}</p>
+          <p class="blog-full-meta">${blogMetaHtml(post)}</p>
           <p class="blog-full-desc">${escapeHtml(post.excerpt)}</p>
         </header>
-        ${post.cover ? `<img class="blog-full-cover" src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.title)}" loading="lazy" />` : ""}
+        ${coverSrc ? `<img class="blog-full-cover" src="${escapeHtml(coverSrc)}" alt="${escapeHtml(post.title)}" loading="lazy" />` : ""}
         <section class="blog-full-body" id="blogFullBody">
           ${bodyPlaceholder}
         </section>

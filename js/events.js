@@ -65,7 +65,7 @@
     modalTag.textContent = event.tag;
     modalTitle.textContent = event.title;
     modalDesc.textContent = event.description;
-    modalMeta.textContent = `${event.date} \u00b7 ${event.location}`;
+    setActMeta(modalMeta, event);
     currentImages =
       event.images && event.images.length
         ? event.images
@@ -129,6 +129,15 @@
       .replace(/"/g, "&quot;");
   }
 
+  function actMetaHtml(ev) {
+    return `<span>${escapeHtml(ev.date)}</span><span>${escapeHtml(ev.location)}</span>`;
+  }
+
+  function setActMeta(el, ev) {
+    if (!el) return;
+    el.innerHTML = actMetaHtml(ev);
+  }
+
   function buildCard(ev, index) {
     const card = document.createElement("div");
     card.className = "act-card";
@@ -142,7 +151,7 @@
       <div class="act-body">
         <span class="act-event-tag">${escapeHtml(ev.tag)}</span>
         <p class="act-title">${escapeHtml(ev.title)}</p>
-        <p class="act-meta">${escapeHtml(ev.date)} \u00b7 ${escapeHtml(ev.location)}</p>
+        <p class="act-meta">${actMetaHtml(ev)}</p>
       </div>`;
     card.addEventListener("click", () => openModal(ev));
     card.addEventListener("keydown", (e) => {

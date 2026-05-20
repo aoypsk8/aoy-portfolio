@@ -309,70 +309,6 @@ nav.s {
   transform: translateY(-2px);
 }
 
-.page-hero {
-  padding: 8rem 3rem 3rem;
-  max-width: 1160px;
-  margin: 0 auto;
-}
-.page-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--ink3);
-  text-decoration: none;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  transition: color 0.2s;
-}
-.page-back:hover {
-  color: var(--amber);
-}
-.page-back-icon {
-  flex-shrink: 0;
-}
-.wrap {
-  max-width: 1160px;
-  margin: 0 auto;
-}
-.s-tag {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  color: var(--amber);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 0.6rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.s-tag::before {
-  content: "";
-  width: 20px;
-  height: 1px;
-  background: var(--amber);
-}
-.s-heading {
-  font-family: var(--serif);
-  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--ink);
-  margin-bottom: 1rem;
-}
-.s-heading em {
-  font-style: italic;
-  color: var(--amber2);
-}
-.s-sub {
-  color: var(--ink2);
-  max-width: 52ch;
-  font-size: 0.95rem;
-}
-
 #activities-page {
   padding: 0 3rem 6rem;
 }
@@ -688,7 +624,7 @@ footer {
   .mobileMenu {
     display: flex;
   }
-  .page-hero,
+  .page-top,
   #activities-page {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -696,7 +632,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .page-hero,
+  .page-top,
   #activities-page {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -748,7 +684,7 @@ footer {
     bottom: 1.25rem;
     right: 1.25rem;
   }
-  .page-hero,
+  .page-top,
   #activities-page {
     padding-left: 1.25rem;
     padding-right: 1.25rem;

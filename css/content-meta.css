@@ -1,0 +1,50 @@
+/**
+ * Meta row separators (date • read time / location) — all pages
+ */
+
+.blog-meta,
+.blog-modal-meta,
+.blog-full-meta,
+.act-meta,
+.act-modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--mono);
+  color: var(--ink3);
+}
+
+.blog-meta span + span::before,
+.blog-modal-meta span + span::before,
+.blog-full-meta span + span::before,
+.act-meta span + span::before,
+.act-modal-meta span + span::before {
+  content: "•";
+  margin-right: 0.55rem;
+  color: rgba(212, 146, 92, 0.85);
+  font-weight: 600;
+}
+
+.blog-meta {
+  font-size: 0.72rem;
+}
+
+.blog-modal-meta {
+  font-size: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-full-meta {
+  font-size: 0.76rem;
+  margin-bottom: 0.7rem;
+}
+
+.act-meta {
+  font-size: 0.78rem;
+}
+
+.act-modal-meta {
+  font-size: 0.75rem;
+  margin-bottom: 1.25rem;
+}

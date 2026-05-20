@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Activities &amp; Events — Aoy Phongsakoun</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <meta name="theme-color" content="#1a1816" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/cv-modal.css" />
+    <link rel="stylesheet" href="css/subpage.css" />
     <link rel="stylesheet" href="css/activities-page.css" />
     <link rel="stylesheet" href="css/grid-skeleton.css" />
     <link rel="stylesheet" href="css/custom-cursor.css" />
+    <link rel="stylesheet" href="css/content-meta.css" />
   </head>
   <body>
     <div class="cursor-wrap" id="cursorWrap" aria-hidden="true">
@@ -41,11 +47,16 @@
       </div>
     </div>
 
-    <div id="bar" aria-hidden="true"></div>
-    <a id="btt" href="#" aria-label="Back to top">&uarr;</a>
+    <div id="bar"></div>
+    <a id="btt" href="#" aria-label="Back to top">↑</a>
+    <button class="cv-fab" type="button" data-open-cv aria-label="Open CV preview">
+      <span class="cv-fab-dot" aria-hidden="true"></span>
+      CV
+    </button>
 
     <nav id="nav">
-      <a class="logo-wrap" href="index.html">
+      <a class="logo-wrap" href="index.html#home">
+        <span class="logo-mark" aria-hidden="true">AP</span>
         <span class="logo">Aoy Phongsakoun</span>
       </a>
       <ul class="navLinks">
@@ -79,22 +90,24 @@
       <a href="activities.html" class="mm-link active" aria-current="page">Activities</a>
       <a href="blogs.html" class="mm-link">Blog</a>
       <a href="index.html#contact" class="mm-link">Contact</a>
-      <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello &rarr;</a>
+      <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello →</a>
     </div>
 
-    <header class="page-hero">
-      <a class="page-back" href="index.html#activities">
-        <svg class="page-back-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
-        Back to portfolio
-      </a>
-      <div class="s-tag">Beyond the screen</div>
-      <h1 class="s-heading">Activities &amp; <em>Events</em></h1>
-      <p class="s-sub">
-        Hackathons, meetups, workshops, and community events &mdash; full gallery with photos from each moment.
-      </p>
-    </header>
+    <section class="page-top">
+      <div class="wrap">
+        <a class="page-back" href="index.html#activities">
+          <svg class="page-back-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to portfolio
+        </a>
+        <div class="s-tag">Beyond the screen</div>
+        <h1 class="s-heading">Activities &amp; <em>Events</em></h1>
+        <p class="s-sub">
+          Hackathons, meetups, workshops, and community events — full gallery with photos from each moment.
+        </p>
+      </div>
+    </section>
 
     <main id="activities-page">
       <div class="wrap">
@@ -135,65 +148,50 @@
       </div>
     </div>
 
+    <div class="cv-modal-overlay" id="cvModal" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle" aria-hidden="true">
+      <div class="cv-modal">
+        <button type="button" class="cv-modal-close" id="cvModalClose" aria-label="Close CV preview">✕</button>
+        <div class="cv-modal-header">
+          <div>
+            <h3 class="cv-modal-title" id="cvModalTitle">Curriculum Vitae</h3>
+            <p class="cv-modal-note">PDF preview for quick review</p>
+          </div>
+          <div class="cv-modal-actions">
+            <a
+              class="cv-download"
+              href="https://res.cloudinary.com/duswpvmeh/image/upload/v1779173731/cv/AOY_1_ggyk7e.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
+        <div class="cv-modal-frame-wrap">
+          <iframe
+            class="cv-modal-frame"
+            id="cvPreviewFrame"
+            title="Aoy Phongsakoun CV Preview"
+            loading="lazy"
+            src=""
+          ></iframe>
+          <p class="cv-modal-fallback">
+            If preview is blocked, open in
+            <a href="https://res.cloudinary.com/duswpvmeh/image/upload/v1779173731/cv/AOY_1_ggyk7e.pdf" target="_blank" rel="noopener noreferrer">new tab</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <span class="f-l">&copy; 2026 Aoy Phongsakoun</span>
       <span class="f-c">Made with care.</span>
       <span class="f-l">Vientiane, Laos</span>
     </footer>
 
-    <script>
-      (function () {
-        const nav = document.getElementById("nav");
-        const bar = document.getElementById("bar");
-        const btt = document.getElementById("btt");
-        const navToggle = document.getElementById("navToggle");
-        const mobileMenu = document.getElementById("mobileMenu");
-
-        window.addEventListener(
-          "scroll",
-          () => {
-            const st = document.documentElement.scrollTop;
-            const sh =
-              document.documentElement.scrollHeight -
-              document.documentElement.clientHeight;
-            if (bar) bar.style.width = sh > 0 ? (st / sh) * 100 + "%" : "0%";
-            nav.classList.toggle("s", st > 60);
-            if (btt) btt.classList.toggle("show", st > 500);
-          },
-          { passive: true }
-        );
-
-        function closeMenu() {
-          navToggle.classList.remove("open");
-          mobileMenu.classList.remove("open");
-          mobileMenu.setAttribute("aria-hidden", "true");
-          navToggle.setAttribute("aria-expanded", "false");
-          document.body.style.overflow = "";
-        }
-
-        navToggle.addEventListener("click", () => {
-          const open = mobileMenu.classList.toggle("open");
-          navToggle.classList.toggle("open", open);
-          navToggle.setAttribute("aria-expanded", open);
-          mobileMenu.setAttribute("aria-hidden", !open);
-          document.body.style.overflow = open ? "hidden" : "";
-        });
-
-        mobileMenu.querySelectorAll("a").forEach((a, i) => {
-          a.addEventListener("click", closeMenu);
-          a.style.transitionDelay = `${0.05 + i * 0.04}s`;
-        });
-
-        if (btt) {
-          btt.addEventListener("click", (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          });
-        }
-
-        nav.classList.toggle("s", window.scrollY > 60);
-      })();
-    </script>
+    <script src="js/site-nav.js"></script>
+    <script src="js/site-cv.js"></script>
     <script>
       window.__EVENTS_CONFIG__ = {
         dataUrl: "events/data.json",

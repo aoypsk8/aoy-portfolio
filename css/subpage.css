@@ -1,0 +1,79 @@
+/* Subpage shell — matches index nav + section headers */
+
+.navLinks a.active {
+  color: var(--ink);
+}
+
+.page-top {
+  padding: 8rem 3rem 2.5rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.page-top .wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink3);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  transition: color 0.2s;
+}
+
+.page-back:hover {
+  color: var(--amber2);
+}
+
+.page-back-icon {
+  flex-shrink: 0;
+}
+
+#activities-page,
+#blog-page {
+  padding: 3rem 3rem 6rem;
+}
+
+#activities-page > .wrap,
+#blog-page > .wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .page-top,
+  #activities-page,
+  #blog-page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .page-top {
+    padding-top: 7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-top,
+  #activities-page,
+  #blog-page {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-top,
+  #activities-page,
+  #blog-page {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

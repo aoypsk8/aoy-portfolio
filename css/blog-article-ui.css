@@ -741,3 +741,49 @@
   color: #7ec8ff;
   font-weight: 600;
 }
+
+/* มือถือ — ลด padding ซ้าย/ขวาเฉพาะเนื้อหา sections */
+@media (max-width: 640px) {
+  .blog-modal-body,
+  .blog-full-body {
+    margin-inline: -0.55rem;
+    padding-inline: 0;
+  }
+
+  .blog-modal-body .blog-section-title,
+  .blog-full-body .blog-section-title {
+    padding-left: 0.45rem;
+  }
+
+  .blog-modal-body .blog-callout,
+  .blog-full-body .blog-callout,
+  .blog-modal-body .blog-analogy,
+  .blog-full-body .blog-analogy,
+  .blog-modal-body .blog-compare-card,
+  .blog-full-body .blog-compare-card,
+  .blog-modal-body .blog-reminder-item,
+  .blog-full-body .blog-reminder-item,
+  .blog-modal-body .blog-def-item,
+  .blog-full-body .blog-def-item,
+  .blog-modal-body .blog-arch-panel,
+  .blog-full-body .blog-arch-panel,
+  .blog-modal-body .blog-learning-path li,
+  .blog-full-body .blog-learning-path li {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+
+  .blog-modal-body .blog-code-block code,
+  .blog-full-body .blog-code-block code {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+  }
+
+  .blog-modal-body .blog-table th,
+  .blog-full-body .blog-table th,
+  .blog-modal-body .blog-table td,
+  .blog-full-body .blog-table td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

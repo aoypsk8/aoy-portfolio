@@ -191,5 +191,52 @@
         "body": "When the basics feel comfortable, learn **Docker Compose** — one file to run multiple services together (for example API + database).\n\n:::steps\n1) Dockerize one small project you already have.\n2) Try Compose with an app and PostgreSQL.\n3) Read the official getting-started guide for best practices.\n:::\n\nOfficial docs:\nhttps://docs.docker.com/get-started/\n\nFor me, Docker clicked when I needed the same Python ML environment on different machines — once you use it on a real repo, it makes sense fast."
       }
     ]
+  },
+  {
+    "id": "github-for-beginners-2026",
+    "tag": "Git",
+    "title": "GitHub for Beginners: Save and Share Your Code the Right Way",
+    "excerpt": "GitHub is where developers save, track, and share their code. This guide walks you through the basics — from creating a repo to your first commit.",
+    "date": "2026-05-20",
+    "readTime": "6 min read",
+    "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779266613/blogs/Gemini_Generated_Image_mkidq8mkidq8mkid_odrekd.jpg",
+    "images": [
+      "https://res.cloudinary.com/duswpvmeh/image/upload/v1779266613/blogs/Gemini_Generated_Image_mkidq8mkidq8mkid_odrekd.jpg"
+    ],
+    "content": "blogs/github-for-beginners-2026/content.html",
+    "sections": [
+      {
+        "title": "What Is GitHub?",
+        "body": "Most beginners mix these up. Here is the split:\n\n:::defs\n**Git**|Version control on your computer — tracks every change, branches, and history.\n**GitHub**|Cloud hosting for Git repos — backup, sharing, pull requests, and portfolio proof.\n:::\n\n:::analogy\nThink of it like Google Docs for code:\n- Every save is a **commit** with a message\n- You can restore any older version\n- Teammates edit in parallel without overwriting each other\n:::\n\nAlmost every developer role expects GitHub fluency. A public repo is often the fastest proof of what you can build."
+      },
+      {
+        "title": "Installing Git",
+        "body": "GitHub lives in the browser — **Git** is what you install locally.\n\n**macOS**\n```bash\nbrew install git\n```\n\n**Ubuntu / Debian**\n```bash\nsudo apt install git\n```\n\n**Windows**\nhttps://git-scm.com/download/win\n\nSet your identity once (used on every commit):\n```bash\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"you@email.com\"\n```\n\nVerify:\n```bash\ngit --version\n```\n\n:::callout tip\nMatch `user.email` to the email on your GitHub account so commits link to your profile.\n:::"
+      },
+      {
+        "title": "Create Your First Repository",
+        "body": "A **repository (repo)** is a project folder that Git tracks over time.\n\n:::compare\n**Start on GitHub**|Best for beginners: create the repo online, clone it, then code. You get a README and remote URL immediately.\n**Start locally**|Best when you already have a folder: `git init`, then connect to GitHub later with `git remote add`.\n:::\n\n**GitHub-first workflow**\n:::steps\n1) Sign in at github.com → **+** → New repository\n2) Name it (e.g. `my-first-repo`), pick Public or Private\n3) Check **Add a README file** → Create repository\n4) Clone to your machine and enter the folder\n:::\n\n```bash\ngit clone https://github.com/your-username/my-first-repo.git\ncd my-first-repo\n```\n\n**Local-first workflow**\n```bash\nmkdir my-project && cd my-project\ngit init\n```"
+      },
+      {
+        "title": "The 3 Commands You Use Every Day",
+        "body": "After editing files, ship changes in three moves — same order every time:\n\n:::reminders\n**git add .**|Stage changes (`.` = all files; or `git add index.html` for one file)\n**git commit -m \"message\"**|Save a snapshot — message should say what changed, not just \"update\"\n**git push**|Upload commits to GitHub so your remote repo stays current\n:::\n\nExample session:\n```bash\ngit add .\ngit commit -m \"Add homepage layout\"\ngit push\n```\n\n:::callout tip\nRun `git status` before `add` — it shows exactly which files changed and avoids surprises.\n:::"
+      },
+      {
+        "title": "Pulling Changes from GitHub",
+        "body": "On a second laptop or with teammates, sync before you edit:\n```bash\ngit pull\n```\n\nThis downloads the latest commits from GitHub into your working copy.\n\n:::callout tip\n**Daily rhythm:** `git pull` when you start → code → `git add` / `commit` / `push` when you finish. That order prevents most merge conflicts.\n:::"
+      },
+      {
+        "title": "Branches — Work Without Breaking Things",
+        "body": "A **branch** is a safe workspace — experiment without breaking `main`.\n\n:::compare\n**main branch**|Production-ready code. What users or CI expect to be stable.\n**feature branch**|In-progress work: login page, bugfix, or experiment.\n:::\n\nCreate and switch:\n```bash\ngit checkout -b my-new-feature\n```\n\nCommit and publish the branch:\n```bash\ngit add .\ngit commit -m \"Add login page\"\ngit push origin my-new-feature\n```\n\nOn GitHub, open a **Pull Request (PR)** to merge into `main` after review."
+      },
+      {
+        "title": "Useful Commands to Know",
+        "body": "Keep these in muscle memory:\n\n:::defs\n**git status**|See modified, staged, and untracked files\n**git log --oneline**|Compact commit history\n**git diff**|Line-by-line changes before you commit\n**git branch**|List local branches\n**git checkout -b name**|Create and switch to a new branch\n:::\n\nUndo the last commit but keep file changes:\n```bash\ngit reset --soft HEAD~1\n```"
+      },
+      {
+        "title": "What's Next?",
+        "body": "When the basics feel natural, level up with:\n\n:::steps\n1) Add a **`.gitignore`** so secrets and `node_modules` never get committed.\n2) Try **GitHub Pages** — free static hosting from any public repo.\n3) Practice **Pull Requests** on a real team repo (even a friend's side project).\n4) **Fork** an open-source repo, fix a small issue, and open your first PR.\n:::\n\nOfficial starting guide:\nhttps://docs.github.com/en/get-started\n\nThe fastest way to learn is one real project on GitHub this week — not another tutorial."
+      }
+    ]
   }
 ]

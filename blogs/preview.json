@@ -36,6 +36,15 @@
       "date": "2026-05-20",
       "readTime": "6 min read",
       "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779265567/blogs/Gemini_Generated_Image_xemsx0xemsx0xems_f2nhct.jpg"
+    },
+    {
+      "id": "github-for-beginners-2026",
+      "tag": "Git",
+      "title": "GitHub for Beginners: Save and Share Your Code the Right Way",
+      "excerpt": "GitHub is where developers save, track, and share their code. This guide walks you through the basics — from creating a repo to your first commit.",
+      "date": "2026-05-20",
+      "readTime": "6 min read",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779266613/blogs/Gemini_Generated_Image_mkidq8mkidq8mkid_odrekd.jpg"
     }
   ]
 }

@@ -1,5 +1,5 @@
 /**
- * Blog ÔøΩ load JSON, render cards, article modal
+ * Blog ù load JSON, render cards, article modal
  * Configure via window.__BLOGS_CONFIG__ before this script runs.
  */
 (function () {
@@ -60,7 +60,7 @@
     });
   }
 
-  /** ?????? + ???????? ÔøΩ ??? span ?????????????????? (::before) ??????????????? */
+  /** ?????? + ???????? ù ??? span ?????????????????? (::before) ??????????????? */
   function blogMetaHtml(post) {
     return `<span>${escapeHtml(fmtDate(post.date))}</span><span>${escapeHtml(post.readTime)}</span>`;
   }
@@ -76,6 +76,18 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  const BLOG_TAG_THEMES = { DevOps: "devops", Git: "git" };
+
+  function blogTagClass(tag) {
+    const theme = BLOG_TAG_THEMES[tag];
+    return theme ? ` blog-tag--${theme}` : "";
+  }
+
+  function blogCoverClass(tag) {
+    const theme = BLOG_TAG_THEMES[tag];
+    return theme ? `blog-cover blog-cover--${theme}` : "blog-cover";
   }
 
   function escapeCodeHtml(str) {
@@ -530,7 +542,7 @@
   function openBlogModal(post) {
     if (!modalAvailable) return;
     blogModalTag.textContent = post.tag;
-    blogModalTag.className = "blog-tag" + (post.tag === "DevOps" ? " blog-tag--devops" : "");
+    blogModalTag.className = "blog-tag" + blogTagClass(post.tag);
     blogModalTitle.textContent = post.title;
     blogModalDesc.textContent = post.excerpt;
     setBlogMeta(blogModalMeta, post);
@@ -581,9 +593,8 @@
     card.setAttribute("role", "button");
     card.tabIndex = 0;
     card.setAttribute("aria-label", post.title);
-    const tagClass = post.tag === "DevOps" ? " blog-tag--devops" : "";
-    const coverClass =
-      post.tag === "DevOps" ? "blog-cover blog-cover--devops" : "blog-cover";
+    const tagClass = blogTagClass(post.tag);
+    const coverClass = blogCoverClass(post.tag);
     const coverSrc = isPlaceholderAsset(post.cover)
       ? `blogs/${post.id}-cover.svg`
       : post.cover;
@@ -674,11 +685,12 @@
   }
 
   function renderFullPagePost(post) {
+    if (window.BlogSocialMeta) window.BlogSocialMeta.apply(post, cfg);
     blogGrid.classList.add("blog-grid--single");
     const bodyPlaceholder = window.GridSkeleton
       ? window.GridSkeleton.blogBodySkeletonHtml()
       : '<p class="blog-modal-loading">Loading\u2026</p>';
-    const tagClass = post.tag === "DevOps" ? " blog-tag--devops" : "";
+    const tagClass = blogTagClass(post.tag);
     const coverSrc = post.cover
       ? isPlaceholderAsset(post.cover)
         ? `blogs/${post.id}-cover.svg`

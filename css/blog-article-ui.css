@@ -6,6 +6,21 @@
   border-color: rgba(36, 150, 237, 0.35);
 }
 
+.blog-tag--git {
+  color: #c4a8f5;
+  background: rgba(137, 87, 229, 0.16);
+  border-color: rgba(137, 87, 229, 0.38);
+}
+
+.blog-cover--git {
+  background: linear-gradient(135deg, #1f1a28 0%, #2a2238 45%, #1a1816 100%);
+}
+
+.blog-cover-placeholder--git {
+  background: linear-gradient(135deg, #1f1a28 0%, #2a2238 50%, #1a1816 100%);
+  color: #c4a8f5;
+}
+
 .blog-cover--devops {
   background: linear-gradient(135deg, #1e2a36 0%, #24303d 45%, #1a1816 100%);
 }

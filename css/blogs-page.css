@@ -1,4 +1,4 @@
-/* Blog page  grid, cards, modal (nav/header from main.css + subpage.css) */
+/* Blog page Â� grid, cards, modal (nav/header from main.css + subpage.css) */
 
 .page-top {
   position: relative;
@@ -148,7 +148,7 @@
   overflow: hidden;
 }
 
-/* .blog-meta  see css/content-meta.css */
+/* .blog-meta Â— see css/content-meta.css */
 
 .blog-card-more {
   border-style: dashed;
@@ -242,7 +242,7 @@
   margin: 0.5rem 0;
 }
 
-/* .blog-full-meta — see css/content-meta.css */
+/* .blog-full-meta â€” see css/content-meta.css */
 
 .blog-full-desc {
   color: var(--ink2);
@@ -488,7 +488,7 @@
   line-height: 1.3;
 }
 
-/* .blog-modal-meta  see css/content-meta.css */
+/* .blog-modal-meta Â� see css/content-meta.css */
 
 .blog-modal-body {
   color: var(--ink2);

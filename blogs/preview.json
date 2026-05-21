@@ -1,6 +1,15 @@
 {
-  "total": 4,
+  "total": 5,
   "preview": [
+    {
+      "id": "collecting-lao-training-data-llm",
+      "tag": "AI/ML",
+      "title": "How I Collected and Cleaned Lao Text Data for Fine-Tuning a Large Language Model",
+      "excerpt": "From scraping Lao Wikipedia and news sites to cleaning 53,000 lines of text — a practical walkthrough of building a Lao training corpus from scratch.",
+      "date": "2026-05-21",
+      "readTime": "10 min read",
+      "cover": "https://res.cloudinary.com/duswpvmeh/image/upload/v1779349871/blogs/ChatGPT_Image_May_21_2026_02_51_02_PM_wftsv0.png"
+    },
     {
       "id": "blutter-flutter-reverse-engineering",
       "tag": "Security",

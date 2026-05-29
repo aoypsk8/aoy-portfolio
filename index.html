@@ -13,10 +13,7 @@
     />
     <link rel="canonical" href="https://aoypsk8.github.io/aoy-portfolio/" />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="Aoy Phongsakoun — Software Engineer"
-    />
+    <meta property="og:title" content="Aoy Phongsakoun — Software Engineer" />
     <meta
       property="og:description"
       content="Fintech-focused software engineer building mobile apps, web platforms, and APIs with real-world impact."
@@ -30,10 +27,7 @@
       content="https://aoypsk8.github.io/aoy-portfolio/"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Aoy Phongsakoun — Software Engineer"
-    />
+    <meta name="twitter:title" content="Aoy Phongsakoun — Software Engineer" />
     <meta
       name="twitter:description"
       content="Portfolio of Aoy Phongsakoun: fintech projects, technical experience, and software engineering work."
@@ -83,7 +77,7 @@
     <link rel="stylesheet" href="css/grid-skeleton.css" />
     <link rel="stylesheet" href="css/blog-article-ui.css" />
     <link rel="stylesheet" href="css/content-meta.css" />
-
+    <link rel="stylesheet" href="css/certificates-strip.css" />
   </head>
   <body>
     <!-- รูปโปรไฟล์: วาง images/profile.jpg หรือแก้ src ใน .profile-img / #navAvatar -->
@@ -118,50 +112,19 @@
 
     <div id="bar"></div>
     <a id="btt" href="#" aria-label="Back to top">↑</a>
-    <button class="cv-fab" type="button" data-open-cv aria-label="Open CV preview">
+    <button
+      class="cv-fab"
+      type="button"
+      data-open-cv
+      aria-label="Open CV preview"
+    >
       <span class="cv-fab-dot" aria-hidden="true"></span>
       CV
     </button>
 
     <!-- NAV -->
-    <nav id="nav">
-      <a class="logo-wrap" href="#home">
-        <span class="logo-mark" aria-hidden="true">AP</span>
-        <span class="logo">Aoy Phongsakoun</span>
-      </a>
-      <ul class="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <a class="navCta" href="mailto:aoypsk8@gmail.com">Say hello</a>
-      <button
-        class="navToggle"
-        id="navToggle"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-      >
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-
-    <div class="mobileMenu" id="mobileMenu" aria-hidden="true">
-      <a href="#about" class="mm-link">About</a>
-      <a href="#experience" class="mm-link">Experience</a>
-      <a href="#skills" class="mm-link">Skills</a>
-      <a href="#projects" class="mm-link">Projects</a>
-      <a href="#education" class="mm-link">Education</a>
-      <a href="#activities" class="mm-link">Activities</a>
-      <a href="#blog" class="mm-link">Blog</a>
-      <a href="#contact" class="mm-link">Contact</a>
-      <a class="mm-cta" href="mailto:aoypsk8@gmail.com">Say hello →</a>
-    </div>
+    <div id="nav-root"></div>
+    <script src="js/site-nav-render.js"></script>
 
     <!-- HERO -->
     <section class="hero" id="home">
@@ -210,9 +173,22 @@
               <div class="hero-meta-card">
                 <div class="hero-meta-row">
                   <span class="hero-meta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Z" stroke="currentColor" stroke-width="1.5"/>
-                      <path d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      />
+                      <path
+                        d="M12 22s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11Z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      />
                     </svg>
                   </span>
                   <div class="hero-meta-copy">
@@ -226,7 +202,9 @@
                   </span>
                   <div class="hero-meta-copy">
                     <span class="hero-meta-label">Status</span>
-                    <span class="hero-meta-value hero-meta-value--highlight">Open to work</span>
+                    <span class="hero-meta-value hero-meta-value--highlight"
+                      >Open to work</span
+                    >
                   </div>
                 </div>
               </div>
@@ -514,6 +492,17 @@
       </div>
     </section>
 
+    <!-- CERTIFICATES -->
+    <div class="cert-band" id="certificates">
+      <div class="cert-band-hd">
+        <span class="s-tag">Certifications</span>
+        <span class="cert-band-count" id="certCount"></span>
+      </div>
+      <div class="cert-overflow">
+        <div class="cert-track" id="certTrack"></div>
+      </div>
+    </div>
+
     <!-- SKILLS -->
     <section id="skills">
       <div class="wrap">
@@ -526,41 +515,63 @@
         <div class="skills-panel">
           <div class="skills-tiers">
             <section class="skills-tier" aria-labelledby="skills-tier-core">
-              <h3 class="skills-tier-label" id="skills-tier-core">Core stack</h3>
+              <h3 class="skills-tier-label" id="skills-tier-core">
+                Core stack
+              </h3>
               <div class="skills-grid skills-grid--core">
                 <div class="sk sk--wide sk--accent">
                   <div class="sk-head">
-                    <span class="sk-head-text">Programming &amp; Frameworks</span>
+                    <span class="sk-head-text"
+                      >Programming &amp; Frameworks</span
+                    >
                     <span class="sk-num">01</span>
                   </div>
                   <div class="sk-groups">
                     <div class="sk-group">
                       <p class="sk-subhead">Languages</p>
                       <div class="sk-tags">
-                        <span class="sk-tag hi">Dart</span><span class="sk-tag hi">TypeScript</span><span class="sk-tag hi">JavaScript</span>
-                        <span class="sk-tag">Python</span><span class="sk-tag">Java</span><span class="sk-tag">C#</span><span class="sk-tag">C</span>
-                        <span class="sk-tag">SQL</span><span class="sk-tag">HTML/CSS</span><span class="sk-tag">EJS</span>
+                        <span class="sk-tag hi">Dart</span
+                        ><span class="sk-tag hi">TypeScript</span
+                        ><span class="sk-tag hi">JavaScript</span>
+                        <span class="sk-tag">Python</span
+                        ><span class="sk-tag">Java</span
+                        ><span class="sk-tag">C#</span
+                        ><span class="sk-tag">C</span>
+                        <span class="sk-tag">SQL</span
+                        ><span class="sk-tag">HTML/CSS</span
+                        ><span class="sk-tag">EJS</span>
                       </div>
                     </div>
                     <div class="sk-group">
                       <p class="sk-subhead">Frontend &amp; Mobile</p>
                       <div class="sk-tags">
-                        <span class="sk-tag hi">Flutter 3+ yrs</span><span class="sk-tag hi">React.js</span><span class="sk-tag">Next.js</span>
-                        <span class="sk-tag">Vue.js</span><span class="sk-tag">Nuxt.js</span><span class="sk-tag">Tailwind CSS</span><span class="sk-tag">Bootstrap 5</span>
+                        <span class="sk-tag hi">Flutter 3+ yrs</span
+                        ><span class="sk-tag hi">React.js</span
+                        ><span class="sk-tag">Next.js</span>
+                        <span class="sk-tag">Vue.js</span
+                        ><span class="sk-tag">Nuxt.js</span
+                        ><span class="sk-tag">Tailwind CSS</span
+                        ><span class="sk-tag">Bootstrap 5</span>
                       </div>
                     </div>
                     <div class="sk-group">
                       <p class="sk-subhead">Backend</p>
                       <div class="sk-tags">
-                        <span class="sk-tag hi">Node.js</span><span class="sk-tag hi">Express.js 2+ yrs</span><span class="sk-tag">Java Spring Boot</span>
+                        <span class="sk-tag hi">Node.js</span
+                        ><span class="sk-tag hi">Express.js 2+ yrs</span
+                        ><span class="sk-tag">Java Spring Boot</span>
                         <span class="sk-tag">RESTful API</span>
                       </div>
                     </div>
                     <div class="sk-group">
                       <p class="sk-subhead">DevOps &amp; Tools</p>
                       <div class="sk-tags">
-                        <span class="sk-tag hi">Docker</span><span class="sk-tag hi">GitHub</span><span class="sk-tag hi">GitLab - GitFlow</span>
-                        <span class="sk-tag">GitLab</span><span class="sk-tag">CI/CD</span><span class="sk-tag">GitFlow</span>
+                        <span class="sk-tag hi">Docker</span
+                        ><span class="sk-tag hi">GitHub</span
+                        ><span class="sk-tag hi">GitLab - GitFlow</span>
+                        <span class="sk-tag">GitLab</span
+                        ><span class="sk-tag">CI/CD</span
+                        ><span class="sk-tag">GitFlow</span>
                       </div>
                     </div>
                   </div>
@@ -571,41 +582,57 @@
                     <span class="sk-num">02</span>
                   </div>
                   <div class="sk-tags">
-                    <span class="sk-tag hi">Flutter</span><span class="sk-tag hi">Dart</span>
-                    <span class="sk-tag">Android SDK</span><span class="sk-tag">iOS</span>
-                    <span class="sk-tag">Google Play</span><span class="sk-tag">App Store</span><span class="sk-tag">Huawei AppGallery</span>
+                    <span class="sk-tag hi">Flutter</span
+                    ><span class="sk-tag hi">Dart</span>
+                    <span class="sk-tag">Android SDK</span
+                    ><span class="sk-tag">iOS</span>
+                    <span class="sk-tag">Google Play</span
+                    ><span class="sk-tag">App Store</span
+                    ><span class="sk-tag">Huawei AppGallery</span>
                   </div>
                 </div>
                 <div class="sk sk--wide">
                   <div class="sk-head">
-                    <span class="sk-head-text">Databases &amp; Cloud Services</span>
+                    <span class="sk-head-text"
+                      >Databases &amp; Cloud Services</span
+                    >
                     <span class="sk-num">03</span>
                   </div>
                   <div class="sk-groups">
                     <div class="sk-group">
                       <p class="sk-subhead">Cloud</p>
                       <div class="sk-tags">
-                        <span class="sk-tag">Alibaba Cloud</span><span class="sk-tag">Firebase</span><span class="sk-tag">Cloudinary</span>
+                        <span class="sk-tag">Alibaba Cloud</span
+                        ><span class="sk-tag">Firebase</span
+                        ><span class="sk-tag">Cloudinary</span>
                       </div>
                     </div>
                     <div class="sk-group">
                       <p class="sk-subhead">APIs</p>
                       <div class="sk-tags">
-                        <span class="sk-tag">Google Maps API</span><span class="sk-tag">MapBox API</span><span class="sk-tag hi">RESTful API Design</span>
+                        <span class="sk-tag">Google Maps API</span
+                        ><span class="sk-tag">MapBox API</span
+                        ><span class="sk-tag hi">RESTful API Design</span>
                       </div>
                     </div>
                     <div class="sk-group">
                       <p class="sk-subhead">Server</p>
                       <div class="sk-tags">
-                        <span class="sk-tag">Ubuntu Linux 24</span><span class="sk-tag">Cloud Server Management</span>
+                        <span class="sk-tag">Ubuntu Linux 24</span
+                        ><span class="sk-tag">Cloud Server Management</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
-            <section class="skills-tier skills-tier--domain" aria-labelledby="skills-tier-domain">
-              <h3 class="skills-tier-label" id="skills-tier-domain">Domain expertise</h3>
+            <section
+              class="skills-tier skills-tier--domain"
+              aria-labelledby="skills-tier-domain"
+            >
+              <h3 class="skills-tier-label" id="skills-tier-domain">
+                Domain expertise
+              </h3>
               <div class="skills-grid skills-grid--compact">
                 <div class="sk sk--fintech">
                   <div class="sk-head">
@@ -613,8 +640,11 @@
                     <span class="sk-num">04</span>
                   </div>
                   <div class="sk-tags">
-                    <span class="sk-tag tl">LaoQR</span><span class="sk-tag tl">LAPNet</span>
-                    <span class="sk-tag">Visa</span><span class="sk-tag">Mastercard</span><span class="sk-tag tl">Telecom APIs</span>
+                    <span class="sk-tag tl">LaoQR</span
+                    ><span class="sk-tag tl">LAPNet</span>
+                    <span class="sk-tag">Visa</span
+                    ><span class="sk-tag">Mastercard</span
+                    ><span class="sk-tag tl">Telecom APIs</span>
                   </div>
                 </div>
                 <div class="sk sk--fintech">
@@ -623,8 +653,11 @@
                     <span class="sk-num">05</span>
                   </div>
                   <div class="sk-tags">
-                    <span class="sk-tag tl">DeepSeek AI</span><span class="sk-tag tl">Google OCR</span>
-                    <span class="sk-tag tl">Face Detection</span><span class="sk-tag tl">Liveness API</span><span class="sk-tag tl">Huawei API</span>
+                    <span class="sk-tag tl">DeepSeek AI</span
+                    ><span class="sk-tag tl">Google OCR</span>
+                    <span class="sk-tag tl">Face Detection</span
+                    ><span class="sk-tag tl">Liveness API</span
+                    ><span class="sk-tag tl">Huawei API</span>
                   </div>
                 </div>
                 <div class="sk">
@@ -633,14 +666,19 @@
                     <span class="sk-num">06</span>
                   </div>
                   <div class="sk-tags">
-                    <span class="sk-tag">Reverse Engineering</span><span class="sk-tag">Mobile / Flutter</span>
-                    <span class="sk-tag">Traffic Interception</span><span class="sk-tag">Network Analysis</span><span class="sk-tag">RSA Cryptography</span>
+                    <span class="sk-tag">Reverse Engineering</span
+                    ><span class="sk-tag">Mobile / Flutter</span>
+                    <span class="sk-tag">Traffic Interception</span
+                    ><span class="sk-tag">Network Analysis</span
+                    ><span class="sk-tag">RSA Cryptography</span>
                   </div>
                 </div>
               </div>
             </section>
             <section class="skills-tier" aria-labelledby="skills-tier-more">
-              <h3 class="skills-tier-label" id="skills-tier-more">Tools &amp; design</h3>
+              <h3 class="skills-tier-label" id="skills-tier-more">
+                Tools &amp; design
+              </h3>
               <div class="skills-grid skills-grid--compact">
                 <div class="sk">
                   <div class="sk-head">
@@ -648,8 +686,10 @@
                     <span class="sk-num">07</span>
                   </div>
                   <div class="sk-tags">
-                    <span class="sk-tag hi">Figma</span><span class="sk-tag">Adobe Photoshop</span>
-                    <span class="sk-tag">UI/UX</span><span class="sk-tag">Prototyping</span>
+                    <span class="sk-tag hi">Figma</span
+                    ><span class="sk-tag">Adobe Photoshop</span>
+                    <span class="sk-tag">UI/UX</span
+                    ><span class="sk-tag">Prototyping</span>
                   </div>
                 </div>
               </div>
@@ -841,10 +881,9 @@
               in-app content configuration.
             </p>
             <div class="pj-tags">
-              <span class="pj-tag">Nuxt.js</span
-              >
+              <span class="pj-tag">Nuxt.js</span>
               <span class="pj-tag">React JS</span
-                ><span class="pj-tag">Node.js</span>
+              ><span class="pj-tag">Node.js</span>
             </div>
           </div>
           <div class="pj" data-cat="api">
@@ -963,8 +1002,7 @@
               redeem flows and promotion management.
             </p>
             <div class="pj-tags">
-              <span class="pj-tag">EJS</span
-              ><span class="pj-tag">Node.js</span
+              <span class="pj-tag">EJS</span><span class="pj-tag">Node.js</span
               ><span class="pj-tag">Promotions</span>
             </div>
           </div>
@@ -1092,15 +1130,26 @@
             <p class="lang-eyebrow">Multilingual</p>
             <h3 class="lang-heading">Languages</h3>
             <p class="lang-intro">
-              Native Lao speaker with strong Thai and English for professional engineering work — currently building French and German for life in the Greater Region.
+              Native Lao speaker with strong Thai and English for professional
+              engineering work — currently building French and German for life
+              in the Greater Region.
             </p>
           </div>
           <div class="lang-panel">
             <div class="lang-tiers">
-              <section class="lang-tier lang-tier--fluent" aria-labelledby="lang-tier-fluent">
-                <h4 class="lang-tier-label" id="lang-tier-fluent">Fluent &amp; professional</h4>
+              <section
+                class="lang-tier lang-tier--fluent"
+                aria-labelledby="lang-tier-fluent"
+              >
+                <h4 class="lang-tier-label" id="lang-tier-fluent">
+                  Fluent &amp; professional
+                </h4>
                 <div class="lang-grid lang-grid--fluent">
-                  <article class="lang-card lang-card--native" data-flag="la" style="--w: 100%">
+                  <article
+                    class="lang-card lang-card--native"
+                    data-flag="la"
+                    style="--w: 100%"
+                  >
                     <header class="lang-card-head">
                       <div class="lang-card-meta">
                         <h5 class="lang-name">Lao</h5>
@@ -1113,54 +1162,99 @@
                         <span class="lang-meter-label">Proficiency</span>
                         <span class="lang-meter-pct">100%</span>
                       </div>
-                      <div class="lang-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Lao proficiency">
+                      <div
+                        class="lang-track"
+                        role="progressbar"
+                        aria-valuenow="100"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-label="Lao proficiency"
+                      >
                         <div class="lang-fill"></div>
                       </div>
                     </div>
                   </article>
-                  <article class="lang-card lang-card--pro" data-flag="th" style="--w: 80%">
+                  <article
+                    class="lang-card lang-card--pro"
+                    data-flag="th"
+                    style="--w: 80%"
+                  >
                     <header class="lang-card-head">
                       <div class="lang-card-meta">
                         <h5 class="lang-name">Thai</h5>
                         <span class="lang-script">ภาษาไทย</span>
                       </div>
-                      <span class="lang-badge lang-badge--pro">Professional</span>
+                      <span class="lang-badge lang-badge--pro"
+                        >Professional</span
+                      >
                     </header>
                     <div class="lang-meter">
                       <div class="lang-meter-head">
                         <span class="lang-meter-label">Proficiency</span>
                         <span class="lang-meter-pct">80%</span>
                       </div>
-                      <div class="lang-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Thai proficiency">
+                      <div
+                        class="lang-track"
+                        role="progressbar"
+                        aria-valuenow="80"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-label="Thai proficiency"
+                      >
                         <div class="lang-fill"></div>
                       </div>
                     </div>
                   </article>
-                  <article class="lang-card lang-card--pro" data-flag="gb" style="--w: 65%">
+                  <article
+                    class="lang-card lang-card--pro"
+                    data-flag="gb"
+                    style="--w: 65%"
+                  >
                     <header class="lang-card-head">
                       <div class="lang-card-meta">
                         <h5 class="lang-name">English</h5>
                         <span class="lang-script">Working language</span>
                       </div>
-                      <span class="lang-badge lang-badge--pro">B2 · IELTS 5.5</span>
+                      <span class="lang-badge lang-badge--pro"
+                        >B2 · IELTS 5.5</span
+                      >
                     </header>
                     <div class="lang-meter">
                       <div class="lang-meter-head">
                         <span class="lang-meter-label">Proficiency</span>
                         <span class="lang-meter-pct">65%</span>
                       </div>
-                      <div class="lang-track" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="English proficiency">
+                      <div
+                        class="lang-track"
+                        role="progressbar"
+                        aria-valuenow="65"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-label="English proficiency"
+                      >
                         <div class="lang-fill"></div>
                       </div>
-                      <p class="lang-level-note">Comfortable in tech docs, meetings &amp; workplace communication</p>
+                      <p class="lang-level-note">
+                        Comfortable in tech docs, meetings &amp; workplace
+                        communication
+                      </p>
                     </div>
                   </article>
                 </div>
               </section>
-              <section class="lang-tier lang-tier--learn" aria-labelledby="lang-tier-learn">
-                <h4 class="lang-tier-label" id="lang-tier-learn">Currently learning</h4>
+              <section
+                class="lang-tier lang-tier--learn"
+                aria-labelledby="lang-tier-learn"
+              >
+                <h4 class="lang-tier-label" id="lang-tier-learn">
+                  Currently learning
+                </h4>
                 <div class="lang-grid lang-grid--learn">
-                  <article class="lang-card lang-card--learn" data-flag="fr" style="--w: 15%">
+                  <article
+                    class="lang-card lang-card--learn"
+                    data-flag="fr"
+                    style="--w: 15%"
+                  >
                     <header class="lang-card-head">
                       <div class="lang-card-meta">
                         <h5 class="lang-name">French</h5>
@@ -1173,13 +1267,26 @@
                         <span class="lang-meter-label">Proficiency</span>
                         <span class="lang-meter-pct">15%</span>
                       </div>
-                      <div class="lang-track" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" aria-label="French proficiency">
+                      <div
+                        class="lang-track"
+                        role="progressbar"
+                        aria-valuenow="15"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-label="French proficiency"
+                      >
                         <div class="lang-fill"></div>
                       </div>
-                      <p class="lang-level-note">Preparing for Luxembourg &amp; Greater Region</p>
+                      <p class="lang-level-note">
+                        Preparing for Luxembourg &amp; Greater Region
+                      </p>
                     </div>
                   </article>
-                  <article class="lang-card lang-card--learn" data-flag="de" style="--w: 5%">
+                  <article
+                    class="lang-card lang-card--learn"
+                    data-flag="de"
+                    style="--w: 5%"
+                  >
                     <header class="lang-card-head">
                       <div class="lang-card-meta">
                         <h5 class="lang-name">German</h5>
@@ -1192,10 +1299,19 @@
                         <span class="lang-meter-label">Proficiency</span>
                         <span class="lang-meter-pct">5%</span>
                       </div>
-                      <div class="lang-track" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" aria-label="German proficiency">
+                      <div
+                        class="lang-track"
+                        role="progressbar"
+                        aria-valuenow="5"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-label="German proficiency"
+                      >
                         <div class="lang-fill"></div>
                       </div>
-                      <p class="lang-level-note">Greater Region · ongoing study</p>
+                      <p class="lang-level-note">
+                        Greater Region · ongoing study
+                      </p>
                     </div>
                   </article>
                 </div>
@@ -1203,7 +1319,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -1212,7 +1327,10 @@
       <div class="wrap">
         <div class="s-tag">Beyond the screen</div>
         <h2 class="s-heading reveal">Activities &amp; <em>Events</em></h2>
-        <p class="s-sub reveal">Moments from hackathons, meetups, workshops, and community events I've been part of.</p>
+        <p class="s-sub reveal">
+          Moments from hackathons, meetups, workshops, and community events I've
+          been part of.
+        </p>
         <div class="act-grid" id="actGrid">
           <!-- Cards injected by JS from events/data.json -->
         </div>
@@ -1220,9 +1338,17 @@
     </section>
 
     <!-- Event Gallery Modal -->
-    <div class="act-modal-overlay" id="actModal" role="dialog" aria-modal="true" aria-label="Event gallery">
+    <div
+      class="act-modal-overlay"
+      id="actModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Event gallery"
+    >
       <div class="act-modal">
-        <button class="act-modal-close" id="actModalClose" aria-label="Close">✕</button>
+        <button class="act-modal-close" id="actModalClose" aria-label="Close">
+          ✕
+        </button>
         <div class="act-modal-header">
           <span class="act-event-tag" id="actModalTag"></span>
           <h3 class="act-modal-title" id="actModalTitle"></h3>
@@ -1230,21 +1356,41 @@
           <p class="act-modal-meta" id="actModalMeta"></p>
         </div>
         <div class="act-gallery">
-          <button class="act-gallery-nav act-gallery-prev" id="actGalleryPrev" aria-label="Previous image">&#8592;</button>
+          <button
+            class="act-gallery-nav act-gallery-prev"
+            id="actGalleryPrev"
+            aria-label="Previous image"
+          >
+            &#8592;
+          </button>
           <div class="act-gallery-img-wrap">
             <img id="actGalleryImg" src="" alt="" />
             <div class="act-gallery-counter" id="actGalleryCounter"></div>
           </div>
-          <button class="act-gallery-nav act-gallery-next" id="actGalleryNext" aria-label="Next image">&#8594;</button>
+          <button
+            class="act-gallery-nav act-gallery-next"
+            id="actGalleryNext"
+            aria-label="Next image"
+          >
+            &#8594;
+          </button>
         </div>
         <div class="act-thumbs" id="actThumbs"></div>
       </div>
     </div>
 
     <!-- Blog Article Modal -->
-    <div class="blog-modal-overlay" id="blogModal" role="dialog" aria-modal="true" aria-label="Blog article" >
+    <div
+      class="blog-modal-overlay"
+      id="blogModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Blog article"
+    >
       <div class="blog-modal">
-        <button class="blog-modal-close" id="blogModalClose" aria-label="Close">✕</button>
+        <button class="blog-modal-close" id="blogModalClose" aria-label="Close">
+          ✕
+        </button>
         <div class="blog-modal-header">
           <span class="blog-tag" id="blogModalTag"></span>
           <h3 class="blog-modal-title" id="blogModalTitle"></h3>
@@ -1253,12 +1399,24 @@
         </div>
         <div class="blog-modal-gallery-wrap" id="blogGalleryWrap">
           <div class="act-gallery">
-            <button class="act-gallery-nav act-gallery-prev" id="blogGalleryPrev" aria-label="Previous image">&#8592;</button>
+            <button
+              class="act-gallery-nav act-gallery-prev"
+              id="blogGalleryPrev"
+              aria-label="Previous image"
+            >
+              &#8592;
+            </button>
             <div class="act-gallery-img-wrap">
               <img id="blogGalleryImg" src="" alt="" />
               <div class="act-gallery-counter" id="blogGalleryCounter"></div>
             </div>
-            <button class="act-gallery-nav act-gallery-next" id="blogGalleryNext" aria-label="Next image">&#8594;</button>
+            <button
+              class="act-gallery-nav act-gallery-next"
+              id="blogGalleryNext"
+              aria-label="Next image"
+            >
+              &#8594;
+            </button>
           </div>
           <div class="act-thumbs" id="blogThumbs"></div>
         </div>
@@ -1269,7 +1427,14 @@
     </div>
 
     <!-- CV Preview Modal -->
-    <div class="cv-modal-overlay" id="cvModal" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle" aria-hidden="true">
+    <div
+      class="cv-modal-overlay"
+      id="cvModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cvModalTitle"
+      aria-hidden="true"
+    >
       <div class="cv-modal">
         <div class="cv-modal-header">
           <div>
@@ -1299,7 +1464,12 @@
           ></iframe>
           <p class="cv-modal-fallback">
             If preview is blocked, open in
-            <a href="https://res.cloudinary.com/duswpvmeh/image/upload/v1780024321/cv/AOY_2_r4eqc1.pdf" target="_blank" rel="noopener noreferrer">new tab</a>.
+            <a
+              href="https://res.cloudinary.com/duswpvmeh/image/upload/v1780024321/cv/AOY_2_r4eqc1.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              >new tab</a
+            >.
           </p>
         </div>
       </div>
@@ -1310,7 +1480,10 @@
       <div class="wrap">
         <div class="s-tag">Writing &amp; thoughts</div>
         <h2 class="s-heading reveal">Blog &amp; <em>Articles</em></h2>
-        <p class="s-sub reveal">Notes on software engineering, mobile development, fintech, and building things in Southeast Asia.</p>
+        <p class="s-sub reveal">
+          Notes on software engineering, mobile development, fintech, and
+          building things in Southeast Asia.
+        </p>
         <div class="blog-grid" id="blogGrid">
           <!-- Cards injected by JS from blogs/data.json -->
         </div>
@@ -1533,6 +1706,146 @@
         )
         .join("");
 
+      // certificates strip
+      // To link to an external URL instead of the local PDF, add:  url: "https://..."
+      const certs = [
+        {
+          file: "ASEAN Goes to School Programme",
+          label: "ASEAN Goes to School Programme",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026798/certificates/images/ASEAN_Goes_to_School_Programme.pdf_dzmbo4.png",
+        },
+        {
+          file: "Application Development Crash Course Using Flutter",
+          label: "App Development — Flutter",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026797/certificates/images/Application_Development_Crash_Course_Using_Flutter.pdf_yh2vsf.png",
+        },
+        {
+          file: "Coding and Al Summer Camp",
+          label: "Coding & AI Summer Camp",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026799/certificates/images/Coding_and_Al_Summer_Camp.pdf_pdcpjk.png",
+        },
+        {
+          file: "Cybersecurity Awareness Training for Lao SMEs",
+          label: "Cybersecurity Awareness — Lao SMEs",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026798/certificates/images/Cybersecurity_Awareness_Training_for_Lao_SMEs.pdf_n3em2i.png",
+        },
+        {
+          file: "English Pre-Intermediate",
+          label: "English Pre-Intermediate",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026798/certificates/images/English_Pre-Intermediate.pdf_yvvdte.png",
+        },
+        {
+          file: "Frontend Web Development with React JS",
+          label: "Frontend Web Dev — React JS",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026799/certificates/images/Frontend_Web_Development_with_React_JS.pdf_vic6ij.png",
+        },
+        {
+          file: "Hadoop Administration and Usage",
+          label: "Hadoop Administration & Usage",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026799/certificates/images/Hadoop_Administration_and_Usage.pdf_hqst6d.png",
+        },
+        {
+          file: "ISO 27001-2022 Awareness and Interpretation",
+          label: "ISO 27001-2022 Awareness",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026800/certificates/images/ISO_27001-2022_Awareness_and_Interpretation.pdf_hhrnrz.png",
+        },
+        {
+          file: "ISO 27001-2022 Internal Audit",
+          label: "ISO 27001-2022 Internal Audit",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026801/certificates/images/ISO_27001-2022_Internal_Audit.pdf_vl05s8.png",
+        },
+        {
+          file: "Information Session on ICCR Scholarships",
+          label: "ICCR Scholarships Session",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026800/certificates/images/Information_Session_on_ICCR_Scholarships.pdf_eph9gt.png",
+        },
+        {
+          file: "Introduction to Data Science and Artificial Intelligence",
+          label: "Intro to Data Science & AI",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026800/certificates/images/Introduction_to_Data_Science_and_Artificial_Intelligence.pdf_obmwyu.png",
+        },
+        {
+          file: "Introduction to Digital Product Design Using Design Thinking",
+          label: "Digital Product Design Thinking",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026800/certificates/images/Introduction_to_Digital_Product_Design_Using_Design_Thinking.pdf_vluffz.png",
+        },
+        {
+          file: "JavaScript building 20 project",
+          label: "JavaScript — 20 Projects",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026801/certificates/images/JavaScript_building_20_project.pdf_dksxut.png",
+        },
+        {
+          file: "MERN Stack",
+          label: "MERN Stack",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026801/certificates/images/MERN_Stack.pdf_renpuf.png",
+        },
+        {
+          file: "P2P English Pre-Intermediate Course",
+          label: "P2P English Pre-Intermediate",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026802/certificates/images/P2P_English_Pre-Intermediate_Course.pdf_nryqwk.png",
+        },
+        {
+          file: "P2P English for Beginner Course",
+          label: "P2P English for Beginners",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026802/certificates/images/P2P_English_for_Beginner_Course.pdf_nddakt.png",
+        },
+        {
+          file: "Product Development with Design Thinking",
+          label: "Product Dev — Design Thinking",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026802/certificates/images/Product_Development_with_Design_Thinking.pdf_djqo8c.png",
+        },
+        {
+          file: "React building 15 project",
+          label: "React — 15 Projects",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026802/certificates/images/React_building_15_project.pdf_ihdmyc.png",
+        },
+        {
+          file: "Short Course Training SAMSUNG",
+          label: "SAMSUNG Short Course Training",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026803/certificates/images/Short_Course_Training_SAMSUNG.pdf_kcwtui.png",
+        },
+        {
+          file: "Thriving as a 21st Century Graduate",
+          label: "Thriving as a 21st Century Graduate",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026804/certificates/images/Thriving_as_a_21st_Century_Graduate.pdf_whzgig.png",
+        },
+        {
+          file: "best creative logo and mascot design content",
+          label: "Creative Logo & Mascot Design",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026799/certificates/images/best_creative_logo_and_mascot_design_content.pdf_j73ug7.png",
+        },
+        {
+          file: "secure coding",
+          label: "Secure Coding",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026802/certificates/images/secure_coding.pdf_co58xg.png ",
+        },
+        {
+          file: "the Sustainable Development Goals Presentation",
+          label: "SDGs Presentation",
+          url: "https://res.cloudinary.com/duswpvmeh/image/upload/v1780026803/certificates/images/the_Sustainable_Development_Goals_Presentation.pdf_rgowb5.png",
+        },
+      ];
+      const certIcon = `<svg class="cert-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="1" width="14" height="10" rx="1.5"/><path d="M4 4.5h8M4 7h5M5.5 15l2.5-4 2.5 4"/></svg>`;
+      const certTrack = document.getElementById("certTrack");
+      const certCount = document.getElementById("certCount");
+      if (certTrack) {
+        certTrack.innerHTML = [...certs, ...certs]
+          .map(({ file, label, url }) => {
+            const cleanUrl = url ? url.trim() : null;
+            const thumb =
+              cleanUrl ||
+              `images/certificates/thumbs/${encodeURIComponent(file)}.pdf.png`;
+            const href =
+              cleanUrl || `images/certificates/${encodeURIComponent(file)}.pdf`;
+            return `<a class="cert-card" href="${href}" target="_blank" rel="noopener" title="${label}">
+              <img class="cert-thumb" src="${thumb}" alt="${label}" loading="lazy" decoding="async">
+              <div class="cert-footer">${certIcon}<span class="cert-name">${label}</span></div>
+            </a>`;
+          })
+          .join("");
+      }
+      if (certCount) certCount.textContent = `${certs.length} credentials`;
+
       // scroll reveal
       const io = new IntersectionObserver(
         (entries) => {
@@ -1718,7 +2031,11 @@
         });
       }
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && cvModal && cvModal.classList.contains("open")) {
+        if (
+          event.key === "Escape" &&
+          cvModal &&
+          cvModal.classList.contains("open")
+        ) {
           closeCvModal();
         }
       });

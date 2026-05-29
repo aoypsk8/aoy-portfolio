@@ -1,0 +1,130 @@
+.cert-band {
+  padding: 3.5rem 0 3rem;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.cert-band-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 3rem;
+  max-width: 1160px;
+  margin: 0 auto 2rem;
+}
+
+.cert-band-count {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--ink3);
+  letter-spacing: 0.08em;
+}
+
+.cert-overflow {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.cert-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  padding: 0.5rem 0.5rem 0.75rem;
+  animation: certRoll 70s linear infinite;
+}
+
+.cert-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Card ── */
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  flex-shrink: 0;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.22s var(--ease), transform 0.22s var(--ease),
+    box-shadow 0.22s;
+}
+
+.cert-card:hover {
+  border-color: var(--amber);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Preview image ── */
+.cert-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--line);
+  transition: opacity 0.2s;
+}
+
+.cert-card:hover .cert-thumb {
+  opacity: 0.9;
+}
+
+/* ── Label ── */
+.cert-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.7rem;
+}
+
+.cert-icon {
+  width: 12px;
+  height: 12px;
+  color: var(--amber);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.cert-name {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--ink2);
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  transition: color 0.22s;
+}
+
+.cert-card:hover .cert-name {
+  color: var(--amber2);
+}
+
+@keyframes certRoll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

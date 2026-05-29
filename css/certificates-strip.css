@@ -1,26 +1,16 @@
-.cert-band {
-  padding: 3.5rem 0 3rem;
-  background: var(--bg);
+#certificates {
+  padding-bottom: 3rem;
+  background: linear-gradient(160deg, var(--bg2) 0%, #1f1d1a 60%, var(--bg) 100%);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
-.cert-band-hd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0 3rem;
-  max-width: 1160px;
-  margin: 0 auto 2rem;
-}
-
 .cert-band-count {
-  font-family: var(--mono);
-  font-size: 0.65rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
   color: var(--ink3);
-  letter-spacing: 0.08em;
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
 }
 
 .cert-overflow {

@@ -63,13 +63,10 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
-  text-decoration: none;
-  transition: border-color 0.22s var(--ease), transform 0.22s var(--ease),
-    box-shadow 0.22s;
+  transition: transform 0.22s var(--ease), box-shadow 0.22s;
 }
 
 .cert-card:hover {
-  border-color: var(--amber);
   transform: translateY(-3px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 }
@@ -120,9 +117,6 @@
   transition: color 0.22s;
 }
 
-.cert-card:hover .cert-name {
-  color: var(--amber2);
-}
 
 @keyframes certRoll {
   from { transform: translateX(0); }

@@ -1832,15 +1832,11 @@
         certTrack.innerHTML = [...certs, ...certs]
           .map(({ file, label, url }) => {
             const cleanUrl = url ? url.trim() : null;
-            const thumb =
-              cleanUrl ||
-              `images/certificates/thumbs/${encodeURIComponent(file)}.pdf.png`;
-            const href =
-              cleanUrl || `images/certificates/${encodeURIComponent(file)}.pdf`;
-            return `<a class="cert-card" href="${href}" target="_blank" rel="noopener" title="${label}">
+            const thumb = cleanUrl || `images/certificates/thumbs/${encodeURIComponent(file)}.pdf.png`;
+            return `<div class="cert-card">
               <img class="cert-thumb" src="${thumb}" alt="${label}" loading="lazy" decoding="async">
               <div class="cert-footer">${certIcon}<span class="cert-name">${label}</span></div>
-            </a>`;
+            </div>`;
           })
           .join("");
       }

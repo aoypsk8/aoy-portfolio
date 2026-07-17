@@ -1,7 +1,14 @@
+// Set to false to remove the "UX/UI" nav link (on every page) and the
+// matching UX/UI Design Portfolio project card on the homepage. The
+// ux-ui.html page itself still exists and stays reachable by direct URL —
+// this only hides the entry points.
+window.SHOW_UXUI_PROJECT = true;
+
 (function () {
   const path = location.pathname;
   const PAGE = path.endsWith('activities.html') ? 'activities'
              : path.endsWith('blogs.html')      ? 'blogs'
+             : path.endsWith('ux-ui.html')      ? 'uxui'
              : 'home';
 
   const base = PAGE === 'home' ? '' : 'index.html';
@@ -11,11 +18,12 @@
     { label: 'Experience', href: base + '#experience' },
     { label: 'Skills',     href: base + '#skills' },
     { label: 'Projects',   href: base + '#projects' },
+    { label: 'UX/UI',      href: 'ux-ui.html',      page: 'uxui' },
     { label: 'Education',  href: base + '#education' },
     { label: 'Activities', href: 'activities.html', page: 'activities' },
     { label: 'Blog',       href: 'blogs.html',      page: 'blogs' },
     { label: 'Contact',    href: base + '#contact' },
-  ];
+  ].filter(item => item.page !== 'uxui' || window.SHOW_UXUI_PROJECT !== false);
 
   function activeAttrs(item) {
     return item.page === PAGE ? ' class="active" aria-current="page"' : '';

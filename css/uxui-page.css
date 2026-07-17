@@ -1,0 +1,72 @@
+/* UX/UI design portfolio page — full-page slide viewer */
+
+.uxui-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.uxui-count {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink3);
+  letter-spacing: 0.06em;
+  margin-top: 1.25rem;
+}
+
+.uxui-slides {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.uxui-slide {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg2);
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease),
+    border-color 0.3s;
+}
+
+.uxui-slide.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.uxui-slide:hover {
+  border-color: rgba(212, 146, 92, 0.3);
+}
+
+.uxui-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.uxui-slide-num {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  background: rgba(26, 24, 22, 0.72);
+  border: 1px solid var(--line2);
+  border-radius: 3px;
+  padding: 0.3rem 0.6rem;
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 900px) {
+  .uxui-slides {
+    gap: 1rem;
+  }
+}

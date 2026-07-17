@@ -38,12 +38,14 @@
 }
 
 #activities-page,
-#blog-page {
+#blog-page,
+#uxui-page {
   padding: 3rem 3rem 6rem;
 }
 
 #activities-page > .wrap,
-#blog-page > .wrap {
+#blog-page > .wrap,
+#uxui-page > .wrap {
   max-width: 1160px;
   margin: 0 auto;
 }
@@ -51,7 +53,8 @@
 @media (max-width: 900px) {
   .page-top,
   #activities-page,
-  #blog-page {
+  #blog-page,
+  #uxui-page {
     padding-left: 2rem;
     padding-right: 2rem;
   }
@@ -63,7 +66,8 @@
 @media (max-width: 768px) {
   .page-top,
   #activities-page,
-  #blog-page {
+  #blog-page,
+  #uxui-page {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
@@ -72,7 +76,8 @@
 @media (max-width: 640px) {
   .page-top,
   #activities-page,
-  #blog-page {
+  #blog-page,
+  #uxui-page {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }

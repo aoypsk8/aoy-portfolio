@@ -324,36 +324,36 @@
             <div class="eu-row">
               <div class="eu-card feat reveal" data-flag="lu">
                 <div class="eu-name">Luxembourg</div>
-                <p class="eu-cities">Luxembourg City</p>
+                <p class="eu-hook">Fintech &amp; banking hub</p>
                 <span class="eu-badge">Top target · MSc 2026</span>
               </div>
               <div class="eu-card reveal" data-flag="be">
                 <div class="eu-name">Belgium</div>
-                <p class="eu-cities">Brussels · Arlon</p>
+                <p class="eu-hook">EU institutions hub</p>
               </div>
               <div class="eu-card reveal" data-flag="de">
                 <div class="eu-name">Germany</div>
-                <p class="eu-cities">Frankfurt · Berlin · Munich</p>
+                <p class="eu-hook">Banking &amp; fintech scene</p>
               </div>
               <div class="eu-card reveal" data-flag="fr">
                 <div class="eu-name">France</div>
-                <p class="eu-cities">Paris · Metz · Strasbourg</p>
+                <p class="eu-hook">Growing fintech market</p>
               </div>
               <div class="eu-card reveal" data-flag="nl">
                 <div class="eu-name">Netherlands</div>
-                <p class="eu-cities">Amsterdam · Eindhoven</p>
+                <p class="eu-hook">Tech &amp; startup hub</p>
               </div>
               <div class="eu-card reveal" data-flag="ch">
                 <div class="eu-name">Switzerland</div>
-                <p class="eu-cities">Zurich · Geneva</p>
+                <p class="eu-hook">Global banking center</p>
               </div>
               <div class="eu-card reveal" data-flag="at">
                 <div class="eu-name">Austria</div>
-                <p class="eu-cities">Vienna · Salzburg</p>
+                <p class="eu-hook">Gateway to CEE</p>
               </div>
               <div class="eu-card eu-card--more reveal" data-flag="eu">
                 <div class="eu-name">And more</div>
-                <p class="eu-cities">EU-wide · open to discuss</p>
+                <p class="eu-hook">Open to discuss</p>
                 <div class="eu-tags">
                   <span class="eu-tag eu-tag--accent">Remote</span>
                   <span class="eu-tag">EU-wide</span>
@@ -718,6 +718,7 @@
             Backend &amp; APIs
           </button>
           <button class="pf" onclick="filter('devops', this)">DevOps</button>
+          <button class="pf" id="pfUxui" onclick="filter('ui', this)">UI/UX Design</button>
         </div>
         <div class="proj-grid">
           <div class="pj" data-cat="mobile">
@@ -1077,6 +1078,33 @@
             </div>
           </div>
 
+          <a class="pj pj-clickable" data-cat="ui" href="ux-ui.html">
+            <div class="pj-preview">
+              <img
+                src="images/lottery-uxui/slide-04.jpg"
+                alt="UX/UI design portfolio preview"
+                loading="lazy"
+              />
+            </div>
+            <div class="pj-icon">
+              <span class="pj-fallback">🎨</span>
+            </div>
+            <div class="pj-head">
+              <div class="pj-name">UX/UI Design Portfolio</div>
+              <div class="pj-badge">13 slides</div>
+            </div>
+            <p class="pj-desc">
+              Personal UX/UI design deck — screens and flows for MMoneyX,
+              MonyChat, DinarPay, the Lottery app, onboarding, ticket shop and
+              more, plus a Lao Telecom tourism concept.
+            </p>
+            <div class="pj-tags">
+              <span class="pj-tag">Figma</span><span class="pj-tag">UX/UI</span
+              ><span class="pj-tag">Prototyping</span>
+            </div>
+            <div class="pj-view">View full portfolio →</div>
+          </a>
+
           <div class="pj pj-more reveal" data-cat="more">
             <div class="pj-more-big">10+</div>
             <div class="pj-more-label">And counting</div>
@@ -1377,6 +1405,51 @@
           </button>
         </div>
         <div class="act-thumbs" id="actThumbs"></div>
+      </div>
+    </div>
+
+    <!-- Certificate Preview Modal -->
+    <div
+      class="act-modal-overlay"
+      id="certModal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Certificate preview"
+    >
+      <div class="act-modal">
+        <button class="act-modal-close" id="certModalClose" aria-label="Close">
+          ✕
+        </button>
+        <div class="act-modal-header">
+          <span class="act-event-tag">Certificate</span>
+          <h3 class="act-modal-title" id="certModalTitle"></h3>
+        </div>
+        <div class="act-gallery">
+          <button
+            class="act-gallery-nav act-gallery-prev"
+            id="certGalleryPrev"
+            aria-label="Previous certificate"
+          >
+            &#8592;
+          </button>
+          <div class="act-gallery-img-wrap">
+            <img id="certGalleryImg" src="" alt="" />
+            <div class="act-gallery-counter" id="certGalleryCounter"></div>
+          </div>
+          <button
+            class="act-gallery-nav act-gallery-next"
+            id="certGalleryNext"
+            aria-label="Next certificate"
+          >
+            &#8594;
+          </button>
+        </div>
+        <div class="act-thumbs" id="certThumbs"></div>
+        <div class="pj-modal-actions">
+          <a class="btn btn-ghost" id="certModalOpen" href="" target="_blank" rel="noopener noreferrer"
+            >Open full size ↗</a
+          >
+        </div>
       </div>
     </div>
 
@@ -1848,6 +1921,100 @@
       }
       if (certCount) certCount.textContent = `${certs.length} credentials`;
 
+      const certImages = certs.map(({ file, label, url }) => {
+        const cleanUrl = url ? url.trim() : null;
+        return {
+          src: cleanUrl || `images/certificates/thumbs/${encodeURIComponent(file)}.pdf.png`,
+          label,
+        };
+      });
+
+      // Certificate preview modal
+      (function () {
+        const modal = document.getElementById("certModal");
+        if (!modal) return;
+        const closeBtn = document.getElementById("certModalClose");
+        const titleEl = document.getElementById("certModalTitle");
+        const img = document.getElementById("certGalleryImg");
+        const counter = document.getElementById("certGalleryCounter");
+        const thumbs = document.getElementById("certThumbs");
+        const prevBtn = document.getElementById("certGalleryPrev");
+        const nextBtn = document.getElementById("certGalleryNext");
+        const openLink = document.getElementById("certModalOpen");
+        let idx = 0;
+
+        function show(i) {
+          idx = i;
+          const item = certImages[i];
+          img.style.opacity = "0";
+          setTimeout(() => {
+            img.src = item.src;
+            img.style.opacity = "1";
+          }, 150);
+          titleEl.textContent = item.label;
+          counter.textContent = `${i + 1} / ${certImages.length}`;
+          openLink.href = item.src;
+          prevBtn.disabled = i === 0;
+          nextBtn.disabled = i === certImages.length - 1;
+          thumbs
+            .querySelectorAll(".act-thumb")
+            .forEach((t, ti) => t.classList.toggle("active", ti === i));
+        }
+
+        window.openCertModal = function (i) {
+          if (!thumbs.childElementCount) {
+            certImages.forEach((item, ti) => {
+              const t = document.createElement("div");
+              t.className = "act-thumb";
+              t.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
+              t.addEventListener("click", () => show(ti));
+              thumbs.appendChild(t);
+            });
+          }
+          show(i);
+          modal.classList.add("open");
+          document.body.style.overflow = "hidden";
+        };
+
+        function closeModal() {
+          modal.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        closeBtn.addEventListener("click", closeModal);
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+        prevBtn.addEventListener("click", () => {
+          if (idx > 0) show(idx - 1);
+        });
+        nextBtn.addEventListener("click", () => {
+          if (idx < certImages.length - 1) show(idx + 1);
+        });
+        document.addEventListener("keydown", (e) => {
+          if (!modal.classList.contains("open")) return;
+          if (e.key === "Escape") closeModal();
+          if (e.key === "ArrowLeft" && idx > 0) show(idx - 1);
+          if (e.key === "ArrowRight" && idx < certImages.length - 1)
+            show(idx + 1);
+        });
+      })();
+
+      if (certTrack) {
+        certTrack.querySelectorAll(".cert-card").forEach((card, i) => {
+          const certIndex = i % certs.length;
+          card.setAttribute("role", "button");
+          card.tabIndex = 0;
+          card.addEventListener("click", () => window.openCertModal(certIndex));
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              window.openCertModal(certIndex);
+            }
+          });
+        });
+      }
+
       // scroll reveal
       const io = new IntersectionObserver(
         (entries) => {
@@ -2048,6 +2215,14 @@
           const r = heroNums.getBoundingClientRect();
           if (r.top < window.innerHeight * 0.85) animateCounters();
         });
+      }
+
+      // Respect the SHOW_UXUI_PROJECT toggle set in js/site-nav-render.js
+      if (window.SHOW_UXUI_PROJECT === false) {
+        const uxuiBtn = document.getElementById("pfUxui");
+        const uxuiCard = document.querySelector('.pj[data-cat="ui"]');
+        if (uxuiBtn) uxuiBtn.remove();
+        if (uxuiCard) uxuiCard.remove();
       }
 
       // project filter

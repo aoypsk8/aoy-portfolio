@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UX/UI Design Portfolio — Aoy Phongsakoun</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <meta name="theme-color" content="#1a1816" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/cv-modal.css" />
+    <link rel="stylesheet" href="css/subpage.css" />
+    <link rel="stylesheet" href="css/uxui-page.css" />
+    <link rel="stylesheet" href="css/custom-cursor.css" />
+    <script>
+      // List the slide numbers (1-13) you want to hide from this page —
+      // e.g. [7, 9] hides slides 07 and 09. Edit this list any time you
+      // like; it only affects this page, not the SHOW_UXUI_PROJECT toggle.
+      window.HIDDEN_UXUI_SLIDES = [7, 9];
+    </script>
+  </head>
+  <body>
+    <div class="cursor-wrap" id="cursorWrap" aria-hidden="true">
+      <div class="cursor-ring" id="cursorRing"></div>
+      <div class="cursor-dot" id="cursorDot"></div>
+      <div class="cursor-icon" id="cursorIcon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="icon-pointer">
+            <path
+              d="M4 4L4 19L9 14L13 20L15 19L11 13L17 12L4 4Z"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="0.5"
+              stroke-linejoin="round"
+            />
+          </g>
+          <g class="icon-hand">
+            <path
+              d="M8 11V8.5a1.5 1.5 0 013 0V11M11 11V7.5a1.5 1.5 0 013 0V11M14 11V8a1.5 1.5 0 013 0v6a5 5 0 01-5 5h-1a4 4 0 01-4-4v-4a1.5 1.5 0 013 0v3"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div id="bar"></div>
+    <a id="btt" href="#" aria-label="Back to top">↑</a>
+    <button class="cv-fab" type="button" data-open-cv aria-label="Open CV preview">
+      <span class="cv-fab-dot" aria-hidden="true"></span>
+      CV
+    </button>
+
+    <div id="nav-root"></div>
+    <script src="js/site-nav-render.js"></script>
+
+    <section class="page-top">
+      <div class="wrap">
+        <a class="page-back" href="index.html#projects">
+          <svg class="page-back-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Back to portfolio
+        </a>
+        <div class="s-tag">Selected work</div>
+        <h1 class="s-heading">UX/UI Design <em>Portfolio</em></h1>
+        <p class="s-sub">
+          Screens and flows I designed for MMoneyX, MonyChat, DinarPay, the
+          Lottery app, staff onboarding, ticket shop and more — plus a Lao
+          Telecom tourism concept.
+        </p>
+        <div class="uxui-actions">
+          <a class="btn btn-primary" href="images/Lottery%20%28%20UXUI%20%29.pdf" download
+            >Download full PDF ↓</a
+          >
+        </div>
+        <p class="uxui-count" id="uxuiCount">13 slides</p>
+      </div>
+    </section>
+
+    <main id="uxui-page">
+      <div class="wrap">
+        <div class="uxui-slides" id="uxuiSlides">
+          <div class="uxui-slide" data-num="1">
+            <span class="uxui-slide-num">01 / 13</span>
+            <img src="images/lottery-uxui/slide-01.jpg" alt="UX/UI portfolio slide 1" loading="eager" />
+          </div>
+          <div class="uxui-slide" data-num="2">
+            <span class="uxui-slide-num">02 / 13</span>
+            <img src="images/lottery-uxui/slide-02.jpg" alt="UX/UI portfolio slide 2" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="3">
+            <span class="uxui-slide-num">03 / 13</span>
+            <img src="images/lottery-uxui/slide-03.jpg" alt="UX/UI portfolio slide 3" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="4">
+            <span class="uxui-slide-num">04 / 13</span>
+            <img src="images/lottery-uxui/slide-04.jpg" alt="UX/UI portfolio slide 4" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="5">
+            <span class="uxui-slide-num">05 / 13</span>
+            <img src="images/lottery-uxui/slide-05.jpg" alt="UX/UI portfolio slide 5" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="6">
+            <span class="uxui-slide-num">06 / 13</span>
+            <img src="images/lottery-uxui/slide-06.jpg" alt="UX/UI portfolio slide 6" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="7">
+            <span class="uxui-slide-num">07 / 13</span>
+            <img src="images/lottery-uxui/slide-07.jpg" alt="UX/UI portfolio slide 7" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="8">
+            <span class="uxui-slide-num">08 / 13</span>
+            <img src="images/lottery-uxui/slide-08.jpg" alt="UX/UI portfolio slide 8" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="9">
+            <span class="uxui-slide-num">09 / 13</span>
+            <img src="images/lottery-uxui/slide-09.jpg" alt="UX/UI portfolio slide 9" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="10">
+            <span class="uxui-slide-num">10 / 13</span>
+            <img src="images/lottery-uxui/slide-10.jpg" alt="UX/UI portfolio slide 10" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="11">
+            <span class="uxui-slide-num">11 / 13</span>
+            <img src="images/lottery-uxui/slide-11.jpg" alt="UX/UI portfolio slide 11" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="12">
+            <span class="uxui-slide-num">12 / 13</span>
+            <img src="images/lottery-uxui/slide-12.jpg" alt="UX/UI portfolio slide 12" loading="lazy" />
+          </div>
+          <div class="uxui-slide" data-num="13">
+            <span class="uxui-slide-num">13 / 13</span>
+            <img src="images/lottery-uxui/slide-13.jpg" alt="UX/UI portfolio slide 13" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="cv-modal-overlay" id="cvModal" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle" aria-hidden="true">
+      <div class="cv-modal">
+        <button type="button" class="cv-modal-close" id="cvModalClose" aria-label="Close CV preview">✕</button>
+        <div class="cv-modal-header">
+          <div>
+            <h3 class="cv-modal-title" id="cvModalTitle">Curriculum Vitae</h3>
+            <p class="cv-modal-note">PDF preview for quick review</p>
+          </div>
+          <div class="cv-modal-actions">
+            <a
+              class="cv-download"
+              href="https://res.cloudinary.com/duswpvmeh/image/upload/v1779173731/cv/AOY_1_ggyk7e.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
+        <div class="cv-modal-frame-wrap">
+          <iframe
+            class="cv-modal-frame"
+            id="cvPreviewFrame"
+            title="Aoy Phongsakoun CV Preview"
+            loading="lazy"
+            src=""
+          ></iframe>
+          <p class="cv-modal-fallback">
+            If preview is blocked, open in
+            <a href="https://res.cloudinary.com/duswpvmeh/image/upload/v1779173731/cv/AOY_1_ggyk7e.pdf" target="_blank" rel="noopener noreferrer">new tab</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span class="f-l">&copy; 2026 Aoy Phongsakoun</span>
+      <span class="f-c">Made with care.</span>
+      <span class="f-l">Vientiane, Laos</span>
+    </footer>
+
+    <script src="js/site-nav.js"></script>
+    <script src="js/site-cv.js"></script>
+    <script src="js/image-loading.js"></script>
+    <script src="js/custom-cursor.js"></script>
+    <script>
+      // Hide any slides listed in window.HIDDEN_UXUI_SLIDES, then renumber
+      // and recount what's left so the badges and "N slides" line stay accurate.
+      const hidden = (window.HIDDEN_UXUI_SLIDES || []).map(Number);
+      const allSlides = Array.from(document.querySelectorAll(".uxui-slide"));
+      const visibleSlides = allSlides.filter((el) => {
+        const isHidden = hidden.includes(Number(el.dataset.num));
+        if (isHidden) el.remove();
+        return !isHidden;
+      });
+      visibleSlides.forEach((el, i) => {
+        const badge = el.querySelector(".uxui-slide-num");
+        if (badge) {
+          badge.textContent = `${String(i + 1).padStart(2, "0")} / ${visibleSlides.length}`;
+        }
+      });
+      const uxuiCount = document.getElementById("uxuiCount");
+      if (uxuiCount) uxuiCount.textContent = `${visibleSlides.length} slides`;
+
+      const revealIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("on");
+          });
+        },
+        { threshold: 0.1 }
+      );
+      visibleSlides.forEach((el, i) => {
+        el.style.transitionDelay = Math.min(i, 4) * 0.06 + "s";
+        revealIO.observe(el);
+      });
+    </script>
+  </body>
+</html>

@@ -130,6 +130,7 @@ nav.s {
   display: flex;
   align-items: center;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .logo {
   font-family: var(--serif);
@@ -138,6 +139,7 @@ nav.s {
   color: var(--ink);
   text-decoration: none;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 .logo:hover {
   color: var(--amber2);
@@ -154,6 +156,7 @@ nav.s {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-family: var(--mono);
+  white-space: nowrap;
   transition: color 0.2s;
 }
 .navLinks a:hover,
@@ -170,6 +173,8 @@ nav.s {
   border: 1px solid rgba(200, 132, 74, 0.35);
   padding: 0.5rem 1.2rem;
   border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 .navCta:hover {
@@ -606,6 +611,27 @@ footer {
   .act-modal {
     max-width: min(800px, calc(100vw - 2rem));
     padding: 1.5rem;
+  }
+}
+
+@media (max-width: 1360px) {
+  nav,
+  nav.s {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .logo {
+    font-size: 1.05rem;
+  }
+  .navLinks {
+    gap: 1.3rem;
+  }
+  .navLinks a {
+    font-size: 0.64rem;
+  }
+  .navCta {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.64rem;
   }
 }
 

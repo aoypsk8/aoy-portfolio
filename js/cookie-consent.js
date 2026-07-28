@@ -1,5 +1,5 @@
 /**
- * Cookie consent banner gating Google Analytics storage via Consent Mode.
+ * Full-screen cookie consent overlay gating Google Analytics storage via Consent Mode.
  * gtag() is defined inline in <head> before this script loads.
  */
 (function () {
@@ -15,35 +15,42 @@
 
   if (stored === "denied") return;
 
-  const banner = document.createElement("div");
-  banner.className = "cookie-consent";
-  banner.setAttribute("role", "dialog");
-  banner.setAttribute("aria-label", "Cookie consent");
-  banner.innerHTML = `
-    <p class="cookie-consent__text">
-      This site uses cookies for basic visitor analytics (page views, country-level location).
-      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Learn more</a>
-    </p>
-    <div class="cookie-consent__actions">
-      <button type="button" class="cookie-consent__decline">Decline</button>
-      <button type="button" class="cookie-consent__accept">Accept</button>
+  const overlay = document.createElement("div");
+  overlay.className = "cookie-consent-overlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "Cookie consent");
+  overlay.innerHTML = `
+    <div class="cookie-consent">
+      <h2 class="cookie-consent__title">Cookies &amp; privacy</h2>
+      <p class="cookie-consent__text">
+        This site uses cookies for basic visitor analytics (page views, country-level location).
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Learn more</a>
+      </p>
+      <div class="cookie-consent__actions">
+        <button type="button" class="cookie-consent__decline">Decline</button>
+        <button type="button" class="cookie-consent__accept">Accept</button>
+      </div>
     </div>
   `;
 
-  document.body.appendChild(banner);
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
 
-  banner
-    .querySelector(".cookie-consent__accept")
-    .addEventListener("click", () => {
-      localStorage.setItem(KEY, "granted");
+  function dismiss(choice) {
+    localStorage.setItem(KEY, choice);
+    if (choice === "granted") {
       gtag("consent", "update", { analytics_storage: "granted" });
-      banner.remove();
-    });
+    }
+    overlay.remove();
+    document.body.style.overflow = "";
+  }
 
-  banner
+  overlay
+    .querySelector(".cookie-consent__accept")
+    .addEventListener("click", () => dismiss("granted"));
+
+  overlay
     .querySelector(".cookie-consent__decline")
-    .addEventListener("click", () => {
-      localStorage.setItem(KEY, "denied");
-      banner.remove();
-    });
+    .addEventListener("click", () => dismiss("denied"));
 })();

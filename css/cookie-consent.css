@@ -67,7 +67,7 @@
 }
 
 .cookie-consent__actions button {
-  cursor: pointer;
+  cursor: pointer !important;
   border-radius: var(--radius-sm, 8px);
   padding: 0.6rem 1.1rem;
   font-family: inherit;

@@ -36,6 +36,7 @@
 
   document.body.appendChild(overlay);
   document.body.style.overflow = "hidden";
+  document.body.classList.add("custom-cursor-disabled");
 
   function dismiss(choice) {
     localStorage.setItem(KEY, choice);
@@ -44,6 +45,7 @@
     }
     overlay.remove();
     document.body.style.overflow = "";
+    document.body.classList.remove("custom-cursor-disabled");
   }
 
   overlay

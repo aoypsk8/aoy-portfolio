@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: 'denied' });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H81J3YWXCG"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-H81J3YWXCG');
+    </script>
     <title>UX/UI Design Portfolio — Aoy Phongsakoun</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
     <meta name="theme-color" content="#1a1816" />
@@ -12,6 +23,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="css/cookie-consent.css" />
     <link rel="stylesheet" href="styles/cv-modal.css" />
     <link rel="stylesheet" href="css/subpage.css" />
     <link rel="stylesheet" href="css/uxui-page.css" />
@@ -190,6 +202,7 @@
     <script src="js/site-cv.js"></script>
     <script src="js/image-loading.js"></script>
     <script src="js/custom-cursor.js"></script>
+    <script src="js/cookie-consent.js"></script>
     <script>
       // Hide any slides listed in window.HIDDEN_UXUI_SLIDES, then renumber
       // and recount what's left so the badges and "N slides" line stay accurate.

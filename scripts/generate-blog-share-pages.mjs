@@ -60,6 +60,17 @@ function buildPage(post) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: 'denied' });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H81J3YWXCG"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-H81J3YWXCG');
+    </script>
     <title>${title} — Aoy Phongsakoun</title>
     <meta name="description" content="${excerpt}" />
     <link rel="canonical" href="${shareUrl}" />

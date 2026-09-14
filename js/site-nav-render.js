@@ -9,6 +9,7 @@ window.SHOW_UXUI_PROJECT = true;
   const PAGE = path.endsWith('activities.html') ? 'activities'
              : path.endsWith('blogs.html')      ? 'blogs'
              : path.endsWith('ux-ui.html')      ? 'uxui'
+             : path.endsWith('pdf-toolbox.html') ? 'pdf'
              : 'home';
 
   const base = PAGE === 'home' ? '' : 'index.html';
